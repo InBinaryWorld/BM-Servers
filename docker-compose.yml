@@ -1,0 +1,27 @@
+version: '2.1'
+services:
+    resource-server:
+        build:
+          context: './BM-Resource'
+          dockerfile: Dockerfile
+        volumes:
+          - ./BM-Resource/shared:/hostStorage
+        ports:
+            - "8081:8081"
+        depends_on:
+          keycloak:
+            condition: service_healthy
+    keycloak:
+        build:
+          context: './BM-Authorization'
+          dockerfile: Dockerfile
+        ports:
+          - "8080:8080"
+          - "8443:8443"
+        volumes:
+          - ./BM-Authorization/shared:/hostStorage
+        healthcheck:
+          test: ["CMD","curl","-f","http://keycloak:8080/auth/realms/base"]
+          interval: 10s
+          timeout: 5s
+          retries: 6

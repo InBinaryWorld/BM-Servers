@@ -1,11 +1,14 @@
 FROM jboss/keycloak:9.0.3
- 
-RUN bash /opt/jboss/keycloak/bin/add-user-keycloak.sh -u admin -p admin
 
+ENV KEYCLOAK_REALM_INPUT=./base.json
+ENV KEYCLOAK_REALM_OUTPUT=/tmp/base.json
+ENV KEYCLOAK_IMPORT=${KEYCLOAK_REALM_OUTPUT}
 
-EXPOSE 8080
-EXPOSE 8443
+ARG login=admin
+ARG password=admin
 
-COPY ./base.json /tmp/base.json
+RUN bash /opt/jboss/keycloak/bin/add-user-keycloak.sh -u ${login} -p ${password}
 
-CMD ["-Dkeycloak.profile=preview", "-Dkeycloak.profile.feature.token_exchange=enabled", "-Dkeycloak.profile.feature.admin_fine_grained_authz=enabled", "-Djboss.socket.binding.port-offset=100" "-Dkeycloak.migration.action=import" "-Dkeycloak.migration.provider=singleFile"  "-Dkeycloak.migration.file=base.json" "-Dkeycloak.migration.strategy=OVERWRITE_EXISTING"] 
+COPY ${KEYCLOAK_REALM_INPUT} ${KEYCLOAK_REALM_OUTPUT}
+
+CMD ["-b","0.0.0.0","-Dkeycloak.profile=preview", "-Dkeycloak.profile.feature.token_exchange=enabled", "-Dkeycloak.profile.feature.admin_fine_grained_authz=enabled"]
