@@ -1,0 +1,5 @@
+CREATE DATABASE IF NOT EXISTS resources;
+
+CREATE USER IF NOT EXISTS 'resouces' IDENTIFIED BY 'password';
+
+GRANT ALL PRIVILEGES ON resources.* TO 'resouces';

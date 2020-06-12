@@ -1,13 +1,14 @@
-FROM jboss/keycloak:9.0.3
+FROM jboss/keycloak:10.0.2
 
 ENV KEYCLOAK_REALM_INPUT=./base.json
 ENV KEYCLOAK_REALM_OUTPUT=/tmp/base.json
 ENV KEYCLOAK_IMPORT=${KEYCLOAK_REALM_OUTPUT}
 
-ARG login=admin
-ARG password=admin
-
-RUN bash /opt/jboss/keycloak/bin/add-user-keycloak.sh -u ${login} -p ${password}
+ENV KEYCLOAK_USER=admin
+ENV KEYCLOAK_PASSWORD=admin
+ENV DB_DATABASE=keycloak
+ENV DB_USER=keycloak
+ENV DB_PASSWORD=password
 
 COPY ${KEYCLOAK_REALM_INPUT} ${KEYCLOAK_REALM_OUTPUT}
 
