@@ -1,12 +1,11 @@
 package dev.szafraniak.bmresource.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -19,5 +18,7 @@ public class User {
     @NotNull
     private String keycloakId;
 
-    private String name;
+    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "owner")
+    private List<UserCompany> companies;
 }
