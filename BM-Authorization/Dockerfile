@@ -1,7 +1,7 @@
 FROM jboss/keycloak:10.0.2
 
-ENV KEYCLOAK_REALM_INPUT=./base.json
-ENV KEYCLOAK_REALM_OUTPUT=/tmp/base.json
+ENV KEYCLOAK_REALM_INPUT=./business-manager.json
+ENV KEYCLOAK_REALM_OUTPUT=/tmp/business-manager.json
 ENV KEYCLOAK_IMPORT=${KEYCLOAK_REALM_OUTPUT}
 
 ENV KEYCLOAK_USER=admin
