@@ -1,6 +1,5 @@
 package dev.szafraniak.bmresource.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -11,7 +10,7 @@ import javax.validation.constraints.NotNull;
 public class ServiceModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "service_model_gen")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -20,8 +19,11 @@ public class ServiceModel {
     @NotNull
     private String quantityUnit;
 
-    @JsonManagedReference
     @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
     private Price priceSuggestion;
-    
+
+    @NotNull
+    @ManyToOne
+    private Company company;
+
 }

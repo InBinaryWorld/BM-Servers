@@ -1,7 +1,5 @@
 package dev.szafraniak.bmresource.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -13,7 +11,7 @@ import java.util.List;
 public class ProductModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_model_gen")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -24,15 +22,16 @@ public class ProductModel {
 
     private String bareCode;
 
-    @JsonManagedReference
     @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
     private Price priceSuggestion;
 
-    @ManyToMany
-    @JsonManagedReference
-    private List<ProductGroup> productGroups;
+    @ManyToOne
+    private ProductGroup productGroup;
 
-    @JsonBackReference
-    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "productModel")
     private List<Product> products;
+
+    @NotNull
+    @ManyToOne
+    private Company company;
 }

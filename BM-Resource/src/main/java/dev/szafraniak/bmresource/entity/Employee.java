@@ -1,6 +1,5 @@
 package dev.szafraniak.bmresource.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -13,21 +12,24 @@ import java.time.LocalDate;
 public class Employee {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_gen")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    @OneToOne
-    @JsonManagedReference
+    @OneToOne(cascade = CascadeType.REMOVE)
     private BusinessContact businessContact;
 
     @NotNull
     private String employmentState;
 
-    private LocalDate firstEmploymentDate;
-
     private String jobPosition;
 
+    private LocalDate firstEmploymentDate;
+
     private BigDecimal salary;
+
+    @NotNull
+    @ManyToOne
+    private Company company;
 
 }

@@ -1,6 +1,5 @@
 package dev.szafraniak.bmresource.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -12,7 +11,7 @@ import java.time.LocalDateTime;
 public class Invoice {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "invoice_gen")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -33,12 +32,15 @@ public class Invoice {
     @NotNull
     private String dueDate;
 
+    @ManyToOne
+    private BusinessContact businessContact;
+
     @NotNull
     @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
     private Amount totalAmount;
 
+    @NotNull
     @ManyToOne
-    @JsonManagedReference
-    private BusinessContact businessContact;
+    private Company company;
 
 }

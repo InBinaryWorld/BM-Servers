@@ -2,10 +2,7 @@ package dev.szafraniak.bmresource.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -15,7 +12,7 @@ import java.time.LocalDateTime;
 public class FinancialRow {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "financial_row_gen")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -27,5 +24,9 @@ public class FinancialRow {
     private String description;
 
     private BigDecimal amountChange;
+
+    @NotNull
+    @ManyToOne
+    private Company company;
 
 }

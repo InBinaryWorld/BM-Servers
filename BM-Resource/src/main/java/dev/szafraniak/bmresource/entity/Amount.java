@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 public class Amount {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "amount_gen")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -22,7 +22,7 @@ public class Amount {
 
     @NotNull
     private BigDecimal tax;
-    
+
     @NotNull
     private BigDecimal gross;
 

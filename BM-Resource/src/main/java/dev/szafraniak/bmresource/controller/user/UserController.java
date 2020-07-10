@@ -1,8 +1,6 @@
 package dev.szafraniak.bmresource.controller.user;
 
-import dev.szafraniak.bmresource.converters.UserDTOConverter;
-import dev.szafraniak.bmresource.dto.user.UserResponseDTO;
-import dev.szafraniak.bmresource.entity.User;
+import dev.szafraniak.bmresource.dto.user.UserGetDTO;
 import dev.szafraniak.bmresource.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,13 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private UserService userService;
-    private UserDTOConverter userDTOConverter;
 
 
     @GetMapping
-    public UserResponseDTO getUser() {
-        User user = userService.getOrCreateContextUser();
-        return userDTOConverter.convertToUserResponseDTO(user);
+    public UserGetDTO getUser() {
+        return userService.getUser();
     }
 
     @Autowired
@@ -28,9 +24,5 @@ public class UserController {
         this.userService = userService;
     }
 
-    @Autowired
-    public void setUserDTOConverter(UserDTOConverter userDTOConverter) {
-        this.userDTOConverter = userDTOConverter;
-    }
 }
 

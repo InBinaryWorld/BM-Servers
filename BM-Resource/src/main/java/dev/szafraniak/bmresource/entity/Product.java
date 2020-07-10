@@ -1,7 +1,5 @@
 package dev.szafraniak.bmresource.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -13,7 +11,7 @@ import java.math.BigDecimal;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_gen")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -21,12 +19,10 @@ public class Product {
 
     @NotNull
     @ManyToOne
-    @JsonManagedReference
     private ProductModel productModel;
 
     @NotNull
     @ManyToOne
-    @JsonBackReference
     private Warehouse warehouse;
 
 }

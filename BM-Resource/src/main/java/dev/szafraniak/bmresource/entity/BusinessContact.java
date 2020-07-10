@@ -1,6 +1,5 @@
 package dev.szafraniak.bmresource.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -12,7 +11,7 @@ import java.util.List;
 public class BusinessContact {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "business_contact_gen")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -24,12 +23,17 @@ public class BusinessContact {
     private String taxIdentityNumber;
 
     @NotNull
-    @JsonManagedReference
     @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
     private Address address;
 
-    @JsonManagedReference
-    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "businessContact")
+    private List<Invoice> invoice;
+
+    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "businessContact")
     private List<ContactMedium> contactMedia;
+
+    @NotNull
+    @ManyToOne
+    private Company company;
 
 }

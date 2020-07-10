@@ -1,13 +1,13 @@
 package dev.szafraniak.bmresource.converters;
 
-import dev.szafraniak.bmresource.dto.user.UserResponseDTO;
+import dev.szafraniak.bmresource.dto.user.UserGetDTO;
 import dev.szafraniak.bmresource.entity.User;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserDTOConverter {
+public class UserConverter {
 
     ModelMapper modelMapper;
 
@@ -16,7 +16,7 @@ public class UserDTOConverter {
         this.modelMapper = modelMapper;
     }
 
-    public UserResponseDTO convertToUserResponseDTO(User user) {
-        return modelMapper.map(user, UserResponseDTO.class);
+    public UserGetDTO convertToDTO(User user) {
+        return modelMapper.map(user, UserGetDTO.class);
     }
 }

@@ -1,21 +1,14 @@
-package dev.szafraniak.bmresource.entity;
+package dev.szafraniak.bmresource.dto.address;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Data
-@Entity
-public class Address {
+public class AddressPostDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//    private Long id;
 
     @NotNull
     @Pattern(regexp = "[A-Z][a-z]+")

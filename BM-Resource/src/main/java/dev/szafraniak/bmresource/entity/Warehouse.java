@@ -1,7 +1,5 @@
 package dev.szafraniak.bmresource.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -13,23 +11,20 @@ import java.util.List;
 public class Warehouse {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "warehouse_gen")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
     private String name;
 
     @NotNull
-    @OneToOne
-    @JsonBackReference
-    private UserCompany company;
+    @ManyToOne
+    private Company company;
 
-    @JsonManagedReference
     @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
     private Address address;
 
-    @JsonManagedReference
-    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "warehouse")
     private List<Product> products;
 
 }

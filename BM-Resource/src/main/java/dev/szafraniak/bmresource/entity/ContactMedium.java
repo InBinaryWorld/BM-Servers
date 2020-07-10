@@ -2,10 +2,7 @@ package dev.szafraniak.bmresource.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Data
@@ -13,7 +10,7 @@ import javax.validation.constraints.NotNull;
 public class ContactMedium {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contact_medium_gen")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -21,5 +18,9 @@ public class ContactMedium {
 
     @NotNull
     private String value;
+
+    @NotNull
+    @ManyToOne
+    private BusinessContact businessContact;
 
 }
