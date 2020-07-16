@@ -22,22 +22,28 @@ public class CompanyController {
         return companyService.getCompanies();
     }
 
-    @PostMapping
-    public CompanyGetDTO createCompany(@Valid @RequestBody CompanyPostDTO dto) {
-        return companyService.createCompany(dto);
-    }
-    
     @GetMapping("/{companyId}")
-    @PreAuthorize("@resourcePermissionChecker.checkCompanyId(#companyId)")
+    @PreAuthorize("@permissionChecker.checkCompanyId(#companyId)")
     public CompanyGetDTO getCompanies(@PathVariable Long companyId) {
         return companyService.getCompany(companyId);
     }
 
+    @PostMapping
+    public CompanyGetDTO createCompany(@Valid @RequestBody CompanyPostDTO dto) {
+        return companyService.createCompany(dto);
+    }
+
     @PutMapping("/{companyId}")
-    @PreAuthorize("@resourcePermissionChecker.checkCompanyId(#companyId)")
+    @PreAuthorize("@permissionChecker.checkCompanyId(#companyId)")
     public CompanyGetDTO updateCompany(@Valid @RequestBody CompanyPutDTO dto,
                                        @PathVariable Long companyId) {
         return companyService.updateCompany(dto, companyId);
+    }
+
+    @DeleteMapping("/{companyId}")
+    @PreAuthorize("@permissionChecker.checkCompanyId(#companyId)")
+    public void deleteCompany(@PathVariable Long companyId) {
+        companyService.deleteCompany(companyId);
     }
 
     @Autowired

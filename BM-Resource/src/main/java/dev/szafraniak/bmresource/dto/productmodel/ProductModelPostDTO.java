@@ -1,25 +1,26 @@
-package dev.szafraniak.bmresource.entity;
+package dev.szafraniak.bmresource.dto.productmodel;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import dev.szafraniak.bmresource.dto.price.PricePutPostDTO;
+import dev.szafraniak.bmresource.dto.shared.BasePostDTO;
+import dev.szafraniak.bmresource.entity.Product;
 import dev.szafraniak.bmresource.utils.Regexps;
 import dev.szafraniak.bmresource.validator.EnvironmentIds;
 import dev.szafraniak.bmresource.validator.VerifyEnvironmentId;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@Entity
-public class ProductModel {
+public class ProductModelPostDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//    private Long id;
 
     @NotNull
     @NotBlank
@@ -31,21 +32,17 @@ public class ProductModel {
     @VerifyEnvironmentId(source = EnvironmentIds.QUANTITY_UNIT_PRODUCT)
     private String quantityUnitId;
 
-
     @Pattern(regexp = Regexps.BARCODE_5_20)
     private String bareCode;
 
     @Valid
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    private Price priceSuggestion;
+    private PricePutPostDTO priceSuggestion;
 
-    @ManyToOne
-    private ProductGroup productGroup;
+    @Valid
+    private BasePostDTO productGroup;
 
-    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "productModel")
-    private List<Product> products;
+    @JsonIgnore
+    private List<Product> products = new ArrayList<>();
 
-    @NotNull
-    @ManyToOne
-    private Company company;
+//    private Company company;
 }

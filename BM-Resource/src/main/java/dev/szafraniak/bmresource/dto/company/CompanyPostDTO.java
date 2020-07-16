@@ -1,11 +1,17 @@
 package dev.szafraniak.bmresource.dto.company;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.szafraniak.bmresource.dto.address.AddressPostDTO;
+import dev.szafraniak.bmresource.entity.*;
+import dev.szafraniak.bmresource.utils.Regexps;
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Data
@@ -13,21 +19,28 @@ public class CompanyPostDTO {
 
 //    private Long id;
 
-//    private Long nextInvoiceNumber;
+    @NotNull
+    @JsonIgnore
+    private Long nextInvoiceNumber = 1L;
 
     @NotNull
-    @Pattern(regexp = "[A-Z][a-z]+")
+    @Length(min = 1, max = 30)
+    @Pattern(regexp = Regexps.WORDS_WITH_NUMBERS)
     private String name;
 
     @NotNull
-    @Pattern(regexp = "\\S{2,14}")
+    @Pattern(regexp = Regexps.INVOICE_PREFIX_2_14)
     private String invoicePrefix;
 
     @NotNull
-    @Pattern(regexp = "\\d{10}")
+    @Pattern(regexp = Regexps.NUMBERS_10)
     private String taxIdentityNumber;
 
-//    private String currency;
+    @NotNull
+    @JsonIgnore
+    @Length(min = 2, max = 4)
+    @Pattern(regexp = Regexps.CURRENCY)
+    private String currency = "PLN";
 
 //    private User owner;
 
@@ -35,21 +48,30 @@ public class CompanyPostDTO {
     @NotNull
     private AddressPostDTO headquarter;
 
-//    private List<Warehouse> warehouses;
+    @JsonIgnore
+    private List<Warehouse> warehouses = new ArrayList<>();
 
-//    private List<ProductGroup> productGroups;
+    @JsonIgnore
+    private List<ProductGroup> productGroups = new ArrayList<>();
 
-//    private List<ProductModel> productModels;
+    @JsonIgnore
+    private List<ProductModel> productModels = new ArrayList<>();
 
-//    private List<ServiceModel> serviceModels;
+    @JsonIgnore
+    private List<ServiceModel> serviceModels = new ArrayList<>();
 
-//    private List<Invoice> invoices;
+    @JsonIgnore
+    private List<Invoice> invoices = new ArrayList<>();
 
-//    private List<BusinessContact> contacts;
+    @JsonIgnore
+    private List<BusinessContact> contacts = new ArrayList<>();
 
-//    private List<Employee> workers;
+    @JsonIgnore
+    private List<Employee> workers = new ArrayList<>();
 
-//    private List<FinancialRow> financialHistory;
+    @JsonIgnore
+    private List<FinancialRow> financialHistory = new ArrayList<>();
 
-//    private List<PaymentMethod> paymentMethods;
+    @JsonIgnore
+    private List<PaymentMethod> paymentMethods = new ArrayList<>();
 }

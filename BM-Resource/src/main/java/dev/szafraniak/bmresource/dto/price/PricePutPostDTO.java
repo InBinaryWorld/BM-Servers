@@ -1,22 +1,15 @@
-package dev.szafraniak.bmresource.entity;
+package dev.szafraniak.bmresource.dto.price;
 
 import com.sun.istack.NotNull;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.validation.constraints.Min;
 import java.math.BigDecimal;
 
 @Data
-@Entity
-public class Price {
+public class PricePutPostDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//    private Long id;
 
     @Min(0)
     @NotNull
@@ -29,5 +22,4 @@ public class Price {
     @Min(0)
     @NotNull
     private BigDecimal gross;
-
 }

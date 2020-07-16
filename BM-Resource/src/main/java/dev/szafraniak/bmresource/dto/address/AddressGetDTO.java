@@ -1,8 +1,10 @@
 package dev.szafraniak.bmresource.dto.address;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class AddressGetDTO {
 
     private Long id;
@@ -13,7 +15,9 @@ public class AddressGetDTO {
 
     private String city;
 
-    private String addressLine1;
+    private String street;
 
-    private String addressLine2;
+    private String houseNumber;
+
+    private String apartmentNumber;
 }

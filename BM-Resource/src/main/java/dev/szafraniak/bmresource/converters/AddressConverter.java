@@ -28,8 +28,9 @@ public class AddressConverter {
         address.setCountry(dto.getCountry());
         address.setCity(dto.getCity());
         address.setPostalCode(dto.getPostalCode());
-        address.setAddressLine1(dto.getAddressLine1());
-        address.setAddressLine2(dto.getAddressLine2());
+        address.setStreet(dto.getStreet());
+        address.setHouseNumber(dto.getHouseNumber());
+        address.setApartmentNumber(dto.getApartmentNumber());
         return address;
     }
 

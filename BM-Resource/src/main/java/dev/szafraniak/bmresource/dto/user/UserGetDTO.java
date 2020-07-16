@@ -1,6 +1,6 @@
 package dev.szafraniak.bmresource.dto.user;
 
-import dev.szafraniak.bmresource.dto.shared.IdNameDTO;
+import dev.szafraniak.bmresource.dto.shared.BaseGetDTO;
 import lombok.Data;
 
 import java.util.List;
@@ -10,5 +10,5 @@ public class UserGetDTO {
 
     private Long id;
 
-    private List<IdNameDTO> companies;
+    private List<BaseGetDTO> companies;
 }

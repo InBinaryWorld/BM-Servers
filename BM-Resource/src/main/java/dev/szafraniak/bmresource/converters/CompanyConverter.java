@@ -29,12 +29,11 @@ public class CompanyConverter {
         Company company = modelMapper.map(dto, Company.class);
         Address address = addressConverter.convertFromDTO(dto.getHeadquarter());
         User user = userService.getOrCreateContextUser();
-        company.setNextInvoiceNumber(1L);
-        company.setCurrency("PL");
         company.setHeadquarter(address);
         company.setOwner(user);
         return company;
     }
+
 
     public Company convertFromDTO(CompanyPutDTO dto, Long companyId) {
         Company original = companyRepository.findById(companyId).get();

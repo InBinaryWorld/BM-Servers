@@ -1,5 +1,7 @@
 package dev.szafraniak.bmresource.entity;
 
+import dev.szafraniak.bmresource.validator.EnvironmentIds;
+import dev.szafraniak.bmresource.validator.VerifyEnvironmentId;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -17,6 +19,7 @@ public class ServiceModel {
     private String name;
 
     @NotNull
+    @VerifyEnvironmentId(source = EnvironmentIds.QUANTITY_UNIT_SERVICE)
     private String quantityUnit;
 
     @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)

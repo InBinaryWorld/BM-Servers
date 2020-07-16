@@ -43,6 +43,11 @@ public class CompanyService {
         return companyConverter.convertToDTO(saved);
     }
 
+    public boolean deleteCompany(Long companyId) {
+        companyRepository.deleteById(companyId);
+        return true;
+    }
+
     @Autowired
     public void setCompanyRepository(CompanyRepository companyRepository) {
         this.companyRepository = companyRepository;

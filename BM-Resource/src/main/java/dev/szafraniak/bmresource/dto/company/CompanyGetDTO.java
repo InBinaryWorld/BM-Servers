@@ -1,9 +1,11 @@
 package dev.szafraniak.bmresource.dto.company;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import dev.szafraniak.bmresource.dto.address.AddressGetDTO;
 import lombok.Data;
 
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CompanyGetDTO {
 
     private Long id;
