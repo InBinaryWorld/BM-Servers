@@ -7,7 +7,7 @@ import javax.validation.constraints.Min;
 import java.math.BigDecimal;
 
 @Data
-public class PricePutPostDTO {
+public class PricePostDTO {
 
 //    private Long id;
 

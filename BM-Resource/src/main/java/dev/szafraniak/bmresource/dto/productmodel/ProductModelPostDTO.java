@@ -1,7 +1,7 @@
 package dev.szafraniak.bmresource.dto.productmodel;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import dev.szafraniak.bmresource.dto.price.PricePutPostDTO;
+import dev.szafraniak.bmresource.dto.price.PricePostDTO;
 import dev.szafraniak.bmresource.dto.shared.BasePostDTO;
 import dev.szafraniak.bmresource.entity.Product;
 import dev.szafraniak.bmresource.utils.Regexps;
@@ -36,7 +36,8 @@ public class ProductModelPostDTO {
     private String bareCode;
 
     @Valid
-    private PricePutPostDTO priceSuggestion;
+    @NotNull
+    private PricePostDTO priceSuggestion;
 
     @Valid
     private BasePostDTO productGroup;

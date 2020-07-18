@@ -3,13 +3,11 @@ package dev.szafraniak.bmresource.services;
 import dev.szafraniak.bmresource.dto.productmodel.ProductModelPostDTO;
 import dev.szafraniak.bmresource.dto.productmodel.ProductModelPutDTO;
 import dev.szafraniak.bmresource.dto.shared.BasePostDTO;
-import dev.szafraniak.bmresource.entity.Company;
-import dev.szafraniak.bmresource.entity.ProductGroup;
-import dev.szafraniak.bmresource.entity.ProductModel;
-import dev.szafraniak.bmresource.entity.User;
+import dev.szafraniak.bmresource.entity.*;
 import dev.szafraniak.bmresource.repository.CompanyRepository;
 import dev.szafraniak.bmresource.repository.ProductGroupRepository;
 import dev.szafraniak.bmresource.repository.ProductModelRepository;
+import dev.szafraniak.bmresource.repository.ServiceModelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +19,7 @@ public class PermissionChecker {
     private UserService userService;
     private CompanyRepository companyRepo;
     private ProductGroupRepository groupRepository;
+    private ServiceModelRepository serviceModelRepository;
     private ProductModelRepository productModelRepository;
     private ProductGroupRepository productGroupRepository;
 
@@ -64,6 +63,13 @@ public class PermissionChecker {
         Optional<Company> company = productModelRepository
                 .findById(productModelId)
                 .map(ProductModel::getCompany);
+        return checkCompany(company, companyId);
+    }
+
+    public boolean checkServiceModel(Long companyId, Long serviceModelId) {
+        Optional<Company> company = serviceModelRepository
+                .findById(serviceModelId)
+                .map(ServiceModel::getCompany);
         return checkCompany(company, companyId);
     }
 
@@ -125,5 +131,10 @@ public class PermissionChecker {
     @Autowired
     public void setProductGroupRepository(ProductGroupRepository productGroupRepository) {
         this.productGroupRepository = productGroupRepository;
+    }
+
+    @Autowired
+    public void setServiceModelRepository(ServiceModelRepository serviceModelRepository) {
+        this.serviceModelRepository = serviceModelRepository;
     }
 }

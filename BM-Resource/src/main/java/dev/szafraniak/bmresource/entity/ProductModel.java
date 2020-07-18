@@ -36,6 +36,7 @@ public class ProductModel {
     private String bareCode;
 
     @Valid
+    @NotNull
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Price priceSuggestion;
 

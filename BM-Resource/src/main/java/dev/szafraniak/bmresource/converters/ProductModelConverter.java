@@ -1,6 +1,6 @@
 package dev.szafraniak.bmresource.converters;
 
-import dev.szafraniak.bmresource.dto.price.PricePutPostDTO;
+import dev.szafraniak.bmresource.dto.price.PricePutDTO;
 import dev.szafraniak.bmresource.dto.productmodel.ProductModelGetDTO;
 import dev.szafraniak.bmresource.dto.productmodel.ProductModelPostDTO;
 import dev.szafraniak.bmresource.dto.productmodel.ProductModelPutDTO;
@@ -33,17 +33,22 @@ public class ProductModelConverter {
     public ProductModel convertFromDTO(ProductModelPostDTO dto, Long companyId) {
         ProductModel productModel = modelMapper.map(dto, ProductModel.class);
         Company company = companyRepository.findById(companyId).get();
+        Price price = priceConverter.convertFromDTO(dto.getPriceSuggestion());
         productModel.setCompany(company);
+        productModel.setPriceSuggestion(price);
         setGroup(productModel, dto.getProductGroup());
         return productModel;
     }
 
     public ProductModel convertFromDTO(ProductModelPutDTO dto, Long productModelId) {
         ProductModel productModel = productModelRepository.findById(productModelId).get();
+        PricePutDTO priceDto = dto.getPriceSuggestion();
+        Long priceId = productModel.getPriceSuggestion().getId();
+        Price price = priceConverter.convertFromDTO(priceDto, priceId);
         productModel.setName(dto.getName());
         productModel.setBareCode(dto.getBareCode());
         productModel.setQuantityUnitId(dto.getQuantityUnitId());
-        setPrice(productModel, dto.getPriceSuggestion());
+        productModel.setPriceSuggestion(price);
         setGroup(productModel, dto.getProductGroup());
         return productModel;
     }
@@ -56,20 +61,6 @@ public class ProductModelConverter {
         }
     }
 
-    private void setPrice(ProductModel productModel, PricePutPostDTO priceDto) {
-        if (priceDto == null) {
-            productModel.setPriceSuggestion(null);
-            return;
-        }
-        Price price;
-        Price currentPrice = productModel.getPriceSuggestion();
-        if (currentPrice != null) {
-            price = priceConverter.convertFromDTO(priceDto, currentPrice.getId());
-        } else {
-            price = priceConverter.convertFromDTO(priceDto);
-        }
-        productModel.setPriceSuggestion(price);
-    }
 
     @Autowired
     public void setModelMapper(ModelMapper modelMapper) {

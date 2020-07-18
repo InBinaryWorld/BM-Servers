@@ -1,7 +1,6 @@
-package dev.szafraniak.bmresource.dto.productmodel;
+package dev.szafraniak.bmresource.dto.serviceModel;
 
-import dev.szafraniak.bmresource.dto.price.PricePutDTO;
-import dev.szafraniak.bmresource.dto.shared.BasePostDTO;
+import dev.szafraniak.bmresource.dto.price.PricePostDTO;
 import dev.szafraniak.bmresource.utils.Regexps;
 import dev.szafraniak.bmresource.validator.EnvironmentIds;
 import dev.szafraniak.bmresource.validator.VerifyEnvironmentId;
@@ -14,7 +13,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Data
-public class ProductModelPutDTO {
+public class ServiceModelPostDTO {
 
 //    private Long id;
 
@@ -25,20 +24,13 @@ public class ProductModelPutDTO {
     private String name;
 
     @NotNull
-    @VerifyEnvironmentId(source = EnvironmentIds.QUANTITY_UNIT_PRODUCT)
+    @VerifyEnvironmentId(source = EnvironmentIds.QUANTITY_UNIT_SERVICE)
     private String quantityUnitId;
-
-    @Pattern(regexp = Regexps.BARCODE_5_20)
-    private String bareCode;
 
     @Valid
     @NotNull
-    private PricePutDTO priceSuggestion;
-
-    @Valid
-    private BasePostDTO productGroup;
-
-//    private List<Product> products = new ArrayList<>();
+    private PricePostDTO priceSuggestion;
 
 //    private Company company;
+
 }
