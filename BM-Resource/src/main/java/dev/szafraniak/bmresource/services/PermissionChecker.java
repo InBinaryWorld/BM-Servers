@@ -4,10 +4,7 @@ import dev.szafraniak.bmresource.dto.productmodel.ProductModelPostDTO;
 import dev.szafraniak.bmresource.dto.productmodel.ProductModelPutDTO;
 import dev.szafraniak.bmresource.dto.shared.BasePostDTO;
 import dev.szafraniak.bmresource.entity.*;
-import dev.szafraniak.bmresource.repository.CompanyRepository;
-import dev.szafraniak.bmresource.repository.ProductGroupRepository;
-import dev.szafraniak.bmresource.repository.ProductModelRepository;
-import dev.szafraniak.bmresource.repository.ServiceModelRepository;
+import dev.szafraniak.bmresource.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,10 +15,13 @@ public class PermissionChecker {
 
     private UserService userService;
     private CompanyRepository companyRepo;
+    private InvoiceRepository invoiceRepository;
     private ProductGroupRepository groupRepository;
     private ServiceModelRepository serviceModelRepository;
     private ProductModelRepository productModelRepository;
     private ProductGroupRepository productGroupRepository;
+    private CompanyContactRepository companyContactRepository;
+    private IndividualContactRepository individualContactRepository;
 
 
     public boolean checkCompanyId(Long companyId) {
@@ -36,6 +36,19 @@ public class PermissionChecker {
         return checkCompany(company, companyId);
     }
 
+    public boolean checkCompanyContact(Long companyId, Long contactId) {
+        Optional<Company> company = companyContactRepository
+                .findById(contactId)
+                .map(CompanyContact::getCompany);
+        return checkCompany(company, companyId);
+    }
+
+    public boolean checkIndividualContact(Long companyId, Long contactId) {
+        Optional<Company> company = individualContactRepository
+                .findById(contactId)
+                .map(IndividualContact::getCompany);
+        return checkCompany(company, companyId);
+    }
 
     public boolean checkForCreate(ProductModelPostDTO dto, Long companyId) {
         if (dto.getProductGroup() == null) {
@@ -70,6 +83,13 @@ public class PermissionChecker {
         Optional<Company> company = serviceModelRepository
                 .findById(serviceModelId)
                 .map(ServiceModel::getCompany);
+        return checkCompany(company, companyId);
+    }
+
+    public boolean checkInvoice(Long companyId, Long invoiceId) {
+        Optional<Company> company = invoiceRepository
+                .findById(invoiceId)
+                .map(Invoice::getCompany);
         return checkCompany(company, companyId);
     }
 
@@ -136,5 +156,20 @@ public class PermissionChecker {
     @Autowired
     public void setServiceModelRepository(ServiceModelRepository serviceModelRepository) {
         this.serviceModelRepository = serviceModelRepository;
+    }
+
+    @Autowired
+    public void setInvoiceRepository(InvoiceRepository invoiceRepository) {
+        this.invoiceRepository = invoiceRepository;
+    }
+
+    @Autowired
+    public void setCompanyContactRepository(CompanyContactRepository companyContactRepository) {
+        this.companyContactRepository = companyContactRepository;
+    }
+
+    @Autowired
+    public void setIndividualContactRepository(IndividualContactRepository individualContactRepository) {
+        this.individualContactRepository = individualContactRepository;
     }
 }

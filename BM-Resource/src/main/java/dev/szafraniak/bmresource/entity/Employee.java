@@ -17,7 +17,7 @@ public class Employee {
 
     @NotNull
     @OneToOne(cascade = CascadeType.REMOVE)
-    private BusinessContact businessContact;
+    private IndividualContact individualContact;
 
     @NotNull
     private String employmentState;

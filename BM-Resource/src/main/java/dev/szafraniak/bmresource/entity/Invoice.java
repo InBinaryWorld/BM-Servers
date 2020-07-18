@@ -33,7 +33,7 @@ public class Invoice {
     private String dueDate;
 
     @ManyToOne
-    private BusinessContact businessContact;
+    private Contact contact;
 
     @NotNull
     @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)

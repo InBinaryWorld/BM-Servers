@@ -1,39 +1,36 @@
 package dev.szafraniak.bmresource.entity;
 
+import dev.szafraniak.bmresource.utils.Regexps;
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @Data
 @Entity
-public class BusinessContact {
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Contact {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    private String type;
+    @Pattern(regexp = Regexps.PHONE_4_12)
+    private String phone;
 
     @NotNull
-    private String name;
-
-    private String taxIdentityNumber;
-
-    @NotNull
-    @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Address address;
 
-    @OneToMany(mappedBy = "businessContact")
+    @OneToMany(mappedBy = "contact")
     private List<Invoice> invoice;
-
-    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "businessContact")
-    private List<ContactMedium> contactMedia;
 
     @NotNull
     @ManyToOne
     private Company company;
+
+    public abstract String getName();
 
 }

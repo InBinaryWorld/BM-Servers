@@ -21,7 +21,8 @@ public class AddressPostDTO {
     private String postalCode;
 
     @NotNull
-    @Pattern(regexp = Regexps.WORD_1_20)
+    @Length(min = 2, max = 30)
+    @Pattern(regexp = Regexps.WORDS)
     private String city;
 
     @NotNull

@@ -8,7 +8,6 @@ import dev.szafraniak.bmresource.utils.Regexps;
 import dev.szafraniak.bmresource.validator.EnvironmentIds;
 import dev.szafraniak.bmresource.validator.VerifyEnvironmentId;
 import lombok.Data;
-import org.hibernate.validator.constraints.Length;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -24,8 +23,7 @@ public class ProductModelPostDTO {
 
     @NotNull
     @NotBlank
-    @Length(min = 2, max = 100)
-    @Pattern(regexp = Regexps.ALMOST_ALL_CHARACTERS)
+    @Pattern(regexp = Regexps.BASE_2_60)
     private String name;
 
     @NotNull

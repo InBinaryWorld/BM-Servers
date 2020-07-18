@@ -3,9 +3,9 @@ package dev.szafraniak.bmresource.dto.company;
 import dev.szafraniak.bmresource.dto.address.AddressPutDTO;
 import dev.szafraniak.bmresource.utils.Regexps;
 import lombok.Data;
-import org.hibernate.validator.constraints.Length;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -17,8 +17,8 @@ public class CompanyPutDTO {
 //    private Long nextInvoiceNumber;
 
     @NotNull
-    @Length(min = 1, max = 30)
-    @Pattern(regexp = Regexps.WORDS_WITH_NUMBERS)
+    @NotBlank
+    @Pattern(regexp = Regexps.BASE_2_40)
     private String name;
 
     @NotNull
@@ -26,7 +26,7 @@ public class CompanyPutDTO {
     private String invoicePrefix;
 
     @NotNull
-    @Pattern(regexp = Regexps.NUMBERS_10)
+    @Pattern(regexp = Regexps.TAX_IDENTITY_NUMBER)
     private String taxIdentityNumber;
 
 //    private String currency;

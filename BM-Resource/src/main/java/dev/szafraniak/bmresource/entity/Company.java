@@ -2,10 +2,10 @@ package dev.szafraniak.bmresource.entity;
 
 import dev.szafraniak.bmresource.utils.Regexps;
 import lombok.Data;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.List;
@@ -22,8 +22,8 @@ public class Company {
     private Long nextInvoiceNumber;
 
     @NotNull
-    @Length(min = 1, max = 30)
-    @Pattern(regexp = Regexps.WORDS_WITH_NUMBERS)
+    @NotBlank
+    @Pattern(regexp = Regexps.BASE_2_40)
     private String name;
 
     @NotNull
@@ -31,7 +31,7 @@ public class Company {
     private String invoicePrefix;
 
     @NotNull
-    @Pattern(regexp = Regexps.NUMBERS_10)
+    @Pattern(regexp = Regexps.TAX_IDENTITY_NUMBER)
     private String taxIdentityNumber;
 
     @NotNull
@@ -63,7 +63,7 @@ public class Company {
     private List<Invoice> invoices;
 
     @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "company")
-    private List<BusinessContact> contacts;
+    private List<Contact> contacts;
 
     @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "company")
     private List<Employee> workers;
