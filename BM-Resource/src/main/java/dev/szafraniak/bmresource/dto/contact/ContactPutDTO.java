@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Data
-public abstract class ContactPutDTO {
+public class ContactPutDTO {
 
 //    private Long id;
 
@@ -20,7 +20,7 @@ public abstract class ContactPutDTO {
     @Pattern(regexp = Regexps.PHONE_4_12)
     private String phone;
 
-//    private List<Invoice> invoice;
+//    private List<Invoice> invoices;
 
 //    private Company company;
 

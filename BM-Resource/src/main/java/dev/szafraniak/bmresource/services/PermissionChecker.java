@@ -1,8 +1,8 @@
 package dev.szafraniak.bmresource.services;
 
+import dev.szafraniak.bmresource.dto.employee.EmployeePostDTO;
 import dev.szafraniak.bmresource.dto.productmodel.ProductModelPostDTO;
 import dev.szafraniak.bmresource.dto.productmodel.ProductModelPutDTO;
-import dev.szafraniak.bmresource.dto.shared.BasePostDTO;
 import dev.szafraniak.bmresource.entity.*;
 import dev.szafraniak.bmresource.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +16,7 @@ public class PermissionChecker {
     private UserService userService;
     private CompanyRepository companyRepo;
     private InvoiceRepository invoiceRepository;
+    private EmployeeRepository employeeRepository;
     private ProductGroupRepository groupRepository;
     private ServiceModelRepository serviceModelRepository;
     private ProductModelRepository productModelRepository;
@@ -51,13 +52,19 @@ public class PermissionChecker {
     }
 
     public boolean checkForCreate(ProductModelPostDTO dto, Long companyId) {
-        if (dto.getProductGroup() == null) {
+        if (dto.getProductGroupId() == null) {
             return checkCompanyId(companyId);
         }
-        BasePostDTO group = dto.getProductGroup();
         Optional<Company> opt = groupRepository
-                .findById(group.getId())
+                .findById(dto.getProductGroupId())
                 .map(ProductGroup::getCompany);
+        return checkCompany(opt, companyId);
+    }
+
+    public boolean checkForCreate(EmployeePostDTO dto, Long companyId) {
+        Optional<Company> opt = individualContactRepository
+                .findById(dto.getIndividualId())
+                .map(IndividualContact::getCompany);
         return checkCompany(opt, companyId);
     }
 
@@ -65,10 +72,10 @@ public class PermissionChecker {
     public boolean checkForUpdate(ProductModelPutDTO dto,
                                   Long companyId,
                                   Long productModelId) {
-        if (dto.getProductGroup() == null) {
+        if (dto.getProductGroupId() == null) {
             return checkProductModel(companyId, productModelId);
         }
-        Long groupId = dto.getProductGroup().getId();
+        Long groupId = dto.getProductGroupId();
         return checkProductModel(companyId, productModelId, groupId);
     }
 
@@ -76,6 +83,13 @@ public class PermissionChecker {
         Optional<Company> company = productModelRepository
                 .findById(productModelId)
                 .map(ProductModel::getCompany);
+        return checkCompany(company, companyId);
+    }
+
+    public boolean checkEmployee(Long companyId, Long entityId) {
+        Optional<Company> company = employeeRepository
+                .findById(entityId)
+                .map(Employee::getCompany);
         return checkCompany(company, companyId);
     }
 
@@ -171,5 +185,10 @@ public class PermissionChecker {
     @Autowired
     public void setIndividualContactRepository(IndividualContactRepository individualContactRepository) {
         this.individualContactRepository = individualContactRepository;
+    }
+
+    @Autowired
+    public void setEmployeeRepository(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
     }
 }

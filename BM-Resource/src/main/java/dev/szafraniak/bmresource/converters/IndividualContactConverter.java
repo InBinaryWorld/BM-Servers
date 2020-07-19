@@ -3,8 +3,6 @@ package dev.szafraniak.bmresource.converters;
 import dev.szafraniak.bmresource.dto.individualContact.IndividualContactGetDTO;
 import dev.szafraniak.bmresource.dto.individualContact.IndividualContactPostDTO;
 import dev.szafraniak.bmresource.dto.individualContact.IndividualContactPutDTO;
-import dev.szafraniak.bmresource.entity.Address;
-import dev.szafraniak.bmresource.entity.Company;
 import dev.szafraniak.bmresource.entity.IndividualContact;
 import dev.szafraniak.bmresource.repository.CompanyRepository;
 import dev.szafraniak.bmresource.repository.IndividualContactRepository;
@@ -17,29 +15,41 @@ public class IndividualContactConverter {
 
     private ModelMapper modelMapper;
     private AddressConverter addressConverter;
+    private ContactConverter contactConverter;
     private CompanyRepository companyRepository;
     private IndividualContactRepository individualContactRepository;
 
 
     public IndividualContactGetDTO convertToDTO(IndividualContact individualContact) {
-        return modelMapper.map(individualContact, IndividualContactGetDTO.class);
+        if (individualContact == null) {
+            return null;
+        }
+        IndividualContactGetDTO dto = new IndividualContactGetDTO();
+        contactConverter.fullFillDTO(individualContact, dto);
+        dto.setFirstName(individualContact.getFirstName());
+        dto.setLastName(individualContact.getLastName());
+        return dto;
     }
 
     public IndividualContact convertFromDTO(IndividualContactPostDTO dto, Long companyId) {
-        IndividualContact individual = modelMapper.map(dto, IndividualContact.class);
-        Company company = companyRepository.findById(companyId).get();
-        individual.setCompany(company);
+        if (dto == null) {
+            return null;
+        }
+        IndividualContact individual = new IndividualContact();
+        contactConverter.fullFillFromDTO(individual, dto, companyId);
+        individual.setFirstName(dto.getFirstName());
+        individual.setLastName(dto.getLastName());
         return individual;
     }
 
     public IndividualContact convertFromDTO(IndividualContactPutDTO dto, Long individualId) {
+        if (dto == null) {
+            return null;
+        }
         IndividualContact individual = individualContactRepository.findById(individualId).get();
-        Long addressId = individual.getAddress().getId();
-        Address address = addressConverter.convertFromDTO(dto.getAddress(), addressId);
+        contactConverter.fullFillFromDTO(individual, dto);
         individual.setFirstName(dto.getFirstName());
         individual.setLastName(dto.getLastName());
-        individual.setAddress(address);
-        individual.setPhone(dto.getPhone());
         return individual;
     }
 

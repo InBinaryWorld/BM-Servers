@@ -3,6 +3,7 @@ package dev.szafraniak.bmresource.converters;
 import dev.szafraniak.bmresource.dto.productGroup.ProductGroupGetDTO;
 import dev.szafraniak.bmresource.dto.productGroup.ProductGroupPostDTO;
 import dev.szafraniak.bmresource.dto.productGroup.ProductGroupPutDTO;
+import dev.szafraniak.bmresource.dto.shared.BaseGetDTO;
 import dev.szafraniak.bmresource.entity.Company;
 import dev.szafraniak.bmresource.entity.ProductGroup;
 import dev.szafraniak.bmresource.repository.CompanyRepository;
@@ -23,6 +24,13 @@ public class ProductGroupConverter {
         return modelMapper.map(productGroup, ProductGroupGetDTO.class);
     }
 
+    public BaseGetDTO convertToBaseDTO(ProductGroup group) {
+        BaseGetDTO baseGetDTO = new BaseGetDTO();
+        baseGetDTO.setName(group.getName());
+        baseGetDTO.setId(group.getId());
+        return baseGetDTO;
+    }
+
     public ProductGroup convertFromDTO(ProductGroupPostDTO dto, Long companyId) {
         ProductGroup productGroup = modelMapper.map(dto, ProductGroup.class);
         Company company = companyRepository.findById(companyId).get();
@@ -36,6 +44,12 @@ public class ProductGroupConverter {
         return productGroup;
     }
 
+    public ProductGroup retrieveFromId(Long productGroupId) {
+        if (productGroupId == null) {
+            return null;
+        }
+        return productGroupRepository.findById(productGroupId).get();
+    }
 
     @Autowired
     public void setModelMapper(ModelMapper modelMapper) {
@@ -51,4 +65,5 @@ public class ProductGroupConverter {
     public void setProductGroupRepository(ProductGroupRepository productGroupRepository) {
         this.productGroupRepository = productGroupRepository;
     }
+
 }

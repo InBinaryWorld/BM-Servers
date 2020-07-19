@@ -63,7 +63,10 @@ public class Company {
     private List<Invoice> invoices;
 
     @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "company")
-    private List<Contact> contacts;
+    private List<IndividualContact> individualContacts;
+
+    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "company")
+    private List<CompanyContact> companyContacts;
 
     @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "company")
     private List<Employee> workers;

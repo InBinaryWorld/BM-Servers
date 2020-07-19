@@ -2,7 +2,6 @@ package dev.szafraniak.bmresource.dto.company;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.szafraniak.bmresource.dto.address.AddressPostDTO;
-import dev.szafraniak.bmresource.entity.*;
 import dev.szafraniak.bmresource.utils.Regexps;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
@@ -11,8 +10,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Data
@@ -49,30 +46,21 @@ public class CompanyPostDTO {
     @NotNull
     private AddressPostDTO headquarter;
 
-    @JsonIgnore
-    private List<Warehouse> warehouses = new ArrayList<>();
+//    private List<Warehouse> warehouses;
 
-    @JsonIgnore
-    private List<ProductGroup> productGroups = new ArrayList<>();
+//    private List<ProductGroup> productGroups;
 
-    @JsonIgnore
-    private List<ProductModel> productModels = new ArrayList<>();
+//    private List<ProductModel> productModels;
 
-    @JsonIgnore
-    private List<ServiceModel> serviceModels = new ArrayList<>();
+//    private List<ServiceModel> serviceModels;
 
-    @JsonIgnore
-    private List<Invoice> invoices = new ArrayList<>();
+//    private List<Invoice> invoices;
 
-    @JsonIgnore
-    private List<Contact> contacts = new ArrayList<>();
+//    private List<Contact> contacts;
 
-    @JsonIgnore
-    private List<Employee> workers = new ArrayList<>();
+//    private List<Employee> workers;
 
-    @JsonIgnore
-    private List<FinancialRow> financialHistory = new ArrayList<>();
+//    private List<FinancialRow> financialHistory;
 
-    @JsonIgnore
-    private List<PaymentMethod> paymentMethods = new ArrayList<>();
+//    private List<PaymentMethod> paymentMethods;
 }

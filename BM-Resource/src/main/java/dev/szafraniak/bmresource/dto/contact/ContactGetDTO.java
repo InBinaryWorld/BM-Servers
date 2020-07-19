@@ -9,15 +9,17 @@ import java.util.List;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public abstract class ContactGetDTO {
+public class ContactGetDTO {
 
     private Long id;
+
+    private String name;
 
     private String phone;
 
     private AddressGetDTO address;
 
-    private List<InvoiceGetDTO> invoice;
+    private List<InvoiceGetDTO> invoices;
 
 //    private Company company;
 

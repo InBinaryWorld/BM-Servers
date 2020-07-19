@@ -1,10 +1,9 @@
-package dev.szafraniak.bmresource.entity;
+package dev.szafraniak.bmresource.dto.employee;
 
 import dev.szafraniak.bmresource.utils.Regexps;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -12,16 +11,12 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
-@Entity
-public class Employee {
+public class EmployeePostDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//    private Long id;
 
     @NotNull
-    @OneToOne(cascade = CascadeType.PERSIST)
-    private IndividualContact individualContact;
+    private Long individualId;
 
     @NotNull
     @Length(min = 2, max = 30)
@@ -33,8 +28,6 @@ public class Employee {
     @Min(0)
     private BigDecimal salary;
 
-    @NotNull
-    @ManyToOne
-    private Company company;
+//    private Company company;
 
 }

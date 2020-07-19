@@ -5,28 +5,33 @@ import dev.szafraniak.bmresource.dto.address.AddressPostDTO;
 import dev.szafraniak.bmresource.dto.address.AddressPutDTO;
 import dev.szafraniak.bmresource.entity.Address;
 import dev.szafraniak.bmresource.repository.AddressRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AddressConverter {
 
-    private ModelMapper modelMapper;
     private AddressRepository addressRepository;
 
     public AddressGetDTO convertToDTO(Address address) {
-        return modelMapper.map(address, AddressGetDTO.class);
+        if (address == null) {
+            return null;
+        }
+        AddressGetDTO dto = new AddressGetDTO();
+        dto.setId(address.getId());
+        dto.setCity(address.getCity());
+        dto.setCountry(address.getCountry());
+        dto.setPostalCode(address.getPostalCode());
+        dto.setStreet(address.getStreet());
+        dto.setHouseNumber(address.getHouseNumber());
+        dto.setApartmentNumber(address.getApartmentNumber());
+        return dto;
     }
 
-    public Address convertFromDTO(AddressPostDTO addressDTO) {
-        return modelMapper.map(addressDTO, Address.class);
-    }
-
-    public Address convertFromDTO(AddressPutDTO dto, Long addressId) {
-        Address address = addressRepository.findById(addressId).get();
-        address.setCountry(dto.getCountry());
+    public Address convertFromDTO(AddressPostDTO dto) {
+        Address address = new Address();
         address.setCity(dto.getCity());
+        address.setCountry(dto.getCountry());
         address.setPostalCode(dto.getPostalCode());
         address.setStreet(dto.getStreet());
         address.setHouseNumber(dto.getHouseNumber());
@@ -34,10 +39,15 @@ public class AddressConverter {
         return address;
     }
 
-
-    @Autowired
-    public void setModelMapper(ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
+    public Address convertFromDTO(AddressPutDTO dto, Long addressId) {
+        Address address = addressRepository.findById(addressId).get();
+        address.setCity(dto.getCity());
+        address.setCountry(dto.getCountry());
+        address.setPostalCode(dto.getPostalCode());
+        address.setStreet(dto.getStreet());
+        address.setHouseNumber(dto.getHouseNumber());
+        address.setApartmentNumber(dto.getApartmentNumber());
+        return address;
     }
 
     @Autowired

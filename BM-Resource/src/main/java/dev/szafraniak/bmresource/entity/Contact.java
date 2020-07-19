@@ -25,7 +25,7 @@ public abstract class Contact {
     private Address address;
 
     @OneToMany(mappedBy = "contact")
-    private List<Invoice> invoice;
+    private List<Invoice> invoices;
 
     @NotNull
     @ManyToOne

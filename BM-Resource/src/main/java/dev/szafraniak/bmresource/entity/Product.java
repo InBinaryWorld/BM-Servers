@@ -25,4 +25,8 @@ public class Product {
     @ManyToOne
     private Warehouse warehouse;
 
+    @NotNull
+    @ManyToOne
+    private Company company;
+
 }

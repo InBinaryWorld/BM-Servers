@@ -1,7 +1,6 @@
 package dev.szafraniak.bmresource.dto.productmodel;
 
 import dev.szafraniak.bmresource.dto.price.PricePutDTO;
-import dev.szafraniak.bmresource.dto.shared.BasePostDTO;
 import dev.szafraniak.bmresource.utils.Regexps;
 import dev.szafraniak.bmresource.validator.EnvironmentIds;
 import dev.szafraniak.bmresource.validator.VerifyEnvironmentId;
@@ -34,7 +33,7 @@ public class ProductModelPutDTO {
     private PricePutDTO priceSuggestion;
 
     @Valid
-    private BasePostDTO productGroup;
+    private Long productGroupId;
 
 //    private List<Product> products = new ArrayList<>();
 
