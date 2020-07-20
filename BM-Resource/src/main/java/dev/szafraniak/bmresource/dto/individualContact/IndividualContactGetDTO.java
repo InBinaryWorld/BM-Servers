@@ -12,4 +12,6 @@ public class IndividualContactGetDTO extends ContactGetDTO {
 
     private String lastName;
 
+//    private Employee employee;
+
 }

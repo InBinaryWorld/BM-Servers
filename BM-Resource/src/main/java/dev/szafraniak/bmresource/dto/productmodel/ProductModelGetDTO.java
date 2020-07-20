@@ -1,13 +1,14 @@
 package dev.szafraniak.bmresource.dto.productmodel;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import dev.szafraniak.bmresource.dto.GetDTOInterface;
 import dev.szafraniak.bmresource.dto.price.PriceGetDTO;
 import dev.szafraniak.bmresource.dto.shared.BaseGetDTO;
 import lombok.Data;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ProductModelGetDTO {
+public class ProductModelGetDTO implements GetDTOInterface {
 
     private Long id;
 

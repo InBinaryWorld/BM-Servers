@@ -1,5 +1,6 @@
 package dev.szafraniak.bmresource.converters;
 
+import dev.szafraniak.bmresource.converters.interfaces.ConverterInterface;
 import dev.szafraniak.bmresource.dto.address.AddressGetDTO;
 import dev.szafraniak.bmresource.dto.company.CompanyGetDTO;
 import dev.szafraniak.bmresource.dto.company.CompanyPostDTO;
@@ -8,7 +9,7 @@ import dev.szafraniak.bmresource.dto.shared.BaseGetDTO;
 import dev.szafraniak.bmresource.entity.Address;
 import dev.szafraniak.bmresource.entity.Company;
 import dev.szafraniak.bmresource.entity.User;
-import dev.szafraniak.bmresource.repository.CompanyRepository;
+import dev.szafraniak.bmresource.repository.entity.CompanyRepository;
 import dev.szafraniak.bmresource.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,7 +17,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 
 @Component
-public class CompanyConverter {
+public class CompanyConverter implements ConverterInterface<Company, CompanyGetDTO, CompanyPostDTO, CompanyPutDTO> {
 
     private UserService userService;
     private AddressConverter addressConverter;
@@ -48,6 +49,7 @@ public class CompanyConverter {
         return companyGetDTO;
     }
 
+    @Override
     public Company convertFromDTO(CompanyPostDTO dto) {
         if (dto == null) {
             return null;
@@ -76,7 +78,7 @@ public class CompanyConverter {
     }
 
     public Company convertFromDTO(CompanyPutDTO dto, Long companyId) {
-        if (dto == null) {
+        if (dto == null || companyId == null) {
             return null;
         }
         Company original = companyRepository.findById(companyId).get();

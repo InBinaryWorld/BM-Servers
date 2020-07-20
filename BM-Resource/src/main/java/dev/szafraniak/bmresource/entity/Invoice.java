@@ -1,5 +1,6 @@
 package dev.szafraniak.bmresource.entity;
 
+import dev.szafraniak.bmresource.entity.base.BaseCompanyEntity;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -8,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-public class Invoice {
+public class Invoice extends BaseCompanyEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

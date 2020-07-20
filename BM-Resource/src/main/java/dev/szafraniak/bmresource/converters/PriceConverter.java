@@ -1,15 +1,16 @@
 package dev.szafraniak.bmresource.converters;
 
+import dev.szafraniak.bmresource.converters.interfaces.ConverterInterface;
 import dev.szafraniak.bmresource.dto.price.PriceGetDTO;
 import dev.szafraniak.bmresource.dto.price.PricePostDTO;
 import dev.szafraniak.bmresource.dto.price.PricePutDTO;
 import dev.szafraniak.bmresource.entity.Price;
-import dev.szafraniak.bmresource.repository.PriceRepository;
+import dev.szafraniak.bmresource.repository.entity.PriceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PriceConverter {
+public class PriceConverter implements ConverterInterface<Price, PriceGetDTO, PricePostDTO, PricePutDTO> {
 
     private PriceRepository priceRepository;
 
@@ -46,6 +47,7 @@ public class PriceConverter {
         price.setTaxRate(dto.getTaxRate());
         return price;
     }
+
 
     @Autowired
     public void setPriceRepository(PriceRepository priceRepository) {

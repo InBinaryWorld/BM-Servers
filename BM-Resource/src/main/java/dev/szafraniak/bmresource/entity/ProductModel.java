@@ -1,5 +1,6 @@
 package dev.szafraniak.bmresource.entity;
 
+import dev.szafraniak.bmresource.entity.base.BaseCompanyEntity;
 import dev.szafraniak.bmresource.utils.Regexps;
 import dev.szafraniak.bmresource.validator.EnvironmentIds;
 import dev.szafraniak.bmresource.validator.VerifyEnvironmentId;
@@ -14,7 +15,7 @@ import java.util.List;
 
 @Data
 @Entity
-public class ProductModel {
+public class ProductModel extends BaseCompanyEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,5 +1,6 @@
 package dev.szafraniak.bmresource.dto.address;
 
+import dev.szafraniak.bmresource.dto.PostDTOInterface;
 import dev.szafraniak.bmresource.utils.Regexps;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
@@ -8,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Data
-public class AddressPostDTO {
+public class AddressPostDTO implements PostDTOInterface {
 
 //    private Long id;
 

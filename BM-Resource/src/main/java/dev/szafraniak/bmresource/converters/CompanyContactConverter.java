@@ -1,15 +1,17 @@
 package dev.szafraniak.bmresource.converters;
 
+import dev.szafraniak.bmresource.converters.interfaces.ConverterCompanyInterface;
 import dev.szafraniak.bmresource.dto.companyContact.CompanyContactGetDTO;
 import dev.szafraniak.bmresource.dto.companyContact.CompanyContactPostDTO;
 import dev.szafraniak.bmresource.dto.companyContact.CompanyContactPutDTO;
 import dev.szafraniak.bmresource.entity.CompanyContact;
-import dev.szafraniak.bmresource.repository.CompanyContactRepository;
+import dev.szafraniak.bmresource.repository.entity.CompanyContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CompanyContactConverter {
+public class CompanyContactConverter implements ConverterCompanyInterface<CompanyContact, CompanyContactGetDTO, CompanyContactPostDTO, CompanyContactPutDTO> {
+
     private ContactConverter contactConverter;
     private CompanyContactRepository companyContactRepository;
 

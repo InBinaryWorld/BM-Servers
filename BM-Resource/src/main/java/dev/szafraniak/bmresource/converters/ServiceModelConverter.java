@@ -1,5 +1,6 @@
 package dev.szafraniak.bmresource.converters;
 
+import dev.szafraniak.bmresource.converters.interfaces.ConverterCompanyInterface;
 import dev.szafraniak.bmresource.dto.price.PriceGetDTO;
 import dev.szafraniak.bmresource.dto.price.PricePutDTO;
 import dev.szafraniak.bmresource.dto.serviceModel.ServiceModelGetDTO;
@@ -8,13 +9,13 @@ import dev.szafraniak.bmresource.dto.serviceModel.ServiceModelPutDTO;
 import dev.szafraniak.bmresource.entity.Company;
 import dev.szafraniak.bmresource.entity.Price;
 import dev.szafraniak.bmresource.entity.ServiceModel;
-import dev.szafraniak.bmresource.repository.CompanyRepository;
-import dev.szafraniak.bmresource.repository.ServiceModelRepository;
+import dev.szafraniak.bmresource.repository.entity.CompanyRepository;
+import dev.szafraniak.bmresource.repository.entity.ServiceModelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ServiceModelConverter {
+public class ServiceModelConverter implements ConverterCompanyInterface<ServiceModel, ServiceModelGetDTO, ServiceModelPostDTO, ServiceModelPutDTO> {
 
     private PriceConverter priceConverter;
     private CompanyRepository companyRepository;

@@ -9,7 +9,7 @@ import dev.szafraniak.bmresource.dto.shared.BaseGetDTO;
 import dev.szafraniak.bmresource.entity.Address;
 import dev.szafraniak.bmresource.entity.Company;
 import dev.szafraniak.bmresource.entity.Contact;
-import dev.szafraniak.bmresource.repository.CompanyRepository;
+import dev.szafraniak.bmresource.repository.entity.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -95,4 +95,5 @@ public class ContactConverter {
     public void setCompanyRepository(CompanyRepository companyRepository) {
         this.companyRepository = companyRepository;
     }
+
 }

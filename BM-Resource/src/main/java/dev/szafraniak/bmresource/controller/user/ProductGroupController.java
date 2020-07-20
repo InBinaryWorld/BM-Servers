@@ -3,9 +3,11 @@ package dev.szafraniak.bmresource.controller.user;
 import dev.szafraniak.bmresource.dto.productGroup.ProductGroupGetDTO;
 import dev.szafraniak.bmresource.dto.productGroup.ProductGroupPostDTO;
 import dev.szafraniak.bmresource.dto.productGroup.ProductGroupPutDTO;
-import dev.szafraniak.bmresource.services.ProductGroupService;
+import dev.szafraniak.bmresource.services.entity.ProductGroupService;
 import dev.szafraniak.bmresource.utils.BmCollection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,46 +17,48 @@ import javax.validation.Valid;
 @RequestMapping("api/companies/{companyId}/products/groups")
 public class ProductGroupController {
 
-    private ProductGroupService productGroupService;
+    private ProductGroupService service;
 
     @GetMapping()
     @PreAuthorize("@permissionChecker.checkCompanyId(#companyId)")
-    public BmCollection<ProductGroupGetDTO> getGroups(@PathVariable Long companyId) {
-        return productGroupService.getGroups(companyId);
+    public BmCollection<ProductGroupGetDTO> getAll(@PathVariable Long companyId) {
+        return service.getAll(companyId);
     }
 
     @PostMapping
     @PreAuthorize("@permissionChecker.checkCompanyId(#companyId)")
-    public ProductGroupGetDTO createProductGroup(@PathVariable Long companyId,
-                                                 @Valid @RequestBody ProductGroupPostDTO dto) {
-        return productGroupService.createProductGroup(dto, companyId);
+    public ProductGroupGetDTO create(@PathVariable Long companyId,
+                                     @Valid @RequestBody ProductGroupPostDTO dto) {
+        return service.create(dto, companyId);
     }
 
 
-    @GetMapping("/{productGroupId}")
-    @PreAuthorize("@permissionChecker.checkProductGroup(#companyId, #productGroupId)")
-    public ProductGroupGetDTO getProductGroup(@PathVariable Long companyId,
-                                              @PathVariable Long productGroupId) {
-        return productGroupService.getGroup(productGroupId);
+    @GetMapping("/{entityId}")
+    @PreAuthorize("@permissionChecker.checkProductGroup(#companyId, #entityId)")
+    public ProductGroupGetDTO getEntity(@PathVariable Long companyId,
+                                        @PathVariable Long entityId) {
+        return service.getEntity(entityId);
     }
 
-    @PutMapping("/{productGroupId}")
-    @PreAuthorize("@permissionChecker.checkProductGroup(#companyId, #productGroupId)")
-    public ProductGroupGetDTO updateProductGroup(@PathVariable Long companyId,
-                                                 @PathVariable Long productGroupId,
-                                                 @Valid @RequestBody ProductGroupPutDTO dto) {
-        return productGroupService.updateProductGroup(dto, productGroupId);
+    @PutMapping("/{entityId}")
+    @PreAuthorize("@permissionChecker.checkProductGroup(#companyId, #entityId)")
+    public ProductGroupGetDTO update(@PathVariable Long companyId,
+                                     @PathVariable Long entityId,
+                                     @Valid @RequestBody ProductGroupPutDTO dto) {
+        return service.update(dto, entityId);
     }
 
-    @DeleteMapping("/{productGroupId}")
-    @PreAuthorize("@permissionChecker.checkProductGroup(#companyId, #productGroupId)")
-    public void deleteCompany(@PathVariable String companyId, @PathVariable Long productGroupId) {
-        productGroupService.deleteProductGroup(productGroupId);
+    @DeleteMapping("/{entityId}")
+    @PreAuthorize("@permissionChecker.checkProductGroup(#companyId, #entityId)")
+    public ResponseEntity<Void> delete(@PathVariable String companyId, @PathVariable Long entityId) {
+        boolean success = service.delete(entityId);
+        HttpStatus status = success ? HttpStatus.OK : HttpStatus.CONFLICT;
+        return new ResponseEntity<>(status);
     }
 
     @Autowired
-    public void setProductGroupService(ProductGroupService productGroupService) {
-        this.productGroupService = productGroupService;
+    public void setService(ProductGroupService service) {
+        this.service = service;
     }
 }
 

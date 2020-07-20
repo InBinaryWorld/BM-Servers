@@ -1,5 +1,6 @@
 package dev.szafraniak.bmresource.dto.contact;
 
+import dev.szafraniak.bmresource.dto.PutDTOInterface;
 import dev.szafraniak.bmresource.dto.address.AddressPutDTO;
 import dev.szafraniak.bmresource.utils.Regexps;
 import lombok.Data;
@@ -9,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Data
-public class ContactPutDTO {
+public class ContactPutDTO implements PutDTOInterface {
 
 //    private Long id;
 

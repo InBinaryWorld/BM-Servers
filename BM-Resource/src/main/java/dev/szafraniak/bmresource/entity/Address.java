@@ -1,5 +1,6 @@
 package dev.szafraniak.bmresource.entity;
 
+import dev.szafraniak.bmresource.entity.base.BaseEntity;
 import dev.szafraniak.bmresource.utils.Regexps;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
@@ -13,7 +14,7 @@ import javax.validation.constraints.Pattern;
 
 @Data
 @Entity
-public class Address {
+public class Address extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

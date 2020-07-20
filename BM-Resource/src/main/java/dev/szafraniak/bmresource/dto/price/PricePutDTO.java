@@ -1,13 +1,14 @@
 package dev.szafraniak.bmresource.dto.price;
 
 import com.sun.istack.NotNull;
+import dev.szafraniak.bmresource.dto.PutDTOInterface;
 import lombok.Data;
 
 import javax.validation.constraints.Min;
 import java.math.BigDecimal;
 
 @Data
-public class PricePutDTO {
+public class PricePutDTO implements PutDTOInterface {
 
 //    private Long id;
 

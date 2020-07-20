@@ -1,5 +1,6 @@
 package dev.szafraniak.bmresource.dto.productGroup;
 
+import dev.szafraniak.bmresource.dto.PutDTOInterface;
 import dev.szafraniak.bmresource.utils.Regexps;
 import lombok.Data;
 
@@ -8,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Data
-public class ProductGroupPutDTO {
+public class ProductGroupPutDTO implements PutDTOInterface {
 
 //    private Long id;
 

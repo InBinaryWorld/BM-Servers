@@ -1,5 +1,6 @@
 package dev.szafraniak.bmresource.entity;
 
+import dev.szafraniak.bmresource.entity.base.BaseCompanyEntity;
 import dev.szafraniak.bmresource.utils.Regexps;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
@@ -13,7 +14,7 @@ import java.time.LocalDate;
 
 @Data
 @Entity
-public class Employee {
+public class Employee extends BaseCompanyEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

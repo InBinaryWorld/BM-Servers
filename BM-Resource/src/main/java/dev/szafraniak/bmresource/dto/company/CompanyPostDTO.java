@@ -1,6 +1,7 @@
 package dev.szafraniak.bmresource.dto.company;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import dev.szafraniak.bmresource.dto.PostDTOInterface;
 import dev.szafraniak.bmresource.dto.address.AddressPostDTO;
 import dev.szafraniak.bmresource.utils.Regexps;
 import lombok.Data;
@@ -13,7 +14,7 @@ import javax.validation.constraints.Pattern;
 
 
 @Data
-public class CompanyPostDTO {
+public class CompanyPostDTO implements PostDTOInterface {
 
 //    private Long id;
 

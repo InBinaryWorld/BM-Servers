@@ -1,6 +1,7 @@
 package dev.szafraniak.bmresource.dto.invoice;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import dev.szafraniak.bmresource.dto.GetDTOInterface;
 import dev.szafraniak.bmresource.dto.amount.AmountGetDTO;
 import dev.szafraniak.bmresource.dto.shared.BaseGetDTO;
 import lombok.Data;
@@ -9,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class InvoiceGetDTO {
+public class InvoiceGetDTO implements GetDTOInterface {
 
     private Long id;
 

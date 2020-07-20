@@ -1,5 +1,6 @@
 package dev.szafraniak.bmresource.converters;
 
+import dev.szafraniak.bmresource.converters.interfaces.ConverterCompanyInterface;
 import dev.szafraniak.bmresource.dto.employee.EmployeeGetDTO;
 import dev.szafraniak.bmresource.dto.employee.EmployeePostDTO;
 import dev.szafraniak.bmresource.dto.employee.EmployeePutDTO;
@@ -7,21 +8,19 @@ import dev.szafraniak.bmresource.dto.individualContact.IndividualContactGetDTO;
 import dev.szafraniak.bmresource.entity.Company;
 import dev.szafraniak.bmresource.entity.Employee;
 import dev.szafraniak.bmresource.entity.IndividualContact;
-import dev.szafraniak.bmresource.repository.CompanyRepository;
-import dev.szafraniak.bmresource.repository.EmployeeRepository;
-import dev.szafraniak.bmresource.repository.IndividualContactRepository;
+import dev.szafraniak.bmresource.repository.entity.CompanyRepository;
+import dev.szafraniak.bmresource.repository.entity.EmployeeRepository;
+import dev.szafraniak.bmresource.repository.entity.IndividualContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class EmployeeConverter {
+public class EmployeeConverter implements ConverterCompanyInterface<Employee, EmployeeGetDTO, EmployeePostDTO, EmployeePutDTO> {
 
     private CompanyRepository companyRepository;
     private EmployeeRepository employeeRepository;
     private IndividualContactRepository individualRepository;
-
     private IndividualContactConverter individualConverter;
-
 
     public EmployeeGetDTO convertToDTO(Employee employee) {
         if (employee == null) {

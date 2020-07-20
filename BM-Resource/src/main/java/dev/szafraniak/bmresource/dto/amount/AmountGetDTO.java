@@ -1,13 +1,14 @@
 package dev.szafraniak.bmresource.dto.amount;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import dev.szafraniak.bmresource.dto.GetDTOInterface;
 import lombok.Data;
 
 import java.math.BigDecimal;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class AmountGetDTO {
+public class AmountGetDTO implements GetDTOInterface {
 
     private Long id;
 

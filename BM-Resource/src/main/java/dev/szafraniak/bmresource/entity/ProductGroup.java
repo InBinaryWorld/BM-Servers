@@ -1,5 +1,6 @@
 package dev.szafraniak.bmresource.entity;
 
+import dev.szafraniak.bmresource.entity.base.BaseCompanyEntity;
 import dev.szafraniak.bmresource.utils.Regexps;
 import lombok.Data;
 
@@ -11,7 +12,7 @@ import java.util.List;
 
 @Data
 @Entity
-public class ProductGroup {
+public class ProductGroup extends BaseCompanyEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

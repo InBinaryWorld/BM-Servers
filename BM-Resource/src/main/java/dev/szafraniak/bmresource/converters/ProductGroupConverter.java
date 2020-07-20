@@ -1,30 +1,45 @@
 package dev.szafraniak.bmresource.converters;
 
+import dev.szafraniak.bmresource.converters.interfaces.ConverterCompanyInterface;
 import dev.szafraniak.bmresource.dto.productGroup.ProductGroupGetDTO;
 import dev.szafraniak.bmresource.dto.productGroup.ProductGroupPostDTO;
 import dev.szafraniak.bmresource.dto.productGroup.ProductGroupPutDTO;
+import dev.szafraniak.bmresource.dto.productmodel.ProductModelGetDTO;
 import dev.szafraniak.bmresource.dto.shared.BaseGetDTO;
 import dev.szafraniak.bmresource.entity.Company;
 import dev.szafraniak.bmresource.entity.ProductGroup;
-import dev.szafraniak.bmresource.repository.CompanyRepository;
-import dev.szafraniak.bmresource.repository.ProductGroupRepository;
-import org.modelmapper.ModelMapper;
+import dev.szafraniak.bmresource.repository.entity.CompanyRepository;
+import dev.szafraniak.bmresource.repository.entity.ProductGroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component
-public class ProductGroupConverter {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
-    private ModelMapper modelMapper;
+@Component
+public class ProductGroupConverter implements ConverterCompanyInterface<ProductGroup, ProductGroupGetDTO, ProductGroupPostDTO, ProductGroupPutDTO> {
+
     private CompanyRepository companyRepository;
+    private ProductModelConverter productModelConverter;
     private ProductGroupRepository productGroupRepository;
 
 
     public ProductGroupGetDTO convertToDTO(ProductGroup productGroup) {
-        return modelMapper.map(productGroup, ProductGroupGetDTO.class);
+        List<ProductModelGetDTO> productModels = productGroup.getProductModels()
+                .stream().map(productModelConverter::convertToDTO)
+                .collect(Collectors.toList());
+        ProductGroupGetDTO dto = new ProductGroupGetDTO();
+        dto.setId(productGroup.getId());
+        dto.setName(productGroup.getName());
+        dto.setProductModels(productModels);
+        return dto;
     }
 
     public BaseGetDTO convertToBaseDTO(ProductGroup group) {
+        if (group == null) {
+            return null;
+        }
         BaseGetDTO baseGetDTO = new BaseGetDTO();
         baseGetDTO.setName(group.getName());
         baseGetDTO.setId(group.getId());
@@ -32,13 +47,21 @@ public class ProductGroupConverter {
     }
 
     public ProductGroup convertFromDTO(ProductGroupPostDTO dto, Long companyId) {
-        ProductGroup productGroup = modelMapper.map(dto, ProductGroup.class);
+        if (dto == null) {
+            return null;
+        }
         Company company = companyRepository.findById(companyId).get();
+        ProductGroup productGroup = new ProductGroup();
+        productGroup.setName(dto.getName());
         productGroup.setCompany(company);
+        productGroup.setProductModels(new ArrayList<>());
         return productGroup;
     }
 
     public ProductGroup convertFromDTO(ProductGroupPutDTO dto, Long productGroupId) {
+        if (dto == null) {
+            return null;
+        }
         ProductGroup productGroup = productGroupRepository.findById(productGroupId).get();
         productGroup.setName(dto.getName());
         return productGroup;
@@ -52,8 +75,8 @@ public class ProductGroupConverter {
     }
 
     @Autowired
-    public void setModelMapper(ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
+    public void setProductModelConverter(ProductModelConverter productModelConverter) {
+        this.productModelConverter = productModelConverter;
     }
 
     @Autowired

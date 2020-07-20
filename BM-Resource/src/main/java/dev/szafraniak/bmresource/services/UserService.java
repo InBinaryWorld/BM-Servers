@@ -3,7 +3,7 @@ package dev.szafraniak.bmresource.services;
 import dev.szafraniak.bmresource.converters.UserConverter;
 import dev.szafraniak.bmresource.dto.user.UserGetDTO;
 import dev.szafraniak.bmresource.entity.User;
-import dev.szafraniak.bmresource.repository.UserRepository;
+import dev.szafraniak.bmresource.repository.entity.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

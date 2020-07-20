@@ -1,5 +1,6 @@
 package dev.szafraniak.bmresource.dto.employee;
 
+import dev.szafraniak.bmresource.dto.PutDTOInterface;
 import dev.szafraniak.bmresource.utils.Regexps;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
@@ -11,7 +12,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Data
-public class EmployeePutDTO {
+public class EmployeePutDTO implements PutDTOInterface {
 
 //    private Long id;
 

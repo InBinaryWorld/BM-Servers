@@ -1,6 +1,7 @@
 package dev.szafraniak.bmresource.entity;
 
 import com.sun.istack.NotNull;
+import dev.szafraniak.bmresource.entity.base.BaseEntity;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -12,7 +13,7 @@ import java.math.BigDecimal;
 
 @Data
 @Entity
-public class Price {
+public class Price extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

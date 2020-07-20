@@ -1,12 +1,13 @@
 package dev.szafraniak.bmresource.dto.company;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import dev.szafraniak.bmresource.dto.GetDTOInterface;
 import dev.szafraniak.bmresource.dto.address.AddressGetDTO;
 import lombok.Data;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CompanyGetDTO {
+public class CompanyGetDTO implements GetDTOInterface {
 
     private Long id;
 

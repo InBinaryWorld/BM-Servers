@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/user")
 public class UserController {
 
-    private UserService userService;
+    private UserService service;
 
 
     @GetMapping
-    public UserGetDTO getUser() {
-        return userService.getUser();
+    public UserGetDTO getEntity() {
+        return service.getUser();
     }
 
     @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
+    public void setService(UserService service) {
+        this.service = service;
     }
 
 }

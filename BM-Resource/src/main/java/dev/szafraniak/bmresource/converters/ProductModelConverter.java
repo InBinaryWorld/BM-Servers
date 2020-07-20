@@ -1,5 +1,6 @@
 package dev.szafraniak.bmresource.converters;
 
+import dev.szafraniak.bmresource.converters.interfaces.ConverterCompanyInterface;
 import dev.szafraniak.bmresource.dto.price.PriceGetDTO;
 import dev.szafraniak.bmresource.dto.price.PricePutDTO;
 import dev.szafraniak.bmresource.dto.productmodel.ProductModelGetDTO;
@@ -10,15 +11,15 @@ import dev.szafraniak.bmresource.entity.Company;
 import dev.szafraniak.bmresource.entity.Price;
 import dev.szafraniak.bmresource.entity.ProductGroup;
 import dev.szafraniak.bmresource.entity.ProductModel;
-import dev.szafraniak.bmresource.repository.CompanyRepository;
-import dev.szafraniak.bmresource.repository.ProductModelRepository;
+import dev.szafraniak.bmresource.repository.entity.CompanyRepository;
+import dev.szafraniak.bmresource.repository.entity.ProductModelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 
 @Component
-public class ProductModelConverter {
+public class ProductModelConverter implements ConverterCompanyInterface<ProductModel, ProductModelGetDTO, ProductModelPostDTO, ProductModelPutDTO> {
 
     private PriceConverter priceConverter;
     private CompanyRepository companyRepository;

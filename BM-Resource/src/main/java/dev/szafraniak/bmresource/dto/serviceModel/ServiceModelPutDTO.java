@@ -1,5 +1,6 @@
 package dev.szafraniak.bmresource.dto.serviceModel;
 
+import dev.szafraniak.bmresource.dto.PutDTOInterface;
 import dev.szafraniak.bmresource.dto.price.PricePutDTO;
 import dev.szafraniak.bmresource.utils.Regexps;
 import dev.szafraniak.bmresource.validator.EnvironmentIds;
@@ -12,7 +13,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Data
-public class ServiceModelPutDTO {
+public class ServiceModelPutDTO implements PutDTOInterface {
 
 //    private Long id;
 
