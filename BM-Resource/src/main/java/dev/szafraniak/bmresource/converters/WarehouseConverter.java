@@ -76,7 +76,6 @@ public class WarehouseConverter implements ConverterCompanyInterface<Warehouse, 
         Address address = getAddressFromDTO(warehouse, dto);
         warehouse.setName(dto.getName());
         warehouse.setAddress(address);
-        warehouse.setProducts(new ArrayList<>());
         return warehouse;
     }
 

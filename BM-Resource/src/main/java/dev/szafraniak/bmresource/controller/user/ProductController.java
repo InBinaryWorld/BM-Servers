@@ -26,14 +26,14 @@ public class ProductController {
     }
 
     @PostMapping
-    @PreAuthorize("@permissionChecker.checkCompanyId(#companyId)")
+    @PreAuthorize("@permissionChecker.checkProductForCreate(#dto, #companyId)")
     public ProductGetDTO create(@PathVariable Long companyId,
                                 @Valid @RequestBody ProductPostDTO dto) {
         return service.create(dto, companyId);
     }
 
     @GetMapping("/{entityId}")
-    @PreAuthorize("@permissionChecker.checkProductForCreate(#companyId, #entityId)")
+    @PreAuthorize("@permissionChecker.checkProduct(#companyId, #entityId)")
     public ProductGetDTO getEntity(@PathVariable Long companyId,
                                    @PathVariable Long entityId) {
         return service.getEntity(entityId);

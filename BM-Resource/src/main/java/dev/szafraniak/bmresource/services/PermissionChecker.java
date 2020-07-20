@@ -133,15 +133,15 @@ public class PermissionChecker {
     }
 
     public boolean checkProductForCreate(ProductPostDTO dto, Long companyId) {
-        Optional<Company> productCompany = productModelRepository
+        Optional<Company> productModel = productModelRepository
                 .findById(dto.getProductModelId())
                 .map(ProductModel::getCompany);
 
-        Optional<Company> warehouse = groupRepository
+        Optional<Company> warehouse = warehouseRepository
                 .findById(dto.getWarehouseId())
-                .map(ProductGroup::getCompany);
+                .map(Warehouse::getCompany);
 
-        Optional<Company> joined = innerJoin(productCompany, warehouse);
+        Optional<Company> joined = innerJoin(productModel, warehouse);
         return checkCompany(joined, companyId);
     }
 

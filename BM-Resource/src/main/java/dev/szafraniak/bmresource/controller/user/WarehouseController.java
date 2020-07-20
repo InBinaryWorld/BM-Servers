@@ -48,7 +48,7 @@ public class WarehouseController {
     }
 
     @DeleteMapping("/{entityId}")
-    @PreAuthorize("@permissionChecker.checkFinanceRow(#companyId, #entityId)")
+    @PreAuthorize("@permissionChecker.checkWarehouse(#companyId, #entityId)")
     public ResponseEntity<Void> deleteCompany(@PathVariable Long entityId,
                                               @PathVariable String companyId) {
         boolean success = service.delete(entityId);
