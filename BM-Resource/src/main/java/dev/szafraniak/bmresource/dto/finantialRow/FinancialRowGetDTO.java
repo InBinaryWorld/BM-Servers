@@ -5,7 +5,7 @@ import dev.szafraniak.bmresource.dto.GetDTOInterface;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -15,7 +15,7 @@ public class FinancialRowGetDTO implements GetDTOInterface {
 
     private String title;
 
-    private LocalDateTime eventDate;
+    private OffsetDateTime eventDate;
 
     private String description;
 

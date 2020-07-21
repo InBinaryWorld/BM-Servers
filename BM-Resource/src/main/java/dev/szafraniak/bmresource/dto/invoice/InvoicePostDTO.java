@@ -9,7 +9,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Data
 public class InvoicePostDTO implements PostDTOInterface {
@@ -29,7 +29,7 @@ public class InvoicePostDTO implements PostDTOInterface {
     private String invoiceName;
 
     @NotNull
-    private LocalDateTime creationDate;
+    private OffsetDateTime creationDate;
 
     @NotNull
     private String dueDate;

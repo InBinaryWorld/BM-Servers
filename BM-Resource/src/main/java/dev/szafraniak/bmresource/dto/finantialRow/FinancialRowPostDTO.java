@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Data
 public class FinancialRowPostDTO implements PostDTOInterface {
@@ -21,7 +21,7 @@ public class FinancialRowPostDTO implements PostDTOInterface {
     private String title;
 
     @NotNull
-    private LocalDateTime eventDate;
+    private OffsetDateTime eventDate;
 
     @NotBlank
     @Pattern(regexp = Regexps.BASE_2_240)

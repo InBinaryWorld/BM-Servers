@@ -8,12 +8,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.math.BigDecimal;
-import java.time.OffsetDateTime;
 
 @Data
 @Entity
-public class FinancialRow extends BaseCompanyEntity {
+public class BankAccount extends BaseCompanyEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,21 +19,14 @@ public class FinancialRow extends BaseCompanyEntity {
 
     @NotNull
     @NotBlank
-    @Pattern(regexp = Regexps.BASE_2_60)
-    private String title;
+    @Pattern(regexp = Regexps.BASE_2_40)
+    private String name;
 
     @NotNull
-    private OffsetDateTime eventDate;
-
-    @NotBlank
-    @Pattern(regexp = Regexps.BASE_2_240)
-    private String description;
-
-    @NotNull
-    private BigDecimal amountChange;
+    @Pattern(regexp = Regexps.BANK_ACCOUNT)
+    private String value;
 
     @NotNull
     @ManyToOne
     private Company company;
-
 }

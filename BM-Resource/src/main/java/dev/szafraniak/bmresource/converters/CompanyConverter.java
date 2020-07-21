@@ -70,7 +70,7 @@ public class CompanyConverter implements ConverterInterface<Company, CompanyGetD
         company.setServiceModels(new ArrayList<>());
         company.setProductModels(new ArrayList<>());
         company.setProductGroups(new ArrayList<>());
-        company.setPaymentMethods(new ArrayList<>());
+        company.setBankAccounts(new ArrayList<>());
         company.setCompanyContacts(new ArrayList<>());
         company.setFinancialHistory(new ArrayList<>());
         company.setIndividualContacts(new ArrayList<>());

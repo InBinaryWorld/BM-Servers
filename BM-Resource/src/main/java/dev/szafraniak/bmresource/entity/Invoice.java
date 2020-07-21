@@ -5,7 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Data
 @Entity
@@ -28,7 +28,7 @@ public class Invoice extends BaseCompanyEntity {
     private String invoiceName;
 
     @NotNull
-    private LocalDateTime creationDate;
+    private OffsetDateTime creationDate;
 
     @NotNull
     private String dueDate;

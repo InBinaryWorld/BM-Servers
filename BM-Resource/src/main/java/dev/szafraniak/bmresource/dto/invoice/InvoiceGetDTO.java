@@ -6,7 +6,7 @@ import dev.szafraniak.bmresource.dto.amount.AmountGetDTO;
 import dev.szafraniak.bmresource.dto.shared.BaseGetDTO;
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -22,7 +22,7 @@ public class InvoiceGetDTO implements GetDTOInterface {
 
     private String invoiceName;
 
-    private LocalDateTime creationDate;
+    private OffsetDateTime creationDate;
 
     private String dueDate;
 

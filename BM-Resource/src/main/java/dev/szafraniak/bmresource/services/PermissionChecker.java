@@ -4,7 +4,10 @@ import dev.szafraniak.bmresource.dto.employee.EmployeePostDTO;
 import dev.szafraniak.bmresource.dto.product.ProductPostDTO;
 import dev.szafraniak.bmresource.dto.productmodel.ProductModelPostDTO;
 import dev.szafraniak.bmresource.dto.productmodel.ProductModelPutDTO;
-import dev.szafraniak.bmresource.entity.*;
+import dev.szafraniak.bmresource.entity.Company;
+import dev.szafraniak.bmresource.entity.User;
+import dev.szafraniak.bmresource.entity.base.BaseCompanyEntity;
+import dev.szafraniak.bmresource.repository.CompanyRepositoryInterface;
 import dev.szafraniak.bmresource.repository.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,8 +22,8 @@ public class PermissionChecker {
     private InvoiceRepository invoiceRepository;
     private ProductRepository productRepository;
     private EmployeeRepository employeeRepository;
-    private ProductGroupRepository groupRepository;
     private WarehouseRepository warehouseRepository;
+    private BankAccountRepository bankAccountRepository;
     private FinancesRowRepository financesRowRepository;
     private ServiceModelRepository serviceModelRepository;
     private ProductModelRepository productModelRepository;
@@ -34,125 +37,79 @@ public class PermissionChecker {
         return checkCompany(company);
     }
 
-    public boolean checkProductGroup(Long companyId, Long productGroupId) {
-        Optional<Company> company = productGroupRepository
-                .findById(productGroupId)
-                .map(ProductGroup::getCompany);
-        return checkCompany(company, companyId);
-    }
-
-    public boolean checkCompanyContact(Long companyId, Long contactId) {
-        Optional<Company> company = companyContactRepository
-                .findById(contactId)
-                .map(CompanyContact::getCompany);
-        return checkCompany(company, companyId);
-    }
-
-    public boolean checkIndividualContact(Long companyId, Long contactId) {
-        Optional<Company> company = individualContactRepository
-                .findById(contactId)
-                .map(IndividualContact::getCompany);
-        return checkCompany(company, companyId);
-    }
-
     public boolean checkForCreate(ProductModelPostDTO dto, Long companyId) {
         if (dto.getProductGroupId() == null) {
             return checkCompanyId(companyId);
         }
-        Optional<Company> opt = groupRepository
-                .findById(dto.getProductGroupId())
-                .map(ProductGroup::getCompany);
-        return checkCompany(opt, companyId);
+        return checkProductGroup(companyId, dto.getProductGroupId());
     }
 
-    public boolean checkForCreate(EmployeePostDTO dto, Long companyId) {
-        Optional<Company> opt = individualContactRepository
-                .findById(dto.getIndividualId())
-                .map(IndividualContact::getCompany);
-        return checkCompany(opt, companyId);
-    }
-
-
-    public boolean checkForUpdate(ProductModelPutDTO dto,
-                                  Long companyId,
-                                  Long productModelId) {
+    public boolean checkForUpdate(ProductModelPutDTO dto, Long companyId, Long productModelId) {
         if (dto.getProductGroupId() == null) {
             return checkProductModel(companyId, productModelId);
         }
-        Long groupId = dto.getProductGroupId();
-        return checkProductModel(companyId, productModelId, groupId);
+        return checkProductModel(companyId, productModelId, dto.getProductGroupId());
     }
 
-    public boolean checkProductModel(Long companyId, Long productModelId) {
-        Optional<Company> company = productModelRepository
-                .findById(productModelId)
-                .map(ProductModel::getCompany);
-        return checkCompany(company, companyId);
+    public boolean checkForCreate(EmployeePostDTO dto, Long companyId) {
+        return checkIndividualContact(companyId, dto.getIndividualId());
+    }
+
+    public boolean checkProductGroup(Long companyId, Long entityId) {
+        return checkEntityId(companyId, entityId, productGroupRepository);
+    }
+
+    public boolean checkCompanyContact(Long companyId, Long contactId) {
+        return checkEntityId(companyId, contactId, companyContactRepository);
+    }
+
+    public boolean checkIndividualContact(Long companyId, Long entityId) {
+        return checkEntityId(companyId, entityId, individualContactRepository);
+    }
+
+    public boolean checkProductModel(Long companyId, Long entityId) {
+        return checkEntityId(companyId, entityId, productModelRepository);
     }
 
     public boolean checkEmployee(Long companyId, Long entityId) {
-        Optional<Company> company = employeeRepository
-                .findById(entityId)
-                .map(Employee::getCompany);
-        return checkCompany(company, companyId);
+        return checkEntityId(companyId, entityId, employeeRepository);
     }
 
-    public boolean checkServiceModel(Long companyId, Long serviceModelId) {
-        Optional<Company> company = serviceModelRepository
-                .findById(serviceModelId)
-                .map(ServiceModel::getCompany);
-        return checkCompany(company, companyId);
+    public boolean checkServiceModel(Long companyId, Long entityId) {
+        return checkEntityId(companyId, entityId, serviceModelRepository);
     }
 
-    public boolean checkFinanceRow(Long companyId, Long financesRowId) {
-        Optional<Company> company = financesRowRepository
-                .findById(financesRowId)
-                .map(FinancialRow::getCompany);
-        return checkCompany(company, companyId);
+    public boolean checkFinanceRow(Long companyId, Long entityId) {
+        return checkEntityId(companyId, entityId, financesRowRepository);
     }
 
     public boolean checkWarehouse(Long companyId, Long entityId) {
-        Optional<Company> company = warehouseRepository
-                .findById(entityId)
-                .map(Warehouse::getCompany);
-        return checkCompany(company, companyId);
+        return checkEntityId(companyId, entityId, warehouseRepository);
     }
 
-    public boolean checkInvoice(Long companyId, Long invoiceId) {
-        Optional<Company> company = invoiceRepository
-                .findById(invoiceId)
-                .map(Invoice::getCompany);
-        return checkCompany(company, companyId);
+    public boolean checkInvoice(Long companyId, Long entityId) {
+        return checkEntityId(companyId, entityId, invoiceRepository);
     }
 
-    public boolean checkProduct(Long companyId, Long productId) {
-        Optional<Company> company = productRepository
-                .findById(productId)
-                .map(Product::getCompany);
-        return checkCompany(company, companyId);
+    public boolean checkProduct(Long companyId, Long entityId) {
+        return checkEntityId(companyId, entityId, productRepository);
+    }
+
+    public boolean checkBankAccountId(Long companyId, Long entityId) {
+        return checkEntityId(companyId, entityId, bankAccountRepository);
     }
 
     public boolean checkProductForCreate(ProductPostDTO dto, Long companyId) {
-        Optional<Company> productModel = productModelRepository
-                .findById(dto.getProductModelId())
-                .map(ProductModel::getCompany);
-
-        Optional<Company> warehouse = warehouseRepository
-                .findById(dto.getWarehouseId())
-                .map(Warehouse::getCompany);
+        Optional<Company> productModel = extractCompany(productModelRepository, dto.getProductModelId());
+        Optional<Company> warehouse = extractCompany(warehouseRepository, dto.getWarehouseId());
 
         Optional<Company> joined = innerJoin(productModel, warehouse);
         return checkCompany(joined, companyId);
     }
 
     private boolean checkProductModel(Long companyId, Long productModelId, Long groupId) {
-        Optional<Company> productCompany = productModelRepository
-                .findById(productModelId)
-                .map(ProductModel::getCompany);
-
-        Optional<Company> groupCompany = groupRepository
-                .findById(groupId)
-                .map(ProductGroup::getCompany);
+        Optional<Company> productCompany = extractCompany(productModelRepository, productModelId);
+        Optional<Company> groupCompany = extractCompany(productGroupRepository, groupId);
 
         Optional<Company> joined = innerJoin(productCompany, groupCompany);
         return checkCompany(joined, companyId);
@@ -176,6 +133,18 @@ public class PermissionChecker {
         return t1.flatMap(t -> t2.filter(t::equals));
     }
 
+    private <T extends BaseCompanyEntity> boolean checkEntityId(
+            Long companyId, Long entityId, CompanyRepositoryInterface<T> repo) {
+        Optional<Company> company = extractCompany(repo, entityId);
+        return checkCompany(company, companyId);
+    }
+
+    private <T extends BaseCompanyEntity> Optional<Company> extractCompany(
+            CompanyRepositoryInterface<T> repository, Long entityId) {
+        return repository.findById(entityId)
+                .map(T::getCompany);
+    }
+
     private boolean companyIdFilter(Company company, Long companyId) {
         return companyId.equals(company.getId());
     }
@@ -188,11 +157,6 @@ public class PermissionChecker {
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
-    }
-
-    @Autowired
-    public void setGroupRepository(ProductGroupRepository groupRepository) {
-        this.groupRepository = groupRepository;
     }
 
     @Autowired
@@ -243,5 +207,10 @@ public class PermissionChecker {
     @Autowired
     public void setWarehouseRepository(WarehouseRepository warehouseRepository) {
         this.warehouseRepository = warehouseRepository;
+    }
+
+    @Autowired
+    public void setBankAccountRepository(BankAccountRepository bankAccountRepository) {
+        this.bankAccountRepository = bankAccountRepository;
     }
 }

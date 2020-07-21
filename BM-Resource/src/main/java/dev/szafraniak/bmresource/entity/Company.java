@@ -76,5 +76,5 @@ public class Company extends BaseEntity {
     private List<FinancialRow> financialHistory;
 
     @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "company")
-    private List<PaymentMethod> paymentMethods;
+    private List<BankAccount> bankAccounts;
 }
