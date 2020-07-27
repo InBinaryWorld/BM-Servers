@@ -1,7 +1,5 @@
 package dev.szafraniak.bmresource.validator;
 
-import dev.szafraniak.bmresource.config.BaseEnvironment;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.ArrayList;
@@ -18,12 +16,6 @@ public class EnvironmentIdValidator implements ConstraintValidator<VerifyEnviron
     @Override
     public void initialize(VerifyEnvironmentId constraintAnnotation) {
         switch (constraintAnnotation.source()) {
-            case QUANTITY_UNIT_PRODUCT:
-                validationList = BaseEnvironment.QUANTITY_UNITS_PRODUCT_IDS;
-                break;
-            case QUANTITY_UNIT_SERVICE:
-                validationList = BaseEnvironment.QUANTITY_UNITS_SERVICE_IDS;
-                break;
             default:
                 validationList = new ArrayList<>();
         }

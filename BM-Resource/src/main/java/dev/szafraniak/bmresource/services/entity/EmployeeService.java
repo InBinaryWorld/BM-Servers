@@ -1,12 +1,11 @@
 package dev.szafraniak.bmresource.services.entity;
 
-import dev.szafraniak.bmresource.converters.EmployeeConverter;
-import dev.szafraniak.bmresource.dto.employee.EmployeeGetDTO;
-import dev.szafraniak.bmresource.dto.employee.EmployeePostDTO;
-import dev.szafraniak.bmresource.dto.employee.EmployeePutDTO;
-import dev.szafraniak.bmresource.entity.Employee;
+import dev.szafraniak.bmresource.converters.entity.EmployeeConverter;
+import dev.szafraniak.bmresource.dto.entity.employee.EmployeeGetDTO;
+import dev.szafraniak.bmresource.dto.entity.employee.EmployeePostDTO;
+import dev.szafraniak.bmresource.dto.entity.employee.EmployeePutDTO;
+import dev.szafraniak.bmresource.model.entity.Employee;
 import dev.szafraniak.bmresource.repository.entity.EmployeeRepository;
-import dev.szafraniak.bmresource.services.AbstractCompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

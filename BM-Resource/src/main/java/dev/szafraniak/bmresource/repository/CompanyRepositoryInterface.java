@@ -1,6 +1,6 @@
 package dev.szafraniak.bmresource.repository;
 
-import dev.szafraniak.bmresource.entity.base.BaseCompanyEntity;
+import dev.szafraniak.bmresource.model.entity.BaseCompanyEntity;
 import org.springframework.data.repository.NoRepositoryBean;
 
 import java.util.List;

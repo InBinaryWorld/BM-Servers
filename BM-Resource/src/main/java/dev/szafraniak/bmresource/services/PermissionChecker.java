@@ -1,14 +1,15 @@
 package dev.szafraniak.bmresource.services;
 
-import dev.szafraniak.bmresource.dto.employee.EmployeePostDTO;
-import dev.szafraniak.bmresource.dto.product.ProductPostDTO;
-import dev.szafraniak.bmresource.dto.productmodel.ProductModelPostDTO;
-import dev.szafraniak.bmresource.dto.productmodel.ProductModelPutDTO;
-import dev.szafraniak.bmresource.entity.Company;
-import dev.szafraniak.bmresource.entity.User;
-import dev.szafraniak.bmresource.entity.base.BaseCompanyEntity;
+import dev.szafraniak.bmresource.dto.entity.employee.EmployeePostDTO;
+import dev.szafraniak.bmresource.dto.entity.product.ProductPostDTO;
+import dev.szafraniak.bmresource.dto.entity.productmodel.ProductModelPostDTO;
+import dev.szafraniak.bmresource.dto.entity.productmodel.ProductModelPutDTO;
+import dev.szafraniak.bmresource.model.entity.BaseCompanyEntity;
+import dev.szafraniak.bmresource.model.entity.Company;
+import dev.szafraniak.bmresource.model.entity.User;
 import dev.szafraniak.bmresource.repository.CompanyRepositoryInterface;
 import dev.szafraniak.bmresource.repository.entity.*;
+import dev.szafraniak.bmresource.services.entity.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -110,7 +111,6 @@ public class PermissionChecker {
     private boolean checkProductModel(Long companyId, Long productModelId, Long groupId) {
         Optional<Company> productCompany = extractCompany(productModelRepository, productModelId);
         Optional<Company> groupCompany = extractCompany(productGroupRepository, groupId);
-
         Optional<Company> joined = innerJoin(productCompany, groupCompany);
         return checkCompany(joined, companyId);
     }
@@ -150,13 +150,48 @@ public class PermissionChecker {
     }
 
     @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    @Autowired
     public void setCompanyRepo(CompanyRepository companyRepo) {
         this.companyRepo = companyRepo;
     }
 
     @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
+    public void setInvoiceRepository(InvoiceRepository invoiceRepository) {
+        this.invoiceRepository = invoiceRepository;
+    }
+
+    @Autowired
+    public void setProductRepository(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
+
+    @Autowired
+    public void setEmployeeRepository(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
+
+    @Autowired
+    public void setWarehouseRepository(WarehouseRepository warehouseRepository) {
+        this.warehouseRepository = warehouseRepository;
+    }
+
+    @Autowired
+    public void setBankAccountRepository(BankAccountRepository bankAccountRepository) {
+        this.bankAccountRepository = bankAccountRepository;
+    }
+
+    @Autowired
+    public void setFinancesRowRepository(FinancesRowRepository financesRowRepository) {
+        this.financesRowRepository = financesRowRepository;
+    }
+
+    @Autowired
+    public void setServiceModelRepository(ServiceModelRepository serviceModelRepository) {
+        this.serviceModelRepository = serviceModelRepository;
     }
 
     @Autowired
@@ -170,16 +205,6 @@ public class PermissionChecker {
     }
 
     @Autowired
-    public void setServiceModelRepository(ServiceModelRepository serviceModelRepository) {
-        this.serviceModelRepository = serviceModelRepository;
-    }
-
-    @Autowired
-    public void setInvoiceRepository(InvoiceRepository invoiceRepository) {
-        this.invoiceRepository = invoiceRepository;
-    }
-
-    @Autowired
     public void setCompanyContactRepository(CompanyContactRepository companyContactRepository) {
         this.companyContactRepository = companyContactRepository;
     }
@@ -187,30 +212,5 @@ public class PermissionChecker {
     @Autowired
     public void setIndividualContactRepository(IndividualContactRepository individualContactRepository) {
         this.individualContactRepository = individualContactRepository;
-    }
-
-    @Autowired
-    public void setEmployeeRepository(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
-    }
-
-    @Autowired
-    public void setFinancesRowRepository(FinancesRowRepository financesRowRepository) {
-        this.financesRowRepository = financesRowRepository;
-    }
-
-    @Autowired
-    public void setProductRepository(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
-
-    @Autowired
-    public void setWarehouseRepository(WarehouseRepository warehouseRepository) {
-        this.warehouseRepository = warehouseRepository;
-    }
-
-    @Autowired
-    public void setBankAccountRepository(BankAccountRepository bankAccountRepository) {
-        this.bankAccountRepository = bankAccountRepository;
     }
 }

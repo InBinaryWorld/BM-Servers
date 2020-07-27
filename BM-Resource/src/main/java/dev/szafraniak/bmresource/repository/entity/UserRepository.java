@@ -1,6 +1,6 @@
 package dev.szafraniak.bmresource.repository.entity;
 
-import dev.szafraniak.bmresource.entity.User;
+import dev.szafraniak.bmresource.model.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

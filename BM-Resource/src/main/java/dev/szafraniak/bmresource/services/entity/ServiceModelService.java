@@ -1,12 +1,11 @@
 package dev.szafraniak.bmresource.services.entity;
 
-import dev.szafraniak.bmresource.converters.ServiceModelConverter;
-import dev.szafraniak.bmresource.dto.serviceModel.ServiceModelGetDTO;
-import dev.szafraniak.bmresource.dto.serviceModel.ServiceModelPostDTO;
-import dev.szafraniak.bmresource.dto.serviceModel.ServiceModelPutDTO;
-import dev.szafraniak.bmresource.entity.ServiceModel;
+import dev.szafraniak.bmresource.converters.entity.ServiceModelConverter;
+import dev.szafraniak.bmresource.dto.entity.serviceModel.ServiceModelGetDTO;
+import dev.szafraniak.bmresource.dto.entity.serviceModel.ServiceModelPostDTO;
+import dev.szafraniak.bmresource.dto.entity.serviceModel.ServiceModelPutDTO;
+import dev.szafraniak.bmresource.model.entity.ServiceModel;
 import dev.szafraniak.bmresource.repository.entity.ServiceModelRepository;
-import dev.szafraniak.bmresource.services.AbstractCompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
