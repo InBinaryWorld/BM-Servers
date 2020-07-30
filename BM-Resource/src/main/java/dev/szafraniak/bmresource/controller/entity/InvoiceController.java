@@ -28,7 +28,7 @@ public class InvoiceController {
     @PostMapping
     @PreAuthorize("@permissionChecker.checkCompanyId(#companyId)")
     public InvoiceGetDTO create(@PathVariable Long companyId,
-                                @Valid @RequestBody CreateInvoiceDTO dto) {
+                                @Valid @RequestBody CreateInvoiceDTO dto) throws Exception {
         return service.createInvoiceAction(dto, companyId);
     }
 

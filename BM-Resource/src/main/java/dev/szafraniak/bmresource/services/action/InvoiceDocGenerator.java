@@ -4,5 +4,5 @@ import dev.szafraniak.bmresource.model.action.CreateInvoiceModel;
 import dev.szafraniak.bmresource.model.action.InvoiceDetailsModel;
 
 public interface InvoiceDocGenerator {
-    String createInvoice(CreateInvoiceModel model, InvoiceDetailsModel options);
+    void createInvoice(CreateInvoiceModel model, InvoiceDetailsModel details, String outputFile) throws Exception;
 }

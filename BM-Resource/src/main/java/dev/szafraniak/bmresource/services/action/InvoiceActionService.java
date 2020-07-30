@@ -8,6 +8,7 @@ import dev.szafraniak.bmresource.model.action.CreateInvoiceModel;
 import dev.szafraniak.bmresource.model.action.InvoiceDetailsModel;
 import dev.szafraniak.bmresource.model.action.InvoiceOrderItemModel;
 import dev.szafraniak.bmresource.model.action.TaxGroupAmountModel;
+import dev.szafraniak.bmresource.services.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,15 +21,17 @@ import java.util.stream.Collectors;
 @Service
 public class InvoiceActionService {
 
+    private FileService fileService;
     private InvoiceDocGenerator docGenerator;
     private CreateInvoiceConverter converter;
 
 
-    public InvoicePostDTO generateInvoice(CreateInvoiceDTO dto, Long companyId) {
+    public InvoicePostDTO generateInvoice(CreateInvoiceDTO dto, Long companyId) throws Exception {
         CreateInvoiceModel baseInfo = converter.convertToModel(dto, companyId);
         InvoiceDetailsModel details = calculateInvoiceDetails(dto.getItems());
-        String fileName = docGenerator.createInvoice(baseInfo, details);
-        return converter.convertToPostDTO(baseInfo, details, fileName);
+        String filePath = fileService.getInvoicePath("invoice.pdf");
+        docGenerator.createInvoice(baseInfo, details, filePath);
+        return converter.convertToPostDTO(baseInfo, details, filePath);
     }
 
     private InvoiceDetailsModel calculateInvoiceDetails(List<InvoiceOrderItemDTO> itemsDTO) {
@@ -75,5 +78,10 @@ public class InvoiceActionService {
     @Autowired
     public void setDocGenerator(InvoiceDocGenerator docGenerator) {
         this.docGenerator = docGenerator;
+    }
+
+    @Autowired
+    public void setFileService(FileService fileService) {
+        this.fileService = fileService;
     }
 }

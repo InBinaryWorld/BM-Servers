@@ -11,13 +11,18 @@ import java.nio.file.Path;
 public class FileService {
 
     public boolean removeInvoice(String fileReference) {
-        return removeFile(Path.of(BaseEnvironment.INVOICE_BASE_PATH, fileReference).toString());
+        String path = getInvoicePath(fileReference);
+        return removeFile(path);
     }
 
-    public boolean removeFile(String filePath) {
-        Path path = Path.of(BaseEnvironment.RESOURCE_BASE_PATH, filePath);
-        File file = path.toFile();
+    public boolean removeFile(String path) {
+        File file = Path.of(path).toFile();
         return file.delete();
+    }
+
+    public String getInvoicePath(String fileName) {
+        return Path.of(BaseEnvironment.RESOURCE_BASE_PATH,
+                BaseEnvironment.INVOICE_BASE_PATH, fileName).toString();
     }
 
     private boolean exist(String filePath) {

@@ -24,7 +24,7 @@ public class InvoiceService extends AbstractCompanyService<Invoice, InvoiceRepos
         super(converter, repository);
     }
 
-    public InvoiceGetDTO createInvoiceAction(CreateInvoiceDTO dto, Long companyId) {
+    public InvoiceGetDTO createInvoiceAction(CreateInvoiceDTO dto, Long companyId) throws Exception {
         InvoicePostDTO invoicePostDTO = actionService.generateInvoice(dto, companyId);
         return this.createFromDTO(invoicePostDTO, companyId);
     }
