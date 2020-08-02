@@ -23,6 +23,9 @@ public class CreateInvoiceConverter {
     private CompanyService companyService;
 
     public CreateInvoiceModel convertToModel(CreateInvoiceDTO dto, Long companyId) {
+        if (dto == null) {
+            return null;
+        }
         Company company = companyService.getEntity(companyId);
         InvoiceContactModel seller = convertToModel(company);
         InvoiceContactModel buyer = convertToModel(dto.getBuyer());
@@ -56,6 +59,9 @@ public class CreateInvoiceConverter {
     }
 
     public InvoiceContactModel convertToModel(Company company) {
+        if (company == null) {
+            return null;
+        }
         List<String> addressRows = company.getHeadquarter().getAddressRows();
         InvoiceContactModel model = new InvoiceContactModel();
         model.setName(company.getName());
@@ -65,6 +71,9 @@ public class CreateInvoiceConverter {
     }
 
     private InvoiceContactModel convertToModel(InvoiceContactDTO contact) {
+        if (contact == null) {
+            return null;
+        }
         List<String> addressRows = contact.getAddress().getAddressRows();
         InvoiceContactModel model = new InvoiceContactModel();
         model.setName(contact.getName());
@@ -74,13 +83,14 @@ public class CreateInvoiceConverter {
     }
 
     public InvoicePostDTO convertToPostDTO(CreateInvoiceModel model, InvoiceDetailsModel details, String fileName) {
+        String receiverName = model.getReceiver() == null ? null : model.getReceiver().getName();
         AmountPostDTO amountPostDTO = new AmountPostDTO();
         amountPostDTO.setNet(details.getTotalNet());
         amountPostDTO.setTax(details.getTotalTax());
         amountPostDTO.setGross(details.getTotalGross());
 
         InvoicePostDTO dto = new InvoicePostDTO();
-        dto.setReceiverName(model.getReceiver().getName());
+        dto.setReceiverName(receiverName);
         dto.setBuyerName(model.getBuyer().getName());
         dto.setCreationDate(model.getCreationDate());
         dto.setInvoiceName(model.getInvoiceName());

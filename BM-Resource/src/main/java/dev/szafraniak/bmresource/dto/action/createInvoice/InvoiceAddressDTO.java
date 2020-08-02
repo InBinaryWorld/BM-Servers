@@ -41,10 +41,10 @@ public class InvoiceAddressDTO implements AddressInterface {
     @Override
     public List<String> getAddressRows() {
         ArrayList<String> addressRows = new ArrayList<>();
+        String addressRow = street + " " + houseNumber;
+        addressRow += apartmentNumber == null ? "" : "/" + apartmentNumber;
+        addressRows.add(addressRow);
         addressRows.add(postalCode + " " + city + ", " + country);
-        String addressRow2 = street + " " + houseNumber;
-        addressRow2 += apartmentNumber == null ? "" : "/" + apartmentNumber;
-        addressRows.add(addressRow2);
         return addressRows;
     }
 }

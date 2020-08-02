@@ -1,8 +1,8 @@
 package dev.szafraniak.bmresource.controller;
 
 import dev.szafraniak.bmresource.config.BaseEnvironment;
+import dev.szafraniak.bmresource.model.action.auth.AuthModel;
 import dev.szafraniak.bmresource.services.AuthorizationService;
-import dev.szafraniak.bmresource.utils.AuthData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,17 +19,17 @@ public class AuthorizationController {
     private AuthorizationService authService;
 
     @PostMapping(value = "/google/exchange", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public ResponseEntity<String> exchangeGoogle(AuthData data) {
+    public ResponseEntity<String> exchangeGoogle(AuthModel data) {
         return socialExchange(data.getToken(), BaseEnvironment.AUTH_PROVIDER_GOOGLE);
     }
 
     @PostMapping(value = "/facebook/exchange", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public ResponseEntity<String> exchangeFacebook(AuthData data) {
+    public ResponseEntity<String> exchangeFacebook(AuthModel data) {
         return socialExchange(data.getToken(), BaseEnvironment.AUTH_PROVIDER_FACEBOOK);
     }
 
     @PostMapping(value = "/login", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public ResponseEntity<String> credentialsLogin(AuthData data) {
+    public ResponseEntity<String> credentialsLogin(AuthModel data) {
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
         map.add("grant_type", "password");
         map.add("username", data.username);
@@ -38,7 +38,7 @@ public class AuthorizationController {
     }
 
     @PostMapping(value = "/refresh", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public ResponseEntity<String> refreshToken(AuthData data) {
+    public ResponseEntity<String> refreshToken(AuthModel data) {
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
         map.add("grant_type", "refresh_token");
         map.add("refresh_token", data.refreshToken);
