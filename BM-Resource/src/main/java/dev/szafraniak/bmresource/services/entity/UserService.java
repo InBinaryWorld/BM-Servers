@@ -26,7 +26,7 @@ public class UserService {
     public User getOrCreateContextUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Optional<User> userOptional = userRepository.findFirstByKeycloakId(auth.getName());
-        return userOptional.orElse(createNewUser(auth.getName()));
+        return userOptional.orElseGet(() -> createNewUser(auth.getName()));
     }
 
     public Long getContextUserId() {
