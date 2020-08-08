@@ -21,8 +21,6 @@ public class PricePutDTO implements PutDTOInterface {
     @NotNull
     private BigDecimal taxRate;
 
-    @Min(0)
-    @NotNull
     @JsonIgnore
     private BigDecimal gross;
 }
