@@ -8,6 +8,9 @@ import dev.szafraniak.bmresource.repository.entity.PriceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 @Component
 public class PriceConverter implements ConverterInterface<Price, PriceGetDTO, PricePostDTO, PricePutDTO> {
 
@@ -29,10 +32,15 @@ public class PriceConverter implements ConverterInterface<Price, PriceGetDTO, Pr
         if (dto == null) {
             return null;
         }
+        BigDecimal net = dto.getNet().setScale(2, RoundingMode.HALF_UP);
+        BigDecimal taxRate = dto.getTaxRate().setScale(0, RoundingMode.FLOOR);
+        BigDecimal tax = dto.getTaxRate().movePointLeft(2).multiply(net)
+                .setScale(2, RoundingMode.HALF_UP);
+        BigDecimal gross = tax.add(net);
         Price price = new Price();
-        price.setNet(dto.getNet());
-        price.setGross(dto.getGross());
-        price.setTaxRate(dto.getTaxRate());
+        price.setNet(net);
+        price.setGross(gross);
+        price.setTaxRate(taxRate);
         return price;
     }
 
@@ -40,11 +48,16 @@ public class PriceConverter implements ConverterInterface<Price, PriceGetDTO, Pr
         if (dto == null) {
             return null;
         }
+        BigDecimal net = dto.getNet().setScale(2, RoundingMode.HALF_UP);
+        BigDecimal taxRate = dto.getTaxRate().setScale(0, RoundingMode.FLOOR);
+        BigDecimal tax = dto.getTaxRate().movePointLeft(2).multiply(net)
+                .setScale(2, RoundingMode.HALF_UP);
+        BigDecimal gross = tax.add(net);
         @SuppressWarnings("OptionalGetWithoutIsPresent")
         Price price = priceRepository.findById(priceId).get();
-        price.setNet(dto.getNet());
-        price.setGross(dto.getGross());
-        price.setTaxRate(dto.getTaxRate());
+        price.setNet(net);
+        price.setGross(gross);
+        price.setTaxRate(taxRate);
         return price;
     }
 

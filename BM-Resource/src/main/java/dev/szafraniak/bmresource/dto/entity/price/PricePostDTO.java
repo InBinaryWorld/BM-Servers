@@ -1,5 +1,6 @@
 package dev.szafraniak.bmresource.dto.entity.price;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import dev.szafraniak.bmresource.dto.PostDTOInterface;
 import lombok.Data;
@@ -22,5 +23,6 @@ public class PricePostDTO implements PostDTOInterface {
 
     @Min(0)
     @NotNull
+    @JsonIgnore
     private BigDecimal gross;
 }
