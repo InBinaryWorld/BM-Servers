@@ -19,10 +19,6 @@ public class CompanyPostDTO implements PostDTOInterface {
 //    private Long id;
 
     @NotNull
-    @JsonIgnore
-    private Long nextInvoiceNumber = 1L;
-
-    @NotNull
     @NotBlank
     @Pattern(regexp = Regexps.BASE_2_40)
     private String name;

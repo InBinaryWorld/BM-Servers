@@ -30,14 +30,12 @@ public class CreateInvoiceConverter {
         InvoiceContactModel seller = convertToModel(company);
         InvoiceContactModel buyer = convertToModel(dto.getBuyer());
         InvoiceContactModel receiver = convertToModel(dto.getReceiver());
-        Long invoiceNumber = companyService.getAndUpdateNextInvoiceNumber(companyId);
-        String invoiceName = company.getInvoicePrefix() + invoiceNumber.toString();
 
         CreateInvoiceModel model = new CreateInvoiceModel();
         model.setBankAccount(dto.getBankAccount());
         model.setCreationDate(dto.getCreationDate());
         model.setDueDate(dto.getDueDate());
-        model.setInvoiceName(invoiceName);
+        model.setInvoiceNumber(dto.getInvoiceNumber());
         model.setBuyer(buyer);
         model.setReceiver(receiver);
         model.setSeller(seller);
@@ -93,7 +91,7 @@ public class CreateInvoiceConverter {
         dto.setReceiverName(receiverName);
         dto.setBuyerName(model.getBuyer().getName());
         dto.setCreationDate(model.getCreationDate());
-        dto.setInvoiceName(model.getInvoiceName());
+        dto.setInvoiceName(model.getInvoiceNumber());
         dto.setDueDate(model.getDueDate());
         dto.setTotalAmount(amountPostDTO);
         dto.setFileReference(fileName);

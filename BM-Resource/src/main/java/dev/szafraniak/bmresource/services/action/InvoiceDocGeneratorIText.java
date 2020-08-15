@@ -95,7 +95,7 @@ public class InvoiceDocGeneratorIText implements InvoiceDocGenerator {
         PdfPTable table = new PdfPTable(2);
         table.setWidthPercentage(100);
 
-        String invoiceNameText = "Faktura VAT nr " + model.getInvoiceName();
+        String invoiceNameText = "Faktura VAT nr " + model.getInvoiceNumber();
         PdfPCell invName = createParCell(invoiceNameText, Element.ALIGN_LEFT, invoiceNameFont);
         invName.setColspan(2);
 

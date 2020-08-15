@@ -21,9 +21,6 @@ public class Company extends BaseEntity {
     private Long id;
 
     @NotNull
-    private Long nextInvoiceNumber;
-
-    @NotNull
     @NotBlank
     @Pattern(regexp = Regexps.BASE_2_40)
     private String name;

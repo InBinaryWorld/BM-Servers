@@ -30,15 +30,6 @@ public class CompanyService extends AbstractService<Company, CompanyRepository,
                 .collect(BmCollectors.toCollection());
     }
 
-    public Long getAndUpdateNextInvoiceNumber(Long companyId) {
-        @SuppressWarnings("OptionalGetWithoutIsPresent")
-        Company company = repository.findById(companyId).get();
-        Long nextInvoiceNumber = company.getNextInvoiceNumber();
-        company.setNextInvoiceNumber(nextInvoiceNumber + 1);
-        repository.save(company);
-        return nextInvoiceNumber;
-    }
-
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;

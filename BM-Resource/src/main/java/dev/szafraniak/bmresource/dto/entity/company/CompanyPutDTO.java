@@ -15,7 +15,6 @@ public class CompanyPutDTO implements PutDTOInterface {
 
 //    private Long id;
 
-//    private Long nextInvoiceNumber;
 
     @NotNull
     @NotBlank

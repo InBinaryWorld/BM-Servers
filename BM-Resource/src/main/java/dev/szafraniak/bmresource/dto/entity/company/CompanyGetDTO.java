@@ -11,8 +11,6 @@ public class CompanyGetDTO implements GetDTOInterface {
 
     private Long id;
 
-//    private Long nextInvoiceNumber;
-
     private String name;
 
     private String invoicePrefix;

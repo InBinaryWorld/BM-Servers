@@ -9,6 +9,7 @@ public class Regexps {
     public final static String WORD_1_20 = LETTER + "{1,20}";
     public final static String WORDS = "( *" + LETTER + "+ *)+";
     public final static String BASE_2_6 = ALLOWED_SIGNS + "{2,6}";
+    public final static String BASE_1_20 = ALLOWED_SIGNS + "{1,20}";
     public final static String BASE_2_40 = ALLOWED_SIGNS + "{2,40}";
     public final static String BASE_2_60 = ALLOWED_SIGNS + "{2,60}";
     public final static String BASE_2_240 = ALLOWED_SIGNS + "{2,240}";

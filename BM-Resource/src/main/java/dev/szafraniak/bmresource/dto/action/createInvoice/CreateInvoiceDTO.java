@@ -21,6 +21,12 @@ public class CreateInvoiceDTO {
     @Valid
     private InvoiceContactDTO receiver;
 
+    @Valid
+    @NotNull
+    @NotEmpty
+    @Pattern(regexp = Regexps.BASE_1_20)
+    private String invoiceNumber;
+
     @Pattern(regexp = Regexps.BANK_ACCOUNT)
     private String bankAccount;
 
