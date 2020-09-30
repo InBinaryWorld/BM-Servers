@@ -6,7 +6,7 @@ import dev.szafraniak.bmresource.dto.entity.employee.EmployeePutDTO;
 import dev.szafraniak.bmresource.dto.entity.individualContact.IndividualContactGetDTO;
 import dev.szafraniak.bmresource.model.entity.Company;
 import dev.szafraniak.bmresource.model.entity.Employee;
-import dev.szafraniak.bmresource.model.entity.IndividualContact;
+import dev.szafraniak.bmresource.model.entity.contact.IndividualContact;
 import dev.szafraniak.bmresource.repository.entity.CompanyRepository;
 import dev.szafraniak.bmresource.repository.entity.EmployeeRepository;
 import dev.szafraniak.bmresource.repository.entity.IndividualContactRepository;

@@ -8,7 +8,7 @@ import dev.szafraniak.bmresource.dto.entity.invoice.InvoiceGetDTO;
 import dev.szafraniak.bmresource.dto.entity.shared.BaseGetDTO;
 import dev.szafraniak.bmresource.model.entity.Address;
 import dev.szafraniak.bmresource.model.entity.Company;
-import dev.szafraniak.bmresource.model.entity.Contact;
+import dev.szafraniak.bmresource.model.entity.contact.Contact;
 import dev.szafraniak.bmresource.repository.entity.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

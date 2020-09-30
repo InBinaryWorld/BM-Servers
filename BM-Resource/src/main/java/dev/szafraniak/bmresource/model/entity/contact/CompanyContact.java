@@ -1,4 +1,4 @@
-package dev.szafraniak.bmresource.model.entity;
+package dev.szafraniak.bmresource.model.entity.contact;
 
 import dev.szafraniak.bmresource.utils.Regexps;
 import lombok.Data;

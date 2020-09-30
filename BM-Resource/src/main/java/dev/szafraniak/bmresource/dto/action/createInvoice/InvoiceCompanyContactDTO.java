@@ -4,28 +4,31 @@ import dev.szafraniak.bmresource.utils.Regexps;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class InvoiceIndividualDTO extends InvoiceContactDTO {
+public class InvoiceCompanyContactDTO extends InvoiceContactDTO {
+
 
     @NotNull
-    @Pattern(regexp = Regexps.WORD_1_20)
-    private String firstName;
+    @NotBlank
+    @Pattern(regexp = Regexps.BASE_2_40)
+    private String name;
 
     @NotNull
-    @Pattern(regexp = Regexps.WORD_1_20)
-    private String lastName;
+    @Pattern(regexp = Regexps.TAX_IDENTITY_NUMBER)
+    private String taxIdentityNumber;
 
     @Override
     public String getName() {
-        return firstName + " " + lastName;
+        return name;
     }
 
     @Override
     public String getTaxIdentityNumber() {
-        return null;
+        return taxIdentityNumber;
     }
 }

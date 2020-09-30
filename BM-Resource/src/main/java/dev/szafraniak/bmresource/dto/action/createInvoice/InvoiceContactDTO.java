@@ -10,8 +10,8 @@ import javax.validation.constraints.NotNull;
 @Data
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = InvoiceCompanyDTO.class, name = "company"),
-        @JsonSubTypes.Type(value = InvoiceIndividualDTO.class, name = "individual")
+        @JsonSubTypes.Type(value = InvoiceCompanyContactDTO.class, name = "company"),
+        @JsonSubTypes.Type(value = InvoiceIndividualContactDTO.class, name = "individual")
 })
 public abstract class InvoiceContactDTO {
 

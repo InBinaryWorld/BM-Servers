@@ -1,5 +1,9 @@
-package dev.szafraniak.bmresource.model.entity;
+package dev.szafraniak.bmresource.model.entity.contact;
 
+import dev.szafraniak.bmresource.model.entity.Address;
+import dev.szafraniak.bmresource.model.entity.BaseCompanyEntity;
+import dev.szafraniak.bmresource.model.entity.Company;
+import dev.szafraniak.bmresource.model.entity.Invoice;
 import dev.szafraniak.bmresource.utils.Regexps;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

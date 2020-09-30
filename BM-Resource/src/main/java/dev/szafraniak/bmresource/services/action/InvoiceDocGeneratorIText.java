@@ -5,7 +5,14 @@ import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import dev.szafraniak.bmresource.model.action.*;
+import dev.szafraniak.bmresource.model.action.CreateInvoiceModel;
+import dev.szafraniak.bmresource.model.action.InvoiceDetailsModel;
+import dev.szafraniak.bmresource.model.action.InvoiceOrderItemModel;
+import dev.szafraniak.bmresource.model.action.TaxGroupAmountModel;
+import dev.szafraniak.bmresource.model.action.contact.InvoiceCompanyContactModel;
+import dev.szafraniak.bmresource.model.action.contact.InvoiceContactModel;
+import dev.szafraniak.bmresource.model.entity.payment.PaymentMethod;
+import dev.szafraniak.bmresource.model.entity.payment.PaymentMethodTransfer;
 import dev.szafraniak.bmresource.utils.Formatters;
 import org.springframework.stereotype.Service;
 
@@ -67,7 +74,7 @@ public class InvoiceDocGeneratorIText implements InvoiceDocGenerator {
         contactTable.setSpacingBefore(15);
         contactTable.setWidths(widths);
 
-        PdfPCell sellerCell = getSellerCell(model.getSeller(), model.getBankAccount());
+        PdfPCell sellerCell = getSellerCell(model.getSeller(), model.getPaymentMethod());
         PdfPCell buyerCell = getContactCell("Nabywca", model.getBuyer());
         contactTable.addCell(sellerCell);
         contactTable.addCell(buyerCell);
@@ -90,7 +97,7 @@ public class InvoiceDocGeneratorIText implements InvoiceDocGenerator {
     private PdfPCell getBaseDataCell(CreateInvoiceModel model) {
         String creationDate = Formatters.formatDate(model.getCreationDate());
         String dueDate = Formatters.formatDate(model.getDueDate());
-        String paymentMethod = model.getBankAccount() == null ? "Gotowka" : "Przelew";
+        String paymentMethod = model.getPaymentMethod() instanceof PaymentMethodTransfer ? "Przelew" : "Gotowka";
 
         PdfPTable table = new PdfPTable(2);
         table.setWidthPercentage(100);
@@ -126,17 +133,19 @@ public class InvoiceDocGeneratorIText implements InvoiceDocGenerator {
         for (String addressRow : model.getAddressRows()) {
             contact.addElement(createParagraph(addressRow));
         }
-        if (model.getTaxIdentityNumber() != null) {
-            String tinString = "NIP: " + model.getTaxIdentityNumber();
+        if (model instanceof InvoiceCompanyContactModel) {
+            String taxId = ((InvoiceCompanyContactModel) model).getTaxIdentityNumber();
+            String tinString = String.format("NIP: %s", taxId);
             contact.addElement(createParagraph(tinString));
         }
         return noBorderDecortor(contact);
     }
 
 
-    private PdfPCell getSellerCell(InvoiceContactModel model, String bankAccount) {
+    private PdfPCell getSellerCell(InvoiceContactModel model, PaymentMethod paymentMethod) {
         PdfPCell contact = getContactCell("Sprzedawca", model);
-        if (bankAccount != null) {
+        if (paymentMethod instanceof PaymentMethodTransfer) {
+            String bankAccount = ((PaymentMethodTransfer) paymentMethod).getBankAccount();
             contact.addElement(createParagraph("Konto " + bankAccount));
         }
         return contact;

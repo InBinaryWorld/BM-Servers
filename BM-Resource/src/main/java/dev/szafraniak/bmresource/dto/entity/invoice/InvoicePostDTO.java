@@ -2,7 +2,7 @@ package dev.szafraniak.bmresource.dto.entity.invoice;
 
 import dev.szafraniak.bmresource.dto.PostDTOInterface;
 import dev.szafraniak.bmresource.dto.entity.amount.AmountPostDTO;
-import dev.szafraniak.bmresource.model.entity.Contact;
+import dev.szafraniak.bmresource.model.entity.contact.Contact;
 import dev.szafraniak.bmresource.utils.Regexps;
 import lombok.Data;
 

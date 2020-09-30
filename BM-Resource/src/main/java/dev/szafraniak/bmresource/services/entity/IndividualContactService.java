@@ -4,7 +4,7 @@ import dev.szafraniak.bmresource.converters.entity.IndividualContactConverter;
 import dev.szafraniak.bmresource.dto.entity.individualContact.IndividualContactGetDTO;
 import dev.szafraniak.bmresource.dto.entity.individualContact.IndividualContactPostDTO;
 import dev.szafraniak.bmresource.dto.entity.individualContact.IndividualContactPutDTO;
-import dev.szafraniak.bmresource.model.entity.IndividualContact;
+import dev.szafraniak.bmresource.model.entity.contact.IndividualContact;
 import dev.szafraniak.bmresource.repository.entity.IndividualContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

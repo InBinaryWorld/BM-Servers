@@ -1,5 +1,6 @@
 package dev.szafraniak.bmresource.dto.action.createInvoice;
 
+import dev.szafraniak.bmresource.dto.action.createInvoice.payment.PaymentMethodDTO;
 import dev.szafraniak.bmresource.utils.Regexps;
 import lombok.Data;
 
@@ -24,11 +25,12 @@ public class CreateInvoiceDTO {
     @Valid
     @NotNull
     @NotEmpty
-    @Pattern(regexp = Regexps.BASE_1_20)
+    @Pattern(regexp = Regexps.BASE_3_20)
     private String invoiceNumber;
 
-    @Pattern(regexp = Regexps.BANK_ACCOUNT)
-    private String bankAccount;
+    @Valid
+    @NotNull
+    private PaymentMethodDTO paymentMethod;
 
     @NotNull
     private LocalDate dueDate;

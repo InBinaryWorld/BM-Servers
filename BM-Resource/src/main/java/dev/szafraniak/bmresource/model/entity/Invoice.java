@@ -1,5 +1,6 @@
 package dev.szafraniak.bmresource.model.entity;
 
+import dev.szafraniak.bmresource.model.entity.contact.Contact;
 import dev.szafraniak.bmresource.utils.Regexps;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
