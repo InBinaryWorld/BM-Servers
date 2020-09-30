@@ -1,11 +1,9 @@
 package dev.szafraniak.bmresource.model.entity.payment;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
-public class PaymentMethodTransfer extends PaymentMethod {
+public class PaymentMethodTransfer implements PaymentMethod {
 
     private String bankAccount;
 }
