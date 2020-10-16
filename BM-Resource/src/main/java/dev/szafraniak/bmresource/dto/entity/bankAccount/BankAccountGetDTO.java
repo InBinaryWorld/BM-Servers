@@ -12,7 +12,7 @@ public class BankAccountGetDTO implements GetDTOInterface {
 
     private String name;
 
-    private String value;
+    private String number;
 
 //    private Company company;
 }

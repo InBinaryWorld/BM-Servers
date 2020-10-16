@@ -20,7 +20,7 @@ public class BankAccountPostDTO implements PostDTOInterface {
 
     @NotNull
     @Pattern(regexp = Regexps.BANK_ACCOUNT)
-    private String value;
+    private String number;
 
 //    private Company company;
 }

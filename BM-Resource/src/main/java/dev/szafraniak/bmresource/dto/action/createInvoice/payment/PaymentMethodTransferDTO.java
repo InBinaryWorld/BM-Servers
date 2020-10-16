@@ -11,7 +11,10 @@ import javax.validation.constraints.Pattern;
 @EqualsAndHashCode(callSuper = true)
 public class PaymentMethodTransferDTO extends PaymentMethodDTO {
 
+    @Pattern(regexp = Regexps.BASE_2_40)
+    private String accountName;
+
     @NotNull
     @Pattern(regexp = Regexps.BANK_ACCOUNT)
-    private String bankAccount;
+    private String accountNumber;
 }

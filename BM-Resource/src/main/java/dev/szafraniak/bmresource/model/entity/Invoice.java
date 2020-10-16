@@ -32,8 +32,7 @@ public class Invoice extends BaseCompanyEntity {
     private String fileReference;
 
     @NotNull
-    @NotBlank
-    private String state;
+    private Boolean isPaid;
 
     @NotNull
     @NotBlank

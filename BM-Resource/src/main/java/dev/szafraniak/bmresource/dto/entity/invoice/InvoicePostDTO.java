@@ -1,5 +1,6 @@
 package dev.szafraniak.bmresource.dto.entity.invoice;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.szafraniak.bmresource.dto.PostDTOInterface;
 import dev.szafraniak.bmresource.dto.entity.amount.AmountPostDTO;
 import dev.szafraniak.bmresource.model.entity.contact.Contact;
@@ -30,8 +31,8 @@ public class InvoicePostDTO implements PostDTOInterface {
     @NotNull
     private String fileReference;
 
-    @NotNull
-    private String state;
+    @JsonIgnore
+    private Boolean isPaid = false;
 
     @NotNull
     private String invoiceName;

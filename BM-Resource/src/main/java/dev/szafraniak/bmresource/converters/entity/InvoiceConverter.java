@@ -35,7 +35,7 @@ public class InvoiceConverter implements ConverterCompanyInterface<Invoice, Invo
         dto.setDueDate(invoice.getDueDate());
         dto.setFileReference(invoice.getFileReference());
         dto.setInvoiceName(invoice.getInvoiceName());
-        dto.setState(invoice.getState());
+        dto.setIsPaid(invoice.getIsPaid());
         dto.setTotalAmount(amountGetDTO);
         return dto;
     }
@@ -55,7 +55,7 @@ public class InvoiceConverter implements ConverterCompanyInterface<Invoice, Invo
         invoice.setDueDate(dto.getDueDate());
         invoice.setFileReference(dto.getFileReference());
         invoice.setInvoiceName(dto.getInvoiceName());
-        invoice.setState(dto.getState());
+        invoice.setIsPaid(dto.getIsPaid());
         invoice.setTotalAmount(amount);
         invoice.setCompany(company);
         return invoice;
@@ -68,7 +68,7 @@ public class InvoiceConverter implements ConverterCompanyInterface<Invoice, Invo
         }
         @SuppressWarnings("OptionalGetWithoutIsPresent")
         Invoice invoice = invoiceRepository.findById(entityId).get();
-        invoice.setState(dto.getState());
+        invoice.setIsPaid(dto.getIsPaid());
         return invoice;
 
     }

@@ -26,7 +26,7 @@ public class BankAccountConverter implements ConverterCompanyInterface<BankAccou
         BankAccountGetDTO dto = new BankAccountGetDTO();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
-        dto.setValue(entity.getValue());
+        dto.setNumber(entity.getValue());
         return dto;
     }
 
@@ -39,7 +39,7 @@ public class BankAccountConverter implements ConverterCompanyInterface<BankAccou
         Company company = companyRepository.findById(companyId).get();
         BankAccount account = new BankAccount();
         account.setName(dto.getName());
-        account.setValue(dto.getValue());
+        account.setValue(dto.getNumber());
         account.setCompany(company);
         return account;
     }
@@ -52,7 +52,7 @@ public class BankAccountConverter implements ConverterCompanyInterface<BankAccou
         @SuppressWarnings("OptionalGetWithoutIsPresent")
         BankAccount account = bankAccountRepository.findById(entityId).get();
         account.setName(dto.getName());
-        account.setValue(dto.getValue());
+        account.setValue(dto.getNumber());
         return account;
     }
 

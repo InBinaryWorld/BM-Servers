@@ -64,7 +64,7 @@ public class CreateInvoiceConverter {
 
     private PaymentMethodTransfer convertToModel(PaymentMethodTransferDTO paymentMethod) {
         PaymentMethodTransfer payment = new PaymentMethodTransfer();
-        payment.setBankAccount(paymentMethod.getBankAccount());
+        payment.setBankAccount(paymentMethod.getAccountNumber());
         return payment;
     }
 
@@ -137,7 +137,7 @@ public class CreateInvoiceConverter {
         dto.setTotalAmount(amountPostDTO);
         dto.setFileReference(fileName);
         dto.setContact(null);
-        dto.setState("NEW");
+        dto.setIsPaid(false);
         return dto;
     }
 

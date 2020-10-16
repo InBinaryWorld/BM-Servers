@@ -19,7 +19,7 @@ public class InvoiceGetDTO implements GetDTOInterface {
 
     private String fileReference;
 
-    private String state;
+    private Boolean isPaid;
 
     private String invoiceName;
 

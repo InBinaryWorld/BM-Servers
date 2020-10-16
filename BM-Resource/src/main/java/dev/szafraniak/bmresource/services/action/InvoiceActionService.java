@@ -26,12 +26,14 @@ public class InvoiceActionService {
     private CreateInvoiceConverter converter;
 
 
-    public InvoicePostDTO generateInvoice(CreateInvoiceDTO dto, Long companyId) throws Exception {
+    public InvoicePostDTO generateInvoice(CreateInvoiceDTO dto, Long companyId, String fileReference) throws Exception {
         CreateInvoiceModel baseInfo = converter.convertToModel(dto, companyId);
         InvoiceDetailsModel details = calculateInvoiceDetails(dto.getItems());
-        String filePath = fileService.getInvoicePath("invoice.pdf");
+        InvoicePostDTO postModel = converter.convertToPostDTO(baseInfo, details, fileReference);
+
+        String filePath = fileService.getInvoicePath(fileReference);
         docGenerator.createInvoice(baseInfo, details, filePath);
-        return converter.convertToPostDTO(baseInfo, details, filePath);
+        return postModel;
     }
 
     private InvoiceDetailsModel calculateInvoiceDetails(List<InvoiceOrderItemDTO> itemsDTO) {
