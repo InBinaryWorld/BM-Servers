@@ -37,7 +37,7 @@ public class ProductModelConverter implements ConverterCompanyInterface<ProductM
 
         productDto.setId(productModel.getId());
         productDto.setName(productModel.getName());
-        productDto.setBareCode(productModel.getBareCode());
+        productDto.setBarcode(productModel.getBarcode());
         productDto.setProductGroup(groupDto);
         productDto.setQuantityUnit(productModel.getQuantityUnit());
         productDto.setPriceSuggestion(priceGetDTO);
@@ -55,7 +55,7 @@ public class ProductModelConverter implements ConverterCompanyInterface<ProductM
         ProductGroup group = groupConverter.retrieveFromId(dto.getProductGroupId());
         productModel.setName(dto.getName());
         productModel.setCompany(company);
-        productModel.setBareCode(dto.getBareCode());
+        productModel.setBarcode(dto.getBarcode());
         productModel.setProducts(new ArrayList<>());
         productModel.setProductGroup(group);
         productModel.setQuantityUnit(dto.getQuantityUnit());
@@ -74,7 +74,7 @@ public class ProductModelConverter implements ConverterCompanyInterface<ProductM
         Price price = priceConverter.convertFromDTO(priceDto, priceId);
         ProductGroup group = groupConverter.retrieveFromId(dto.getProductGroupId());
         productModel.setName(dto.getName());
-        productModel.setBareCode(dto.getBareCode());
+        productModel.setBarcode(dto.getBarcode());
         productModel.setQuantityUnit(dto.getQuantityUnit());
         productModel.setPriceSuggestion(price);
         productModel.setProductGroup(group);

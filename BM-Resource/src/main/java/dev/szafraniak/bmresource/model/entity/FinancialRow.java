@@ -1,6 +1,7 @@
 package dev.szafraniak.bmresource.model.entity;
 
 import dev.szafraniak.bmresource.utils.Regexps;
+import dev.szafraniak.bmresource.validator.nullOrNotBlank.NullOrNotBlank;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -28,7 +29,7 @@ public class FinancialRow extends BaseCompanyEntity {
     @NotNull
     private OffsetDateTime eventDate;
 
-    @NotBlank
+    @NullOrNotBlank
     @Pattern(regexp = Regexps.BASE_2_240)
     private String description;
 

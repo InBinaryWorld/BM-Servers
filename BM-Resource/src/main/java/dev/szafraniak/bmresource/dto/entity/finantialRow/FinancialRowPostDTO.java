@@ -2,6 +2,7 @@ package dev.szafraniak.bmresource.dto.entity.finantialRow;
 
 import dev.szafraniak.bmresource.dto.PostDTOInterface;
 import dev.szafraniak.bmresource.utils.Regexps;
+import dev.szafraniak.bmresource.validator.nullOrNotBlank.NullOrNotBlank;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -17,13 +18,13 @@ public class FinancialRowPostDTO implements PostDTOInterface {
 
     @NotNull
     @NotBlank
-    @Pattern(regexp = Regexps.BASE_2_60)
+    @Pattern(regexp = Regexps.BASE_2_40)
     private String title;
 
     @NotNull
     private OffsetDateTime eventDate;
 
-    @NotBlank
+    @NullOrNotBlank
     @Pattern(regexp = Regexps.BASE_2_240)
     private String description;
 

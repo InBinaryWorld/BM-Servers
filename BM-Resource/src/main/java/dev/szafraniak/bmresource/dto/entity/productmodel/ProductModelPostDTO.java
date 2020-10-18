@@ -26,7 +26,7 @@ public class ProductModelPostDTO implements PostDTOInterface {
     private String quantityUnit;
 
     @Pattern(regexp = Regexps.BARCODE_5_20)
-    private String bareCode;
+    private String barcode;
 
     @Valid
     @NotNull

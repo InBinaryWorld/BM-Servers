@@ -16,7 +16,7 @@ public class ProductModelGetDTO implements GetDTOInterface {
 
     private String quantityUnit;
 
-    private String bareCode;
+    private String barcode;
 
     private PriceGetDTO priceSuggestion;
 
