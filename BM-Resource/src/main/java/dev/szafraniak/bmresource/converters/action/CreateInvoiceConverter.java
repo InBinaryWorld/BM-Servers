@@ -6,6 +6,7 @@ import dev.szafraniak.bmresource.dto.action.createInvoice.payment.PaymentMethodD
 import dev.szafraniak.bmresource.dto.action.createInvoice.payment.PaymentMethodTransferDTO;
 import dev.szafraniak.bmresource.dto.entity.amount.AmountPostDTO;
 import dev.szafraniak.bmresource.dto.entity.invoice.InvoicePostDTO;
+import dev.szafraniak.bmresource.model.action.AmountModel;
 import dev.szafraniak.bmresource.model.action.CreateInvoiceModel;
 import dev.szafraniak.bmresource.model.action.InvoiceDetailsModel;
 import dev.szafraniak.bmresource.model.action.InvoiceOrderItemModel;
@@ -20,7 +21,6 @@ import dev.szafraniak.bmresource.services.entity.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Component
@@ -68,17 +68,16 @@ public class CreateInvoiceConverter {
         return payment;
     }
 
-    public InvoiceOrderItemModel convertToModel(InvoiceOrderItemDTO dto, BigDecimal totalNet,
-                                                BigDecimal totalTax, BigDecimal totalGross) {
+    public InvoiceOrderItemModel convertToModel(InvoiceOrderItemDTO dto, AmountModel amount) {
         InvoiceOrderItemModel model = new InvoiceOrderItemModel();
         model.setName(dto.getName());
         model.setQuantityUnit(dto.getQuantityUnit());
         model.setQuantity(dto.getQuantity());
         model.setTaxRate(dto.getTaxRate());
         model.setPriceNet(dto.getNetPrice());
-        model.setNet(totalNet);
-        model.setTax(totalTax);
-        model.setGross(totalGross);
+        model.setNet(amount.getNet());
+        model.setTax(amount.getTax());
+        model.setGross(amount.getGross());
         return model;
     }
 

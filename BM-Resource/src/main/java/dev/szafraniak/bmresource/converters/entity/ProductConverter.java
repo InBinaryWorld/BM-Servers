@@ -35,6 +35,7 @@ public class ProductConverter implements ConverterCompanyInterface<Product, Prod
         ProductModelGetDTO productModel = productModelConverter.convertToDTO(entity.getProductModel());
         BaseGetDTO warehouse = warehouseConverter.convertToBaseDTO(entity.getWarehouse());
         ProductGetDTO dto = new ProductGetDTO();
+        dto.setId(entity.getId());
         dto.setQuantity(entity.getQuantity());
         dto.setProductModel(productModel);
         dto.setWarehouse(warehouse);

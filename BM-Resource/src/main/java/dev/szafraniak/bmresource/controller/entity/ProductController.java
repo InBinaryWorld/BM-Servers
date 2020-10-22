@@ -21,8 +21,10 @@ public class ProductController {
 
     @GetMapping()
     @PreAuthorize("@permissionChecker.checkCompanyId(#companyId)")
-    public BmCollection<ProductGetDTO> getAll(@PathVariable Long companyId) {
-        return service.getAllDTO(companyId);
+    public BmCollection<ProductGetDTO> getAll(@PathVariable Long companyId,
+                                              @RequestParam(required = false) Long warehouseId,
+                                              @RequestParam(required = false) Long productModelId) {
+        return service.getAllDTO(companyId, warehouseId, productModelId);
     }
 
     @PostMapping
@@ -49,7 +51,7 @@ public class ProductController {
 
     @DeleteMapping("/{entityId}")
     @PreAuthorize("@permissionChecker.checkProduct(#companyId, #entityId)")
-    public ResponseEntity<Void> deleteCompany(@PathVariable Long entityId,
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long entityId,
                                               @PathVariable String companyId) {
         boolean success = service.delete(entityId);
         HttpStatus status = success ? HttpStatus.OK : HttpStatus.CONFLICT;

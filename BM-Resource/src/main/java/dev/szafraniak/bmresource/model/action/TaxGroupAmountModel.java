@@ -6,10 +6,10 @@ import java.math.BigDecimal;
 
 @Data
 public class TaxGroupAmountModel {
-    public TaxGroupAmountModel(BigDecimal net, BigDecimal tax, BigDecimal gross, BigDecimal taxRate) {
-        this.net = net;
-        this.tax = tax;
-        this.gross = gross;
+    public TaxGroupAmountModel(AmountModel amount, BigDecimal taxRate) {
+        this.net = amount.getNet();
+        this.tax = amount.getTax();
+        this.gross = amount.getGross();
         this.taxRate = taxRate;
     }
 

@@ -77,4 +77,7 @@ public class Company extends BaseEntity {
 
     @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "company")
     private List<BankAccount> bankAccounts;
+
+    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "company")
+    private List<Product> products;
 }

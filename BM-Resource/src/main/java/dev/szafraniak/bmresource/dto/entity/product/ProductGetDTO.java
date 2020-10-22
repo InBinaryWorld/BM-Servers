@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ProductGetDTO implements GetDTOInterface {
 
-//    private Long id;
+    private Long id;
 
     private BigDecimal quantity;
 
