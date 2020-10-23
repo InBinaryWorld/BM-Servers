@@ -10,4 +10,7 @@ public final class ListUtils {
         return list.stream().filter(predicate::apply).collect(Collectors.toList());
     }
 
+    public static <T, R> List<R> map(List<T> list, Function<T, R> predicate) {
+        return list.stream().map(predicate).collect(Collectors.toList());
+    }
 }

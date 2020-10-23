@@ -3,6 +3,7 @@ package dev.szafraniak.bmresource.controller;
 import dev.szafraniak.bmresource.model.action.stats.CompanyStatsModel;
 import dev.szafraniak.bmresource.model.action.stats.FinancesStatsModel;
 import dev.szafraniak.bmresource.model.action.stats.InvoicesStatsModel;
+import dev.szafraniak.bmresource.model.action.stats.ResourcesStatsModel;
 import dev.szafraniak.bmresource.services.StatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -33,6 +34,12 @@ public class StatisticsController {
     @PreAuthorize("@permissionChecker.checkCompanyId(#companyId)")
     public FinancesStatsModel getFinancesStats(@PathVariable Long companyId) {
         return statisticsService.getFinancesStats(companyId);
+    }
+
+    @GetMapping("/resources")
+    @PreAuthorize("@permissionChecker.checkCompanyId(#companyId)")
+    public ResourcesStatsModel getResources(@PathVariable Long companyId) {
+        return statisticsService.getResourcesStats(companyId);
     }
 
 
