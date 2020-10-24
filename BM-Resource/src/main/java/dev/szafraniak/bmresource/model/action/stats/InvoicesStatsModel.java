@@ -1,5 +1,6 @@
 package dev.szafraniak.bmresource.model.action.stats;
 
+import dev.szafraniak.bmresource.config.BaseEnvironment;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -13,4 +14,5 @@ public class InvoicesStatsModel {
     private BigDecimal unpaidValue;
     private BigDecimal paidValue;
     private BigDecimal lastInvoiceValue;
+    private String currency = BaseEnvironment.CURRENCY;
 }

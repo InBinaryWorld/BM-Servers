@@ -1,5 +1,6 @@
 package dev.szafraniak.bmresource.model.action.stats;
 
+import dev.szafraniak.bmresource.config.BaseEnvironment;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -12,4 +13,5 @@ public class FinancesStatsModel {
     private BigDecimal totalIncome;
     private BigDecimal totalOutcome;
     private BigDecimal lastChange;
+    private String currency = BaseEnvironment.CURRENCY;
 }

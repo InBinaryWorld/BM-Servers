@@ -2,7 +2,6 @@ package dev.szafraniak.bmresource.controller.entity;
 
 import dev.szafraniak.bmresource.dto.action.createInvoice.CreateInvoiceDTO;
 import dev.szafraniak.bmresource.dto.entity.invoice.InvoiceGetDTO;
-import dev.szafraniak.bmresource.dto.entity.invoice.InvoicePutDTO;
 import dev.szafraniak.bmresource.services.entity.InvoiceService;
 import dev.szafraniak.bmresource.utils.BmCollection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,12 +51,11 @@ public class InvoiceController {
         return service.getInvoicePdf(entityId);
     }
 
-    @PutMapping("/{entityId}")
+    @PutMapping("/{entityId}/action/paid")
     @PreAuthorize("@permissionChecker.checkInvoice(#companyId, #entityId)")
-    public InvoiceGetDTO update(@PathVariable Long companyId,
-                                @PathVariable Long entityId,
-                                @Valid @RequestBody InvoicePutDTO dto) {
-        return service.updateFromDTO(dto, entityId);
+    public InvoiceGetDTO paidOffAction(@PathVariable Long companyId,
+                                       @PathVariable Long entityId) {
+        return service.paidOffAction(entityId);
     }
 
     @DeleteMapping("/{entityId}")

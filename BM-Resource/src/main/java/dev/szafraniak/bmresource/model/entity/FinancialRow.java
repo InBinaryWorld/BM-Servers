@@ -23,7 +23,7 @@ public class FinancialRow extends BaseCompanyEntity {
 
     @NotNull
     @NotBlank
-    @Pattern(regexp = Regexps.BASE_2_60)
+    @Pattern(regexp = Regexps.BASE_2_40)
     private String title;
 
     @NotNull

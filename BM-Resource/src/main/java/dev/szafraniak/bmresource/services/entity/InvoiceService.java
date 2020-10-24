@@ -23,6 +23,7 @@ public class InvoiceService extends AbstractCompanyService<Invoice, InvoiceRepos
 
     protected FileService fileService;
     protected InvoiceActionService actionService;
+    protected FinancialRowService financialRowService;
 
     @Autowired
     public InvoiceService(InvoiceConverter converter, InvoiceRepository repository) {
@@ -56,9 +57,22 @@ public class InvoiceService extends AbstractCompanyService<Invoice, InvoiceRepos
         return in.readAllBytes();
     }
 
+    public InvoiceGetDTO paidOffAction(Long entityId) {
+        Invoice invoice = repository.findById(entityId).get();
+        invoice.setIsPaid(true);
+        Invoice saved = repository.save(invoice);
+        financialRowService.createFromInvoice(saved);
+        return converter.convertToDTO(saved);
+    }
+
     @Autowired
     public void setFileService(FileService fileService) {
         this.fileService = fileService;
+    }
+
+    @Autowired
+    public void setFinancialRowService(FinancialRowService financialRowService) {
+        this.financialRowService = financialRowService;
     }
 
     @Autowired

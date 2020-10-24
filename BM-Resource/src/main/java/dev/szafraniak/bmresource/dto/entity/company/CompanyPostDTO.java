@@ -1,6 +1,7 @@
 package dev.szafraniak.bmresource.dto.entity.company;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import dev.szafraniak.bmresource.config.BaseEnvironment;
 import dev.szafraniak.bmresource.dto.PostDTOInterface;
 import dev.szafraniak.bmresource.dto.entity.address.AddressPostDTO;
 import dev.szafraniak.bmresource.utils.Regexps;
@@ -35,7 +36,7 @@ public class CompanyPostDTO implements PostDTOInterface {
     @JsonIgnore
     @Length(min = 2, max = 4)
     @Pattern(regexp = Regexps.CURRENCY)
-    private String currency = "PLN";
+    private String currency = BaseEnvironment.CURRENCY;
 
 //    private User owner;
 

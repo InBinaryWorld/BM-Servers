@@ -1,6 +1,7 @@
 package dev.szafraniak.bmresource.dto.entity.price;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import dev.szafraniak.bmresource.config.BaseEnvironment;
 import dev.szafraniak.bmresource.dto.GetDTOInterface;
 import lombok.Data;
 
@@ -17,4 +18,6 @@ public class PriceGetDTO implements GetDTOInterface {
     private BigDecimal taxRate;
 
     private BigDecimal gross;
+
+    private String currency = BaseEnvironment.CURRENCY;
 }

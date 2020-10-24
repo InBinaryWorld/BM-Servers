@@ -22,12 +22,12 @@ public class ProductModel extends BaseCompanyEntity {
 
     @NotNull
     @NotBlank
-    @Pattern(regexp = Regexps.BASE_2_60)
+    @Pattern(regexp = Regexps.BASE_2_40)
     private String name;
 
     @NotNull
     @NotBlank
-    @Pattern(regexp = Regexps.BASE_2_6)
+    @Pattern(regexp = Regexps.BASE_1_6)
     private String quantityUnit;
 
     @Pattern(regexp = Regexps.BARCODE_5_20)
