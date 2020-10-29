@@ -72,7 +72,7 @@ public class CreateInvoiceConverter {
         InvoiceOrderItemModel model = new InvoiceOrderItemModel();
         model.setName(dto.getName());
         model.setQuantityUnit(dto.getQuantityUnit());
-        model.setQuantity(dto.getQuantity());
+        model.setQuantity(dto.getQuantity().stripTrailingZeros());
         model.setTaxRate(dto.getTaxRate());
         model.setPriceNet(dto.getNetPrice());
         model.setNet(amount.getNet());

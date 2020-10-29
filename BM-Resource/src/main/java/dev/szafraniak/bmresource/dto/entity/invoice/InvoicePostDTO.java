@@ -40,6 +40,8 @@ public class InvoicePostDTO implements PostDTOInterface {
     @NotNull
     private OffsetDateTime creationDate;
 
+//    private OffsetDateTime dateOfPayment;
+    
     @NotNull
     private LocalDate dueDate;
 

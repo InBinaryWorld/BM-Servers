@@ -1,5 +1,6 @@
 package dev.szafraniak.bmresource.dto.action.createInvoice;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.szafraniak.bmresource.dto.action.createInvoice.payment.PaymentMethodDTO;
 import dev.szafraniak.bmresource.utils.Regexps;
 import lombok.Data;
@@ -10,6 +11,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 
 @Data
@@ -36,7 +38,8 @@ public class CreateInvoiceDTO {
     private LocalDate dueDate;
 
     @NotNull
-    private OffsetDateTime creationDate;
+    @JsonIgnore
+    private OffsetDateTime creationDate = OffsetDateTime.now(ZoneOffset.UTC);
 
     @Valid
     @NotNull

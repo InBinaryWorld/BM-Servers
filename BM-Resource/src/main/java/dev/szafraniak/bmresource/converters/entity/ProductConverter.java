@@ -55,7 +55,7 @@ public class ProductConverter implements ConverterCompanyInterface<Product, Prod
         product.setCompany(company);
         product.setWarehouse(warehouse);
         product.setProductModel(productModel);
-        product.setQuantity(dto.getQuantity());
+        product.setQuantity(dto.getQuantity().stripTrailingZeros());
         return product;
     }
 
@@ -66,7 +66,7 @@ public class ProductConverter implements ConverterCompanyInterface<Product, Prod
         }
         @SuppressWarnings("OptionalGetWithoutIsPresent")
         Product product = productRepository.findById(entityId).get();
-        product.setQuantity(dto.getQuantity());
+        product.setQuantity(dto.getQuantity().stripTrailingZeros());
         return product;
     }
 

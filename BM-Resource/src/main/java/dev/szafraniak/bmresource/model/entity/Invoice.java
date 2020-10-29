@@ -41,6 +41,8 @@ public class Invoice extends BaseCompanyEntity {
     @NotNull
     private OffsetDateTime creationDate;
 
+    private OffsetDateTime dateOfPayment;
+
     @NotNull
     private LocalDate dueDate;
 

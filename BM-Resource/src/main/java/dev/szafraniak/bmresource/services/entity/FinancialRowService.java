@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 
 @Service
 public class FinancialRowService extends AbstractCompanyService<FinancialRow, FinancesRowRepository,
@@ -22,11 +21,11 @@ public class FinancialRowService extends AbstractCompanyService<FinancialRow, Fi
         super(converter, repository);
     }
 
-    public void createFromInvoice(Invoice invoice) {
+    public void createFromInvoice(Invoice invoice, OffsetDateTime dateOfPayment) {
         FinancialRowPostDTO event = new FinancialRowPostDTO();
         event.setTitle(invoice.getInvoiceName());
         event.setAmountChange(invoice.getTotalAmount().getGross());
-        event.setEventDate(OffsetDateTime.now(ZoneOffset.UTC));
+        event.setEventDate(dateOfPayment);
         createFromDTO(event, invoice.getCompany().getId());
     }
 }

@@ -20,6 +20,7 @@ public class Product extends BaseCompanyEntity {
 
     @Min(0)
     @NotNull
+    @Column(scale = 5, columnDefinition = "DECIMAL(19,5)")
     private BigDecimal quantity;
 
     @Valid

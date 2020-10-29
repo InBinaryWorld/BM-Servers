@@ -21,6 +21,8 @@ public class InvoicePutDTO implements PutDTOInterface {
 
 //    private OffsetDateTime creationDate;
 
+//    private OffsetDateTime dateOfPayment;
+
 //    private LocalDate dueDate;
 
 //    private Contact contact;

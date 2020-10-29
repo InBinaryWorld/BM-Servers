@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.UUID;
 
 @Service
@@ -50,6 +52,7 @@ public class InvoiceService extends AbstractCompanyService<Invoice, InvoiceRepos
         return String.format("%d#%d#%s", companyId, secondsPart, uuid);
     }
 
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
     public byte[] getInvoicePdf(Long entityId) throws IOException {
         Invoice entity = repository.findById(entityId).get();
         String filePath = fileService.getInvoicePath(entity.getFileReference());
@@ -57,11 +60,14 @@ public class InvoiceService extends AbstractCompanyService<Invoice, InvoiceRepos
         return in.readAllBytes();
     }
 
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
     public InvoiceGetDTO paidOffAction(Long entityId) {
+        OffsetDateTime now = OffsetDateTime.now(ZoneOffset.UTC);
         Invoice invoice = repository.findById(entityId).get();
         invoice.setIsPaid(true);
+        invoice.setDateOfPayment(now);
         Invoice saved = repository.save(invoice);
-        financialRowService.createFromInvoice(saved);
+        financialRowService.createFromInvoice(saved, now);
         return converter.convertToDTO(saved);
     }
 

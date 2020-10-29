@@ -184,7 +184,7 @@ public class InvoiceDocGeneratorIText implements InvoiceDocGenerator {
         String lpText = Integer.toString(lp);
         String nameText = item.getName();
         String quantityUnitText = item.getQuantityUnit();
-        String quantityText = item.getQuantity().toString();
+        String quantityText = item.getQuantity().toPlainString();
         String taxRateText = Formatters.formatTaxRate(item.getTaxRate());
         String priceNetText = Formatters.formatPrice(item.getPriceNet());
         String netText = Formatters.formatPrice(item.getNet());

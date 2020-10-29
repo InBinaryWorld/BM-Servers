@@ -44,8 +44,8 @@ public class InvoiceActionService {
     private List<InvoiceOrderItemModel> generateInvoiceItems(List<InvoiceOrderItemDTO> itemsDTO) {
         return itemsDTO.stream().map(itemDTO -> {
             BigDecimal netPrice = itemDTO.getNetPrice();
-            BigDecimal taxRate = itemDTO.getTaxRate();
-            BigDecimal quantity = itemDTO.getQuantity();
+            BigDecimal taxRate = itemDTO.getTaxRate().stripTrailingZeros();
+            BigDecimal quantity = itemDTO.getQuantity().stripTrailingZeros();
             AmountModel amountModel = FinancialUtils.countAmount(netPrice, taxRate, quantity);
             return converter.convertToModel(itemDTO, amountModel);
         }).collect(Collectors.toList());
