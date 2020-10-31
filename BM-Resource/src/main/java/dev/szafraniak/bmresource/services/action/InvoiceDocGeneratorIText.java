@@ -5,12 +5,10 @@ import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import dev.szafraniak.bmresource.model.action.CreateInvoiceModel;
-import dev.szafraniak.bmresource.model.action.InvoiceDetailsModel;
-import dev.szafraniak.bmresource.model.action.InvoiceOrderItemModel;
-import dev.szafraniak.bmresource.model.action.TaxGroupAmountModel;
+import dev.szafraniak.bmresource.config.BaseEnvironment;
 import dev.szafraniak.bmresource.model.action.contact.InvoiceCompanyContactModel;
 import dev.szafraniak.bmresource.model.action.contact.InvoiceContactModel;
+import dev.szafraniak.bmresource.model.action.invoice.*;
 import dev.szafraniak.bmresource.model.entity.payment.PaymentMethod;
 import dev.szafraniak.bmresource.model.entity.payment.PaymentMethodTransfer;
 import dev.szafraniak.bmresource.utils.Formatters;
@@ -25,17 +23,16 @@ import java.util.List;
 @Service
 public class InvoiceDocGeneratorIText implements InvoiceDocGenerator {
 
-    Font logoFont;
-    Font defaultFont;
-    Font defaultBoldFont;
-    Font smallFont;
-    Font invoiceNameFont;
-    BaseFont baseFont;
+    private final Font logoFont;
+    private final Font defaultFont;
+    private final Font defaultBoldFont;
+    private final Font smallFont;
+    private final Font invoiceNameFont;
 
-    String fontDir = "fonts/times_new_roman.ttf";
+    private final String fontDir = "fonts/times_new_roman.ttf";
 
     public InvoiceDocGeneratorIText() throws IOException, DocumentException {
-        baseFont = BaseFont.createFont(fontDir, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+        BaseFont baseFont = BaseFont.createFont(fontDir, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
         smallFont = new Font(baseFont, 8);
         defaultFont = new Font(baseFont, 9);
         defaultBoldFont = new Font(baseFont, 9, Font.BOLD);
@@ -43,7 +40,7 @@ public class InvoiceDocGeneratorIText implements InvoiceDocGenerator {
         logoFont = new Font(baseFont, 24, Font.BOLD);
     }
 
-    public void createInvoice(CreateInvoiceModel model, InvoiceDetailsModel details, String outputFile) throws FileNotFoundException, DocumentException {
+    public void createInvoice(BaseInvoiceDataModel model, FinancesInvoiceSectionModel finances, String outputFile) throws FileNotFoundException, DocumentException {
         FileOutputStream os = new FileOutputStream(outputFile);
         Document document = new Document(PageSize.A4);
         PdfWriter pdfWriter = PdfWriter.getInstance(document, os);
@@ -51,13 +48,13 @@ public class InvoiceDocGeneratorIText implements InvoiceDocGenerator {
 
         document.open();
         setBaseData(document, model);
-        setItems(document, details);
-        setSummary(document, details);
+        setItems(document, finances);
+        setSummary(document, finances);
         setSignFields(document);
         document.close();
     }
 
-    private void setBaseData(Document doc, CreateInvoiceModel model) throws DocumentException {
+    private void setBaseData(Document doc, BaseInvoiceDataModel model) throws DocumentException {
         float[] widths = new float[]{6f, 5f};
         PdfPTable invoiceInfoTable = new PdfPTable(2);
         invoiceInfoTable.setWidthPercentage(100);
@@ -89,12 +86,12 @@ public class InvoiceDocGeneratorIText implements InvoiceDocGenerator {
     }
 
     private PdfPCell getLogoCell() {
-        PdfPCell cell = createParCell("LOGO", logoFont);
+        PdfPCell cell = createParCell("BM", logoFont);
         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
         return cell;
     }
 
-    private PdfPCell getBaseDataCell(CreateInvoiceModel model) {
+    private PdfPCell getBaseDataCell(BaseInvoiceDataModel model) {
         String creationDate = Formatters.formatDate(model.getCreationDate());
         String dueDate = Formatters.formatDate(model.getDueDate());
         String paymentMethod = model.getPaymentMethod() instanceof PaymentMethodTransfer ? "Przelew" : "Gotowka";
@@ -151,7 +148,7 @@ public class InvoiceDocGeneratorIText implements InvoiceDocGenerator {
         return contact;
     }
 
-    private void setItems(Document doc, InvoiceDetailsModel details) throws DocumentException {
+    private void setItems(Document doc, FinancesInvoiceSectionModel details) throws DocumentException {
         float[] widths = new float[]{0.7f, 10f, 1.1f, 1.5f, 2.5f, 1.5f, 2.7f, 2.7f, 2.9f};
         PdfPTable table = new PdfPTable(9);
         table.setWidthPercentage(100);
@@ -202,14 +199,14 @@ public class InvoiceDocGeneratorIText implements InvoiceDocGenerator {
         table.addCell(createParBorderedCell(grossText, Element.ALIGN_RIGHT, font));
     }
 
-    private void setSummary(Document doc, InvoiceDetailsModel details) throws DocumentException {
+    private void setSummary(Document doc, FinancesInvoiceSectionModel details) throws DocumentException {
         float[] widths = new float[]{2, 1, 0.3f, 0.7f};
         PdfPTable table = new PdfPTable(4);
         table.setWidthPercentage(100);
         table.setSpacingBefore(20);
         table.setWidths(widths);
 
-        String totalGross = Formatters.formatPrice(details.getTotalGross(), "PLN");
+        String totalGross = Formatters.formatPrice(details.getTotalAmount().getGross(), BaseEnvironment.CURRENCY);
         table.addCell(createSummaryTable(details));
         table.addCell(getEmptyCell());
         table.addCell(createParCell("Razem", Element.ALIGN_LEFT));
@@ -217,10 +214,11 @@ public class InvoiceDocGeneratorIText implements InvoiceDocGenerator {
         doc.add(table);
     }
 
-    private void setTotalOfGroups(PdfPTable table, InvoiceDetailsModel details) {
-        String netText = Formatters.formatPrice(details.getTotalNet());
-        String taxText = Formatters.formatPrice(details.getTotalTax());
-        String grossText = Formatters.formatPrice(details.getTotalGross());
+    private void setTotalOfGroups(PdfPTable table, FinancesInvoiceSectionModel finances) {
+        AmountModel total = finances.getTotalAmount();
+        String netText = Formatters.formatPrice(total.getNet());
+        String taxText = Formatters.formatPrice(total.getTax());
+        String grossText = Formatters.formatPrice(total.getGross());
 
         table.addCell(createParBorderedCell("Razem"));
         table.addCell(createParBorderedCell(netText, Element.ALIGN_RIGHT));
@@ -228,7 +226,7 @@ public class InvoiceDocGeneratorIText implements InvoiceDocGenerator {
         table.addCell(createParBorderedCell(grossText, Element.ALIGN_RIGHT));
     }
 
-    private PdfPCell createSummaryTable(InvoiceDetailsModel details) {
+    private PdfPCell createSummaryTable(FinancesInvoiceSectionModel details) {
         PdfPTable table = new PdfPTable(4);
         table.setWidthPercentage(100);
 

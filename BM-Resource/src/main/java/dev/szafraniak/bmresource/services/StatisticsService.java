@@ -1,7 +1,7 @@
 package dev.szafraniak.bmresource.services;
 
-import dev.szafraniak.bmresource.model.action.AmountModel;
-import dev.szafraniak.bmresource.model.action.PriceModel;
+import dev.szafraniak.bmresource.model.action.invoice.AmountModel;
+import dev.szafraniak.bmresource.model.action.invoice.PriceModel;
 import dev.szafraniak.bmresource.model.action.stats.CompanyStatsModel;
 import dev.szafraniak.bmresource.model.action.stats.FinancesStatsModel;
 import dev.szafraniak.bmresource.model.action.stats.InvoicesStatsModel;
@@ -58,7 +58,6 @@ public class StatisticsService {
 
         BigDecimal lastInvoiceAmount = invoices.stream().max(Comparator.comparing(Invoice::getCreationDate))
                 .map(Invoice::getTotalAmount).map(Amount::getGross).orElse(null);
-
 
         InvoicesStatsModel model = new InvoicesStatsModel();
         model.setInvoicesNumber(invoices.size());

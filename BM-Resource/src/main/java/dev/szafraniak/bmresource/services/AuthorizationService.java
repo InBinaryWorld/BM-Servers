@@ -24,7 +24,7 @@ public class AuthorizationService {
     private static final String keycloakAuthClient = "bm-mobile";
 
     public ResponseEntity<String> postFromUrlEncoded(MultiValueMap<String, String> map) {
-        String KEYCLOAK_URL = keycloakPath + "/realms/" + keycloakRealm + "/protocol/openid-connect/token";
+        String KEYCLOAK_URL = String.format("%s%s%s%s", keycloakPath, "/realms/", keycloakRealm, "/protocol/openid-connect/token");
         HttpEntity<MultiValueMap<String, String>> request = createRequest(map);
         RestTemplate restTemplate = createTemplate();
         return restTemplate.postForEntity(KEYCLOAK_URL, request, String.class);

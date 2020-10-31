@@ -1,8 +1,8 @@
 package dev.szafraniak.bmresource.dto.entity.finantialRow;
 
+import dev.szafraniak.bmresource.annotations.nullOrNotBlank.NullOrNotBlank;
 import dev.szafraniak.bmresource.dto.PutDTOInterface;
 import dev.szafraniak.bmresource.utils.Regexps;
-import dev.szafraniak.bmresource.validator.nullOrNotBlank.NullOrNotBlank;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;

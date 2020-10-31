@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
-import java.util.UUID;
 
 @Service
 public class InvoiceService extends AbstractCompanyService<Invoice, InvoiceRepository, InvoiceConverter, InvoiceGetDTO, InvoicePostDTO, InvoicePutDTO> {
@@ -33,8 +32,7 @@ public class InvoiceService extends AbstractCompanyService<Invoice, InvoiceRepos
     }
 
     public InvoiceGetDTO createInvoiceAction(CreateInvoiceDTO dto, Long companyId) throws Exception {
-        String fileReference = getNewInvoiceFileReference(dto, companyId);
-        InvoicePostDTO invoicePostDTO = actionService.generateInvoice(dto, companyId, fileReference);
+        InvoicePostDTO invoicePostDTO = actionService.generateInvoice(dto, companyId);
         return this.createFromDTO(invoicePostDTO, companyId);
     }
 
@@ -44,12 +42,6 @@ public class InvoiceService extends AbstractCompanyService<Invoice, InvoiceRepos
         Invoice invoice = repository.findById(entityId).get();
         fileService.removeInvoice(invoice.getFileReference());
         return super.delete(entityId);
-    }
-
-    private String getNewInvoiceFileReference(CreateInvoiceDTO dto, Long companyId) {
-        String uuid = UUID.randomUUID().toString();
-        long secondsPart = dto.getCreationDate().toEpochSecond();
-        return String.format("%d#%d#%s", companyId, secondsPart, uuid);
     }
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")

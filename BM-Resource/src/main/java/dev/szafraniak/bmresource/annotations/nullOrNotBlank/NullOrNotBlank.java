@@ -1,4 +1,4 @@
-package dev.szafraniak.bmresource.validator.nullOrNotBlank;
+package dev.szafraniak.bmresource.annotations.nullOrNotBlank;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

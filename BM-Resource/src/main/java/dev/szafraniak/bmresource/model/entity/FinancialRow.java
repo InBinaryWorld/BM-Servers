@@ -1,7 +1,7 @@
 package dev.szafraniak.bmresource.model.entity;
 
+import dev.szafraniak.bmresource.annotations.nullOrNotBlank.NullOrNotBlank;
 import dev.szafraniak.bmresource.utils.Regexps;
-import dev.szafraniak.bmresource.validator.nullOrNotBlank.NullOrNotBlank;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

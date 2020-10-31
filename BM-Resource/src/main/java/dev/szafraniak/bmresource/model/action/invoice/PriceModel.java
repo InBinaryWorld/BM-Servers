@@ -1,4 +1,4 @@
-package dev.szafraniak.bmresource.model.action;
+package dev.szafraniak.bmresource.model.action.invoice;
 
 import dev.szafraniak.bmresource.model.entity.Price;
 import lombok.Data;

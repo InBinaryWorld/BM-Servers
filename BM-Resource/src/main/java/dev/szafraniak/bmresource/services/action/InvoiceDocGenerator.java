@@ -1,8 +1,8 @@
 package dev.szafraniak.bmresource.services.action;
 
-import dev.szafraniak.bmresource.model.action.CreateInvoiceModel;
-import dev.szafraniak.bmresource.model.action.InvoiceDetailsModel;
+import dev.szafraniak.bmresource.model.action.invoice.BaseInvoiceDataModel;
+import dev.szafraniak.bmresource.model.action.invoice.FinancesInvoiceSectionModel;
 
 public interface InvoiceDocGenerator {
-    void createInvoice(CreateInvoiceModel model, InvoiceDetailsModel details, String outputFile) throws Exception;
+    void createInvoice(BaseInvoiceDataModel model, FinancesInvoiceSectionModel details, String outputFile) throws Exception;
 }

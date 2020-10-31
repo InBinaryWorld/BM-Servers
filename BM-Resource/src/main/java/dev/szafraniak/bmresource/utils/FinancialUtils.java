@@ -1,7 +1,7 @@
 package dev.szafraniak.bmresource.utils;
 
-import dev.szafraniak.bmresource.model.action.AmountModel;
-import dev.szafraniak.bmresource.model.action.PriceModel;
+import dev.szafraniak.bmresource.model.action.invoice.AmountModel;
+import dev.szafraniak.bmresource.model.action.invoice.PriceModel;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

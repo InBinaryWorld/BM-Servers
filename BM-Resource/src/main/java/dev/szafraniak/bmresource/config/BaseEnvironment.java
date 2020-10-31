@@ -8,8 +8,11 @@ public final class BaseEnvironment {
     public static final String AUTH_PROVIDER_GOOGLE = "google";
     public static final String AUTH_PROVIDER_FACEBOOK = "facebook";
 
-    public static final String BASE_DECIMAL_PATTERN = "###,###,###.00";
-    public static final String DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
-    public static final String DATE_PATTERN = "yyyy-MM-dd";
     public static final String CURRENCY = "PLN";
+    public static final String TIME_PATTERN = "HH:mm";
+    public static final String DATE_PATTERN = "yyyy.MM.dd";
+    public static final String DATE_TIME_PATTERN = "yyyy.MM.dd HH:mm";
+
+    public static final char DECIMAL_SEPARATOR = '.';
+    public static final char GROUPING_SEPARATOR = ',';
 }

@@ -1,4 +1,4 @@
-package dev.szafraniak.bmresource.model.action;
+package dev.szafraniak.bmresource.model.action.invoice;
 
 import lombok.Data;
 
@@ -6,6 +6,9 @@ import java.math.BigDecimal;
 
 @Data
 public class AmountModel {
+    public AmountModel() {
+    }
+
     public AmountModel(BigDecimal net, BigDecimal tax, BigDecimal gross) {
         this.net = net;
         this.tax = tax;

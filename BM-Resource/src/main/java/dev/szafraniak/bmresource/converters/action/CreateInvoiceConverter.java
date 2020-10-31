@@ -6,13 +6,13 @@ import dev.szafraniak.bmresource.dto.action.createInvoice.payment.PaymentMethodD
 import dev.szafraniak.bmresource.dto.action.createInvoice.payment.PaymentMethodTransferDTO;
 import dev.szafraniak.bmresource.dto.entity.amount.AmountPostDTO;
 import dev.szafraniak.bmresource.dto.entity.invoice.InvoicePostDTO;
-import dev.szafraniak.bmresource.model.action.AmountModel;
-import dev.szafraniak.bmresource.model.action.CreateInvoiceModel;
-import dev.szafraniak.bmresource.model.action.InvoiceDetailsModel;
-import dev.szafraniak.bmresource.model.action.InvoiceOrderItemModel;
 import dev.szafraniak.bmresource.model.action.contact.InvoiceCompanyContactModel;
 import dev.szafraniak.bmresource.model.action.contact.InvoiceContactModel;
 import dev.szafraniak.bmresource.model.action.contact.InvoiceIndividualContactModel;
+import dev.szafraniak.bmresource.model.action.invoice.AmountModel;
+import dev.szafraniak.bmresource.model.action.invoice.BaseInvoiceDataModel;
+import dev.szafraniak.bmresource.model.action.invoice.FinancesInvoiceSectionModel;
+import dev.szafraniak.bmresource.model.action.invoice.InvoiceOrderItemModel;
 import dev.szafraniak.bmresource.model.entity.Company;
 import dev.szafraniak.bmresource.model.entity.payment.PaymentMethod;
 import dev.szafraniak.bmresource.model.entity.payment.PaymentMethodCash;
@@ -28,7 +28,7 @@ public class CreateInvoiceConverter {
 
     private CompanyService companyService;
 
-    public CreateInvoiceModel convertToModel(CreateInvoiceDTO dto, Long companyId) {
+    public BaseInvoiceDataModel convertToModel(CreateInvoiceDTO dto, Long companyId) {
         if (dto == null) {
             return null;
         }
@@ -38,7 +38,7 @@ public class CreateInvoiceConverter {
         InvoiceContactModel receiver = convertToModel(dto.getReceiver());
         PaymentMethod paymentMethod = convertToModel(dto.getPaymentMethod());
 
-        CreateInvoiceModel model = new CreateInvoiceModel();
+        BaseInvoiceDataModel model = new BaseInvoiceDataModel();
         model.setPaymentMethod(paymentMethod);
         model.setCreationDate(dto.getCreationDate());
         model.setDueDate(dto.getDueDate());
@@ -120,12 +120,13 @@ public class CreateInvoiceConverter {
         return model;
     }
 
-    public InvoicePostDTO convertToPostDTO(CreateInvoiceModel model, InvoiceDetailsModel details, String fileName) {
+    public InvoicePostDTO convertToPostDTO(BaseInvoiceDataModel model, FinancesInvoiceSectionModel finances, String fileName) {
         String receiverName = model.getReceiver() == null ? null : model.getReceiver().getName();
+        AmountModel totalAmount = finances.getTotalAmount();
         AmountPostDTO amountPostDTO = new AmountPostDTO();
-        amountPostDTO.setNet(details.getTotalNet());
-        amountPostDTO.setTax(details.getTotalTax());
-        amountPostDTO.setGross(details.getTotalGross());
+        amountPostDTO.setNet(totalAmount.getNet());
+        amountPostDTO.setTax(totalAmount.getTax());
+        amountPostDTO.setGross(totalAmount.getGross());
 
         InvoicePostDTO dto = new InvoicePostDTO();
         dto.setReceiverName(receiverName);
