@@ -21,7 +21,6 @@ import java.util.stream.Collectors;
 @Service
 public class InvoiceActionService {
 
-    private FileService fileService;
     private InvoiceDocGenerator docGenerator;
     private CreateInvoiceConverter converter;
 
@@ -30,7 +29,7 @@ public class InvoiceActionService {
         FinancesInvoiceSectionModel finances = calculateInvoiceFinances(dto.getItems());
 
         String fileReference = generateInvoiceFileReference(dto, companyId);
-        String filePath = fileService.getInvoicePath(fileReference);
+        String filePath = FileService.getInvoicePath(fileReference);
         docGenerator.createInvoice(baseInfo, finances, filePath);
         return converter.convertToPostDTO(baseInfo, finances, fileReference);
     }
@@ -88,8 +87,4 @@ public class InvoiceActionService {
         this.docGenerator = docGenerator;
     }
 
-    @Autowired
-    public void setFileService(FileService fileService) {
-        this.fileService = fileService;
-    }
 }

@@ -21,8 +21,6 @@ import java.time.ZoneOffset;
 @Service
 public class InvoiceService extends AbstractCompanyService<Invoice, InvoiceRepository, InvoiceConverter, InvoiceGetDTO, InvoicePostDTO, InvoicePutDTO> {
 
-
-    protected FileService fileService;
     protected InvoiceActionService actionService;
     protected FinancialRowService financialRowService;
 
@@ -40,14 +38,14 @@ public class InvoiceService extends AbstractCompanyService<Invoice, InvoiceRepos
     public boolean delete(Long entityId) {
         @SuppressWarnings("OptionalGetWithoutIsPresent")
         Invoice invoice = repository.findById(entityId).get();
-        fileService.removeInvoice(invoice.getFileReference());
+        FileService.removeInvoice(invoice.getFileReference());
         return super.delete(entityId);
     }
 
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     public byte[] getInvoicePdf(Long entityId) throws IOException {
         Invoice entity = repository.findById(entityId).get();
-        String filePath = fileService.getInvoicePath(entity.getFileReference());
+        String filePath = FileService.getInvoicePath(entity.getFileReference());
         InputStream in = new FileInputStream(filePath);
         return in.readAllBytes();
     }
@@ -63,10 +61,6 @@ public class InvoiceService extends AbstractCompanyService<Invoice, InvoiceRepos
         return converter.convertToDTO(saved);
     }
 
-    @Autowired
-    public void setFileService(FileService fileService) {
-        this.fileService = fileService;
-    }
 
     @Autowired
     public void setFinancialRowService(FinancialRowService financialRowService) {
