@@ -32,9 +32,6 @@ public class ProductModelPutDTO implements PutDTOInterface {
     @NotNull
     private PricePutDTO priceSuggestion;
 
-    @Valid
-    private Long productGroupId;
-
 //    private List<Product> products = new ArrayList<>();
 
 //    private Company company;

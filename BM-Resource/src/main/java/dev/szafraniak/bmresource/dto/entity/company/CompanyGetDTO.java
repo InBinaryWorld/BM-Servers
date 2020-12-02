@@ -25,8 +25,6 @@ public class CompanyGetDTO implements GetDTOInterface {
 
 //    private List<Warehouse> warehouses;
 
-//    private List<ProductGroup> productGroups;
-
 //    private List<ProductModel> productModels;
 
 //    private List<ServiceModel> serviceModels;
@@ -34,8 +32,6 @@ public class CompanyGetDTO implements GetDTOInterface {
 //    private List<Invoice> invoices;
 
 //    private List<BusinessContact> contacts;
-
-//    private List<Employee> workers;
 
 //    private List<FinancialRow> financialHistory;
 

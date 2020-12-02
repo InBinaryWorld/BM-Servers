@@ -46,8 +46,6 @@ public class CompanyPostDTO implements PostDTOInterface {
 
 //    private List<Warehouse> warehouses;
 
-//    private List<ProductGroup> productGroups;
-
 //    private List<ProductModel> productModels;
 
 //    private List<ServiceModel> serviceModels;
@@ -55,8 +53,6 @@ public class CompanyPostDTO implements PostDTOInterface {
 //    private List<Invoice> invoices;
 
 //    private List<Contact> contacts;
-
-//    private List<Employee> workers;
 
 //    private List<FinancialRow> financialHistory;
 

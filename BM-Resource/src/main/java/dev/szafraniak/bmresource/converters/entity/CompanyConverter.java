@@ -61,13 +61,11 @@ public class CompanyConverter implements ConverterInterface<Company, CompanyGetD
         company.setInvoicePrefix(dto.getInvoicePrefix());
         company.setTaxIdentityNumber(dto.getTaxIdentityNumber());
         company.setOwner(user);
-        company.setWorkers(new ArrayList<>());
         company.setInvoices(new ArrayList<>());
         company.setWarehouses(new ArrayList<>());
         company.setHeadquarter(address);
         company.setServiceModels(new ArrayList<>());
         company.setProductModels(new ArrayList<>());
-        company.setProductGroups(new ArrayList<>());
         company.setBankAccounts(new ArrayList<>());
         company.setCompanyContacts(new ArrayList<>());
         company.setFinancialHistory(new ArrayList<>());

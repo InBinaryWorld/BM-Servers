@@ -1,6 +1,5 @@
 package dev.szafraniak.bmresource.model.entity;
 
-import dev.szafraniak.bmresource.model.entity.contact.Contact;
 import dev.szafraniak.bmresource.utils.Regexps;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -45,10 +44,6 @@ public class Invoice extends BaseCompanyEntity {
 
     @NotNull
     private LocalDate dueDate;
-
-    @Valid
-    @ManyToOne
-    private Contact contact;
 
     @Valid
     @NotNull

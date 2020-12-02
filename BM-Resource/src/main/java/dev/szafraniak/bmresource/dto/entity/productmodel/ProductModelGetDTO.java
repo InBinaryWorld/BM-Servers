@@ -20,8 +20,6 @@ public class ProductModelGetDTO implements GetDTOInterface {
 
     private PriceGetDTO priceSuggestion;
 
-    private BaseGetDTO productGroup;
-
 //    private List<Product> products;
 
 //    private Company company;

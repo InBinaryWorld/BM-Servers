@@ -29,6 +29,4 @@ public class InvoicePutDTO implements PutDTOInterface {
 
 //    private Amount totalAmount;
 
-//    private Company company;
-
 }

@@ -33,6 +33,4 @@ public class InvoiceGetDTO implements GetDTOInterface {
 
     private AmountGetDTO totalAmount;
 
-//    private Company company;
-
 }

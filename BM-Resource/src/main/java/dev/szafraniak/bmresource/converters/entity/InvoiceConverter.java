@@ -17,7 +17,6 @@ import org.springframework.stereotype.Component;
 public class InvoiceConverter implements ConverterCompanyInterface<Invoice, InvoiceGetDTO, InvoicePostDTO, InvoicePutDTO> {
 
     private AmountConverter amountConverter;
-    private ContactConverter contactConverter;
     private CompanyRepository companyRepository;
     private InvoiceRepository invoiceRepository;
 
@@ -26,11 +25,9 @@ public class InvoiceConverter implements ConverterCompanyInterface<Invoice, Invo
             return null;
         }
         AmountGetDTO amountGetDTO = amountConverter.convertToDTO(invoice.getTotalAmount());
-        BaseGetDTO contact = contactConverter.convertToBaseDTO(invoice.getContact());
         InvoiceGetDTO dto = new InvoiceGetDTO();
         dto.setId(invoice.getId());
         dto.setBuyerName(invoice.getBuyerName());
-        dto.setContact(contact);
         dto.setCreationDate(invoice.getCreationDate());
         dto.setDueDate(invoice.getDueDate());
         dto.setFileReference(invoice.getFileReference());
@@ -50,7 +47,6 @@ public class InvoiceConverter implements ConverterCompanyInterface<Invoice, Invo
         Invoice invoice = new Invoice();
         Amount amount = amountConverter.convertFromDTO(dto.getTotalAmount());
         invoice.setBuyerName(dto.getBuyerName());
-        invoice.setContact(dto.getContact());
         invoice.setCreationDate(dto.getCreationDate());
         invoice.setDueDate(dto.getDueDate());
         invoice.setFileReference(dto.getFileReference());
@@ -76,11 +72,6 @@ public class InvoiceConverter implements ConverterCompanyInterface<Invoice, Invo
     @Autowired
     public void setAmountConverter(AmountConverter amountConverter) {
         this.amountConverter = amountConverter;
-    }
-
-    @Autowired
-    public void setContactConverter(ContactConverter contactConverter) {
-        this.contactConverter = contactConverter;
     }
 
     @Autowired

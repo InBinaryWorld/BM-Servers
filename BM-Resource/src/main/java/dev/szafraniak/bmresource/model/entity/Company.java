@@ -52,9 +52,6 @@ public class Company extends BaseEntity {
     private List<Warehouse> warehouses;
 
     @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "company")
-    private List<ProductGroup> productGroups;
-
-    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "company")
     private List<ProductModel> productModels;
 
     @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "company")
@@ -68,9 +65,6 @@ public class Company extends BaseEntity {
 
     @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "company")
     private List<CompanyContact> companyContacts;
-
-    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "company")
-    private List<Employee> workers;
 
     @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "company")
     private List<FinancialRow> financialHistory;

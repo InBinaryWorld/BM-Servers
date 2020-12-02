@@ -35,7 +35,6 @@ public class IndividualContactConverter implements ConverterCompanyInterface<Ind
         contactConverter.fullFillFromDTO(individual, dto, companyId);
         individual.setFirstName(dto.getFirstName());
         individual.setLastName(dto.getLastName());
-        individual.setEmployee(null);
         return individual;
     }
 
@@ -48,7 +47,6 @@ public class IndividualContactConverter implements ConverterCompanyInterface<Ind
         contactConverter.fullFillFromDTO(individual, dto);
         individual.setFirstName(dto.getFirstName());
         individual.setLastName(dto.getLastName());
-        individual.setEmployee(null);
         return individual;
     }
 

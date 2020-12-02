@@ -32,9 +32,6 @@ public class ProductModelPostDTO implements PostDTOInterface {
     @NotNull
     private PricePostDTO priceSuggestion;
 
-    @Valid
-    private Long productGroupId;
-
 //    private List<Product> products;
 
 //    private Company company;

@@ -20,6 +20,4 @@ public class IndividualContactPostDTO extends ContactPostDTO {
     @Pattern(regexp = Regexps.WORD_1_20)
     private String lastName;
 
-//    private Employee employee;
-
 }

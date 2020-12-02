@@ -8,7 +8,6 @@ import dev.szafraniak.bmresource.dto.entity.productmodel.ProductModelPutDTO;
 import dev.szafraniak.bmresource.dto.entity.shared.BaseGetDTO;
 import dev.szafraniak.bmresource.model.entity.Company;
 import dev.szafraniak.bmresource.model.entity.Price;
-import dev.szafraniak.bmresource.model.entity.ProductGroup;
 import dev.szafraniak.bmresource.model.entity.ProductModel;
 import dev.szafraniak.bmresource.repository.entity.CompanyRepository;
 import dev.szafraniak.bmresource.repository.entity.ProductModelRepository;
@@ -22,7 +21,6 @@ public class ProductModelConverter implements ConverterCompanyInterface<ProductM
 
     private PriceConverter priceConverter;
     private CompanyRepository companyRepository;
-    private ProductGroupConverter groupConverter;
     private ProductModelRepository productModelRepository;
 
 
@@ -33,12 +31,10 @@ public class ProductModelConverter implements ConverterCompanyInterface<ProductM
         ProductModelGetDTO productDto = new ProductModelGetDTO();
         Price price = productModel.getPriceSuggestion();
         PriceGetDTO priceGetDTO = priceConverter.convertToDTO(price);
-        BaseGetDTO groupDto = groupConverter.convertToBaseDTO(productModel.getProductGroup());
 
         productDto.setId(productModel.getId());
         productDto.setName(productModel.getName());
         productDto.setBarcode(productModel.getBarcode());
-        productDto.setProductGroup(groupDto);
         productDto.setQuantityUnit(productModel.getQuantityUnit());
         productDto.setPriceSuggestion(priceGetDTO);
         return productDto;
@@ -52,12 +48,10 @@ public class ProductModelConverter implements ConverterCompanyInterface<ProductM
         Company company = companyRepository.findById(companyId).get();
         ProductModel productModel = new ProductModel();
         Price price = priceConverter.convertFromDTO(dto.getPriceSuggestion());
-        ProductGroup group = groupConverter.retrieveFromId(dto.getProductGroupId());
         productModel.setName(dto.getName());
         productModel.setCompany(company);
         productModel.setBarcode(dto.getBarcode());
         productModel.setProducts(new ArrayList<>());
-        productModel.setProductGroup(group);
         productModel.setQuantityUnit(dto.getQuantityUnit());
         productModel.setPriceSuggestion(price);
         return productModel;
@@ -72,12 +66,10 @@ public class ProductModelConverter implements ConverterCompanyInterface<ProductM
         PricePutDTO priceDto = dto.getPriceSuggestion();
         Long priceId = productModel.getPriceSuggestion().getId();
         Price price = priceConverter.convertFromDTO(priceDto, priceId);
-        ProductGroup group = groupConverter.retrieveFromId(dto.getProductGroupId());
         productModel.setName(dto.getName());
         productModel.setBarcode(dto.getBarcode());
         productModel.setQuantityUnit(dto.getQuantityUnit());
         productModel.setPriceSuggestion(price);
-        productModel.setProductGroup(group);
         return productModel;
     }
 
@@ -89,11 +81,6 @@ public class ProductModelConverter implements ConverterCompanyInterface<ProductM
     @Autowired
     public void setCompanyRepository(CompanyRepository companyRepository) {
         this.companyRepository = companyRepository;
-    }
-
-    @Autowired
-    public void setGroupConverter(ProductGroupConverter groupConverter) {
-        this.groupConverter = groupConverter;
     }
 
     @Autowired

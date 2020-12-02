@@ -30,9 +30,6 @@ public abstract class Contact extends BaseCompanyEntity {
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Address address;
 
-    @OneToMany(mappedBy = "contact")
-    private List<Invoice> invoices;
-
     @NotNull
     @ManyToOne
     private Company company;

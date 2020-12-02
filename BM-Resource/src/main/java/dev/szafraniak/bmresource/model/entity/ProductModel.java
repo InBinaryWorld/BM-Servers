@@ -38,9 +38,6 @@ public class ProductModel extends BaseCompanyEntity {
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Price priceSuggestion;
 
-    @ManyToOne
-    private ProductGroup productGroup;
-
     @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true, mappedBy = "productModel")
     private List<Product> products;
 

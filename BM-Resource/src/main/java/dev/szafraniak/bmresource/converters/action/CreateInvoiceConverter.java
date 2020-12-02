@@ -136,7 +136,6 @@ public class CreateInvoiceConverter {
         dto.setDueDate(model.getDueDate());
         dto.setTotalAmount(amountPostDTO);
         dto.setFileReference(fileName);
-        dto.setContact(null);
         dto.setIsPaid(false);
         return dto;
     }

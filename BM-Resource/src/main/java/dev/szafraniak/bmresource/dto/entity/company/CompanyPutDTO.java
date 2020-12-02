@@ -39,8 +39,6 @@ public class CompanyPutDTO implements PutDTOInterface {
 
 //    private List<Warehouse> warehouses;
 
-//    private List<ProductGroup> productGroups;
-
 //    private List<ProductModel> productModels;
 
 //    private List<ServiceModel> serviceModels;
@@ -48,8 +46,6 @@ public class CompanyPutDTO implements PutDTOInterface {
 //    private List<Invoice> invoices;
 
 //    private List<BusinessContact> contacts;
-
-//    private List<Employee> workers;
 
 //    private List<FinancialRow> financialHistory;
 

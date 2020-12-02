@@ -4,7 +4,6 @@ import dev.szafraniak.bmresource.dto.entity.address.AddressGetDTO;
 import dev.szafraniak.bmresource.dto.entity.contact.ContactGetDTO;
 import dev.szafraniak.bmresource.dto.entity.contact.ContactPostDTO;
 import dev.szafraniak.bmresource.dto.entity.contact.ContactPutDTO;
-import dev.szafraniak.bmresource.dto.entity.invoice.InvoiceGetDTO;
 import dev.szafraniak.bmresource.dto.entity.shared.BaseGetDTO;
 import dev.szafraniak.bmresource.model.entity.Address;
 import dev.szafraniak.bmresource.model.entity.Company;
@@ -21,7 +20,6 @@ import java.util.stream.Collectors;
 public class ContactConverter {
 
     private AddressConverter addressConverter;
-    private InvoiceConverter invoiceConverter;
     private CompanyRepository companyRepository;
 
 
@@ -49,13 +47,9 @@ public class ContactConverter {
             return;
         }
         AddressGetDTO addressGetDTO = addressConverter.convertToDTO(contact.getAddress());
-        List<InvoiceGetDTO> invoices = contact.getInvoices().stream()
-                .map(invoiceConverter::convertToDTO)
-                .collect(Collectors.toList());
         dto.setId(contact.getId());
         dto.setName(contact.getName());
         dto.setAddress(addressGetDTO);
-        dto.setInvoices(invoices);
         dto.setPhone(contact.getPhone());
     }
 
@@ -67,7 +61,6 @@ public class ContactConverter {
         Company company = companyRepository.findById(companyId).get();
         Address address = addressConverter.convertFromDTO(dto.getAddress());
         contact.setAddress(address);
-        contact.setInvoices(new ArrayList<>());
         contact.setPhone(dto.getPhone());
         contact.setCompany(company);
     }
@@ -85,11 +78,6 @@ public class ContactConverter {
     @Autowired
     public void setAddressConverter(AddressConverter addressConverter) {
         this.addressConverter = addressConverter;
-    }
-
-    @Autowired
-    public void setInvoiceConverter(InvoiceConverter invoiceConverter) {
-        this.invoiceConverter = invoiceConverter;
     }
 
     @Autowired

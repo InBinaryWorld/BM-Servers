@@ -1,6 +1,5 @@
 package dev.szafraniak.bmresource.services;
 
-import dev.szafraniak.bmresource.dto.entity.employee.EmployeePostDTO;
 import dev.szafraniak.bmresource.dto.entity.product.ProductPostDTO;
 import dev.szafraniak.bmresource.dto.entity.productmodel.ProductModelPostDTO;
 import dev.szafraniak.bmresource.dto.entity.productmodel.ProductModelPutDTO;
@@ -22,13 +21,11 @@ public class PermissionChecker {
     private CompanyRepository companyRepo;
     private InvoiceRepository invoiceRepository;
     private ProductRepository productRepository;
-    private EmployeeRepository employeeRepository;
     private WarehouseRepository warehouseRepository;
     private BankAccountRepository bankAccountRepository;
     private FinancesRowRepository financesRowRepository;
     private ServiceModelRepository serviceModelRepository;
     private ProductModelRepository productModelRepository;
-    private ProductGroupRepository productGroupRepository;
     private CompanyContactRepository companyContactRepository;
     private IndividualContactRepository individualContactRepository;
 
@@ -39,25 +36,11 @@ public class PermissionChecker {
     }
 
     public boolean checkForCreate(ProductModelPostDTO dto, Long companyId) {
-        if (dto.getProductGroupId() == null) {
-            return checkCompanyId(companyId);
-        }
-        return checkProductGroup(companyId, dto.getProductGroupId());
+        return checkCompanyId(companyId);
     }
 
     public boolean checkForUpdate(ProductModelPutDTO dto, Long companyId, Long productModelId) {
-        if (dto.getProductGroupId() == null) {
-            return checkProductModel(companyId, productModelId);
-        }
-        return checkProductModel(companyId, productModelId, dto.getProductGroupId());
-    }
-
-    public boolean checkForCreate(EmployeePostDTO dto, Long companyId) {
-        return checkIndividualContact(companyId, dto.getIndividualId());
-    }
-
-    public boolean checkProductGroup(Long companyId, Long entityId) {
-        return checkEntityId(companyId, entityId, productGroupRepository);
+        return checkProductModel(companyId, productModelId);
     }
 
     public boolean checkCompanyContact(Long companyId, Long contactId) {
@@ -70,10 +53,6 @@ public class PermissionChecker {
 
     public boolean checkProductModel(Long companyId, Long entityId) {
         return checkEntityId(companyId, entityId, productModelRepository);
-    }
-
-    public boolean checkEmployee(Long companyId, Long entityId) {
-        return checkEntityId(companyId, entityId, employeeRepository);
     }
 
     public boolean checkServiceModel(Long companyId, Long entityId) {
@@ -105,13 +84,6 @@ public class PermissionChecker {
         Optional<Company> warehouse = extractCompany(warehouseRepository, dto.getWarehouseId());
 
         Optional<Company> joined = innerJoin(productModel, warehouse);
-        return checkCompany(joined, companyId);
-    }
-
-    private boolean checkProductModel(Long companyId, Long productModelId, Long groupId) {
-        Optional<Company> productCompany = extractCompany(productModelRepository, productModelId);
-        Optional<Company> groupCompany = extractCompany(productGroupRepository, groupId);
-        Optional<Company> joined = innerJoin(productCompany, groupCompany);
         return checkCompany(joined, companyId);
     }
 
@@ -170,11 +142,6 @@ public class PermissionChecker {
     }
 
     @Autowired
-    public void setEmployeeRepository(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
-    }
-
-    @Autowired
     public void setWarehouseRepository(WarehouseRepository warehouseRepository) {
         this.warehouseRepository = warehouseRepository;
     }
@@ -197,11 +164,6 @@ public class PermissionChecker {
     @Autowired
     public void setProductModelRepository(ProductModelRepository productModelRepository) {
         this.productModelRepository = productModelRepository;
-    }
-
-    @Autowired
-    public void setProductGroupRepository(ProductGroupRepository productGroupRepository) {
-        this.productGroupRepository = productGroupRepository;
     }
 
     @Autowired

@@ -1,6 +1,5 @@
 package dev.szafraniak.bmresource.model.entity.contact;
 
-import dev.szafraniak.bmresource.model.entity.Employee;
 import dev.szafraniak.bmresource.utils.Regexps;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -23,10 +22,6 @@ public class IndividualContact extends Contact {
     @NotNull
     @Pattern(regexp = Regexps.WORD_1_20)
     private String lastName;
-
-    @Valid
-    @OneToOne(mappedBy = "individualContact")
-    private Employee employee;
 
     @Override
     public String getName() {
