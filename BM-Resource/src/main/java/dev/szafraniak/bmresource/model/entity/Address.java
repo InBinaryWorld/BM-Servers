@@ -25,11 +25,12 @@ public class Address extends BaseEntity implements AddressInterface {
     private Long id;
 
     @NotNull
-    @Length(min = 4, max = 25)
+    @Length(min = 4, max = 30)
     @Pattern(regexp = Regexps.WORDS)
     private String country;
 
     @NotNull
+    @Length(max = 10)
     @Pattern(regexp = Regexps.POSTAL_CODE)
     private String postalCode;
 
@@ -44,9 +45,11 @@ public class Address extends BaseEntity implements AddressInterface {
     private String street;
 
     @NotNull
+    @Length(max = 5)
     @Pattern(regexp = Regexps.HOUSE_NUMBER)
     private String houseNumber;
 
+    @Length(max = 5)
     @Pattern(regexp = Regexps.HOUSE_NUMBER)
     private String apartmentNumber;
 
