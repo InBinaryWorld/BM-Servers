@@ -25,7 +25,7 @@ public class Address extends BaseEntity implements AddressInterface {
     private Long id;
 
     @NotNull
-    @Length(min = 4, max = 30)
+    @Length(min = 2, max = 30)
     @Pattern(regexp = Regexps.WORDS)
     private String country;
 

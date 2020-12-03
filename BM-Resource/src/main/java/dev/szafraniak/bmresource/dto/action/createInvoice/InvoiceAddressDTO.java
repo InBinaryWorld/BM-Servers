@@ -14,7 +14,7 @@ import java.util.List;
 public class InvoiceAddressDTO implements AddressInterface {
 
     @NotNull
-    @Length(min = 4, max = 25)
+    @Length(min = 2, max = 30)
     @Pattern(regexp = Regexps.WORDS)
     private String country;
 
