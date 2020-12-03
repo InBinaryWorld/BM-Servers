@@ -31,7 +31,7 @@ public class Address extends BaseEntity implements AddressInterface {
 
     @NotNull
     @Length(max = 10)
-    @Pattern(regexp = Regexps.POSTAL_CODE)
+    @Pattern(regexp = Regexps.BASE_4_10)
     private String postalCode;
 
     @NotNull

@@ -14,12 +14,13 @@ public class AddressPutDTO implements PutDTOInterface {
 //    private Long id;
 
     @NotNull
-    @Length(min = 4, max = 25)
+    @Length(min = 4, max = 30)
     @Pattern(regexp = Regexps.WORDS)
     private String country;
 
     @NotNull
-    @Pattern(regexp = Regexps.POSTAL_CODE)
+    @Length(max = 10)
+    @Pattern(regexp = Regexps.BASE_4_10)
     private String postalCode;
 
     @NotNull
