@@ -25,7 +25,7 @@ public class CompanyService extends AbstractService<Company, CompanyRepository,
 
     public BmCollection<CompanyGetDTO> getAll() {
         return userService
-                .getOrCreateContextUser()
+                .getContextUser()
                 .getCompanies().stream()
                 .map(converter::convertToDTO)
                 .collect(BmCollectors.toCollection());

@@ -35,14 +35,6 @@ public class PermissionChecker {
         return checkCompany(company);
     }
 
-    public boolean checkForCreate(ProductModelPostDTO dto, Long companyId) {
-        return checkCompanyId(companyId);
-    }
-
-    public boolean checkForUpdate(ProductModelPutDTO dto, Long companyId, Long productModelId) {
-        return checkProductModel(companyId, productModelId);
-    }
-
     public boolean checkCompanyContact(Long companyId, Long contactId) {
         return checkEntityId(companyId, contactId, companyContactRepository);
     }
@@ -93,11 +85,10 @@ public class PermissionChecker {
     }
 
     private boolean checkCompany(Optional<Company> company) {
-        Long userId = userService.getContextUserId();
         return company
                 .map(Company::getOwner)
                 .map(User::getId)
-                .map(userId::equals)
+                .map(userService::isContextUser)
                 .orElse(false);
     }
 

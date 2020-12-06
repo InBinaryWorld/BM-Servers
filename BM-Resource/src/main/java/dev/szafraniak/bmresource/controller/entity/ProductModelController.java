@@ -26,7 +26,7 @@ public class ProductModelController {
     }
 
     @PostMapping
-    @PreAuthorize("@permissionChecker.checkForCreate(#dto, #companyId)")
+    @PreAuthorize("@permissionChecker.checkCompanyId(#companyId)")
     public ProductModelGetDTO create(@PathVariable Long companyId,
                                      @Valid @RequestBody ProductModelPostDTO dto) {
         return service.createFromDTO(dto, companyId);
@@ -40,7 +40,7 @@ public class ProductModelController {
     }
 
     @PutMapping("/{entityId}")
-    @PreAuthorize("@permissionChecker.checkForUpdate(#dto, #companyId, #entityId)")
+    @PreAuthorize("@permissionChecker.checkProductModel(#companyId, #entityId)")
     public ProductModelGetDTO update(@PathVariable Long companyId,
                                      @PathVariable Long entityId,
                                      @Valid @RequestBody ProductModelPutDTO dto) {
