@@ -54,7 +54,7 @@ public class CompanyConverter implements ConverterInterface<Company, CompanyGetD
             return null;
         }
         Address address = addressConverter.convertFromDTO(dto.getHeadquarter());
-        User user = userService.getOrCreateContextUser();
+        User user = userService.getContextUser();
         Company company = new Company();
         company.setName(dto.getName());
         company.setCurrency(dto.getCurrency());

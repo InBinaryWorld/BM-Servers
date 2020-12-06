@@ -6,9 +6,11 @@ import dev.szafraniak.bmresource.model.entity.User;
 import dev.szafraniak.bmresource.repository.entity.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import javax.xml.crypto.dsig.spec.XSLTTransformParameterSpec;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -19,18 +21,22 @@ public class UserService {
     private UserRepository userRepository;
 
     public UserGetDTO getUser() {
-        User user = getOrCreateContextUser();
+        User user = getContextUser();
         return userConverter.convertToDTO(user);
     }
 
-    public User getOrCreateContextUser() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Optional<User> userOptional = userRepository.findFirstByKeycloakId(auth.getName());
-        return userOptional.orElseGet(() -> createNewUser(auth.getName()));
+    public User getContextUser() {
+        String keycloakUserId = getKeycloakUserId();
+        Optional<User> userOptional = userRepository.findFirstByKeycloakId(keycloakUserId);
+        return userOptional.orElseGet(() -> createNewUser(keycloakUserId));
     }
 
-    public Long getContextUserId() {
-        return getOrCreateContextUser().getId();
+    public boolean isContextUser(Long userId){
+        String keycloakUserId = getKeycloakUserId();
+        return userRepository.findById(userId)
+                .map(User::getKeycloakId)
+                .map(keycloakUserId::equals)
+                .orElse(false);
     }
 
     private User createNewUser(String keycloakId) {
@@ -38,6 +44,12 @@ public class UserService {
         user.setKeycloakId(keycloakId);
         user.setCompanies(new ArrayList<>());
         return userRepository.save(user);
+    }
+
+    private String getKeycloakUserId() {
+        SecurityContext context = SecurityContextHolder.getContext();
+        Authentication auth = context.getAuthentication();
+        return auth.getName();
     }
 
     @Autowired
