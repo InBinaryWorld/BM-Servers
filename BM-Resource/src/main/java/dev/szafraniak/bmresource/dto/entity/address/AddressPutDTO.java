@@ -28,9 +28,8 @@ public class AddressPutDTO implements PutDTOInterface {
     @Pattern(regexp = Regexps.WORDS)
     private String city;
 
-    @NotNull
     @Length(min = 2, max = 30)
-    @Pattern(regexp = Regexps.WORDS)
+    @Pattern(regexp = Regexps.BASE_2_30)
     private String street;
 
     @NotNull

@@ -29,10 +29,13 @@ public class Company extends BaseEntity {
     @Pattern(regexp = Regexps.BASE_2_40)
     private String name;
 
-    @NotNull
     @Length(max = 14)
     @Pattern(regexp = Regexps.INVOICE_PREFIX_2_14)
     private String invoicePrefix;
+
+    @Length(max = 20)
+    @Pattern(regexp = Regexps.BASE_1_20)
+    private String invoiceLogo;
 
     @NotNull
     @Length(max = 10)

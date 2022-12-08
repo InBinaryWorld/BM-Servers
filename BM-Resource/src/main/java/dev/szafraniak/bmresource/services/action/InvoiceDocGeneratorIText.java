@@ -55,21 +55,21 @@ public class InvoiceDocGeneratorIText implements InvoiceDocGenerator {
     }
 
     private void setBaseData(Document doc, BaseInvoiceDataModel model) throws DocumentException {
-        float[] widths = new float[]{6f, 5f};
-        PdfPTable invoiceInfoTable = new PdfPTable(2);
+        PdfPTable invoiceInfoTable = new PdfPTable(3);
         invoiceInfoTable.setWidthPercentage(100);
-        invoiceInfoTable.setWidths(widths);
+        invoiceInfoTable.setWidths(new float[]{5f, 1f, 5f});
 
-        PdfPCell logoCell = getLogoCell();
+        PdfPCell logoCell = getLogoCell(model.getInvoiceLogo());
         PdfPCell BaseDataCell = getBaseDataCell(model);
         invoiceInfoTable.addCell(logoCell);
+        invoiceInfoTable.addCell(getEmptyCell());
         invoiceInfoTable.addCell(BaseDataCell);
         doc.add(invoiceInfoTable);
 
         PdfPTable contactTable = new PdfPTable(2);
         contactTable.setWidthPercentage(100);
         contactTable.setSpacingBefore(15);
-        contactTable.setWidths(widths);
+        contactTable.setWidths(new float[]{6f, 5f});
 
         PdfPCell sellerCell = getSellerCell(model.getSeller(), model.getPaymentMethod());
         PdfPCell buyerCell = getContactCell("Nabywca", model.getBuyer());
@@ -85,9 +85,10 @@ public class InvoiceDocGeneratorIText implements InvoiceDocGenerator {
         doc.add(contactTable);
     }
 
-    private PdfPCell getLogoCell() {
-        PdfPCell cell = createParCell("BM", logoFont);
+    private PdfPCell getLogoCell(String logo) {
+        PdfPCell cell = createParCell(logo == null ? "" : logo, logoFont);
         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+        cell.setPaddingBottom(0);
         return cell;
     }
 
