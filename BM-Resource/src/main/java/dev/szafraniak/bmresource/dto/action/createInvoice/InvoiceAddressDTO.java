@@ -28,22 +28,23 @@ public class InvoiceAddressDTO implements AddressInterface {
     @Pattern(regexp = Regexps.WORDS)
     private String city;
 
-    @NotNull
     @Length(min = 2, max = 30)
-    @Pattern(regexp = Regexps.WORDS)
+    @Pattern(regexp = Regexps.BASE_2_30)
     private String street;
 
     @NotNull
+    @Length(max = 10)
     @Pattern(regexp = Regexps.HOUSE_NUMBER)
     private String houseNumber;
 
+    @Length(max = 10)
     @Pattern(regexp = Regexps.HOUSE_NUMBER)
     private String apartmentNumber;
 
     @Override
     public List<String> getAddressRows() {
         ArrayList<String> addressRows = new ArrayList<>();
-        String addressRow = street + " " + houseNumber;
+        String addressRow = (street == null ? city : street) + " " + houseNumber;
         addressRow += apartmentNumber == null ? "" : "/" + apartmentNumber;
         addressRows.add(addressRow);
         addressRows.add(postalCode + " " + city + ", " + country);

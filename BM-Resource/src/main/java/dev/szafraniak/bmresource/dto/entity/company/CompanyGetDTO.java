@@ -15,6 +15,8 @@ public class CompanyGetDTO implements GetDTOInterface {
 
     private String invoicePrefix;
 
+    private String invoiceLogo;
+
     private String taxIdentityNumber;
 
     private String currency;

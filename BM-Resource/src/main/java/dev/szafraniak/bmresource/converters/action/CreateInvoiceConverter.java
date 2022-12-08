@@ -39,13 +39,14 @@ public class CreateInvoiceConverter {
         PaymentMethod paymentMethod = convertToModel(dto.getPaymentMethod());
 
         BaseInvoiceDataModel model = new BaseInvoiceDataModel();
-        model.setPaymentMethod(paymentMethod);
-        model.setCreationDate(dto.getCreationDate());
-        model.setDueDate(dto.getDueDate());
+        model.setInvoiceLogo(company.getInvoiceLogo());
         model.setInvoiceNumber(dto.getInvoiceNumber());
-        model.setBuyer(buyer);
+        model.setCreationDate(dto.getCreationDate());
+        model.setPaymentMethod(paymentMethod);
+        model.setDueDate(dto.getDueDate());
         model.setReceiver(receiver);
         model.setSeller(seller);
+        model.setBuyer(buyer);
         return model;
     }
 

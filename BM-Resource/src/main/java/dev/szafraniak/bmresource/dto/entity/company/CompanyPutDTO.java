@@ -4,6 +4,7 @@ import dev.szafraniak.bmresource.dto.PutDTOInterface;
 import dev.szafraniak.bmresource.dto.entity.address.AddressPutDTO;
 import dev.szafraniak.bmresource.utils.Regexps;
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -21,9 +22,12 @@ public class CompanyPutDTO implements PutDTOInterface {
     @Pattern(regexp = Regexps.BASE_2_40)
     private String name;
 
-    @NotNull
     @Pattern(regexp = Regexps.INVOICE_PREFIX_2_14)
     private String invoicePrefix;
+
+    @Length(max = 20)
+    @Pattern(regexp = Regexps.BASE_1_20)
+    private String invoiceLogo;
 
     @NotNull
     @Pattern(regexp = Regexps.TAX_IDENTITY_NUMBER)

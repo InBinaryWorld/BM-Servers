@@ -44,6 +44,7 @@ public class CompanyConverter implements ConverterInterface<Company, CompanyGetD
         companyGetDTO.setCurrency(company.getCurrency());
         companyGetDTO.setHeadquarter(addressGetDTO);
         companyGetDTO.setInvoicePrefix(company.getInvoicePrefix());
+        companyGetDTO.setInvoiceLogo(company.getInvoiceLogo());
         companyGetDTO.setTaxIdentityNumber(company.getTaxIdentityNumber());
         return companyGetDTO;
     }
@@ -59,6 +60,7 @@ public class CompanyConverter implements ConverterInterface<Company, CompanyGetD
         company.setName(dto.getName());
         company.setCurrency(dto.getCurrency());
         company.setInvoicePrefix(dto.getInvoicePrefix());
+        company.setInvoiceLogo(dto.getInvoiceLogo());
         company.setTaxIdentityNumber(dto.getTaxIdentityNumber());
         company.setOwner(user);
         company.setInvoices(new ArrayList<>());
@@ -83,6 +85,7 @@ public class CompanyConverter implements ConverterInterface<Company, CompanyGetD
         Address address = addressConverter.convertFromDTO(dto.getHeadquarter(), headquarterId);
         original.setTaxIdentityNumber(dto.getTaxIdentityNumber());
         original.setInvoicePrefix(dto.getInvoicePrefix());
+        original.setInvoiceLogo(dto.getInvoiceLogo());
         original.setHeadquarter(address);
         original.setName(dto.getName());
         return original;

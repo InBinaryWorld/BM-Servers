@@ -24,9 +24,12 @@ public class CompanyPostDTO implements PostDTOInterface {
     @Pattern(regexp = Regexps.BASE_2_40)
     private String name;
 
-    @NotNull
     @Pattern(regexp = Regexps.INVOICE_PREFIX_2_14)
     private String invoicePrefix;
+
+    @Length(max = 20)
+    @Pattern(regexp = Regexps.BASE_1_20)
+    private String invoiceLogo;
 
     @NotNull
     @Pattern(regexp = Regexps.TAX_IDENTITY_NUMBER)

@@ -13,8 +13,9 @@ public class BaseInvoiceDataModel {
     private InvoiceContactModel buyer;
     private InvoiceContactModel seller;
     private InvoiceContactModel receiver;
-    private String InvoiceNumber;
-    private PaymentMethod paymentMethod;
-    private LocalDate dueDate;
     private OffsetDateTime creationDate;
+    private PaymentMethod paymentMethod;
+    private String InvoiceNumber;
+    private String InvoiceLogo;
+    private LocalDate dueDate;
 }

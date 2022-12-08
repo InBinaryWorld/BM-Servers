@@ -27,7 +27,7 @@ public class CreateInvoiceDTO {
     @Valid
     @NotNull
     @NotEmpty
-    @Pattern(regexp = Regexps.BASE_3_20)
+    @Pattern(regexp = Regexps.BASE_1_20)
     private String invoiceNumber;
 
     @Valid
