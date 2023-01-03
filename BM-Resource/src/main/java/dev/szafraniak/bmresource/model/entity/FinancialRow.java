@@ -24,8 +24,8 @@ public class FinancialRow extends BaseCompanyEntity {
 
     @NotNull
     @NotBlank
-    @Length(max = 40)
-    @Pattern(regexp = Regexps.BASE_2_40)
+    @Length(max = 60)
+    @Pattern(regexp = Regexps.BASE_2_60)
     private String title;
 
     @NotNull

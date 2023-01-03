@@ -18,7 +18,7 @@ public class FinancialRowPostDTO implements PostDTOInterface {
 
     @NotNull
     @NotBlank
-    @Pattern(regexp = Regexps.BASE_2_40)
+    @Pattern(regexp = Regexps.BASE_2_60)
     private String title;
 
     @NotNull

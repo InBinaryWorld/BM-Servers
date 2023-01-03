@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 public class InvoiceOrderItemDTO {
 
     @NotNull
-    @Pattern(regexp = Regexps.BASE_2_40)
+    @Pattern(regexp = Regexps.BASE_2_60)
     private String name;
 
     @NotNull

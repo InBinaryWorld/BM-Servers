@@ -18,7 +18,7 @@ public class FinancialRowPutDTO implements PutDTOInterface {
 
     @NotNull
     @NotBlank
-    @Pattern(regexp = Regexps.BASE_2_40)
+    @Pattern(regexp = Regexps.BASE_2_60)
     private String title;
 
     @NotNull

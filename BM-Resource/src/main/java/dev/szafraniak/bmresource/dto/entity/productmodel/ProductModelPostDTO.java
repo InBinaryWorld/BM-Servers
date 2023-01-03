@@ -17,7 +17,7 @@ public class ProductModelPostDTO implements PostDTOInterface {
 
     @NotNull
     @NotBlank
-    @Pattern(regexp = Regexps.BASE_2_40)
+    @Pattern(regexp = Regexps.BASE_2_60)
     private String name;
 
     @NotNull

@@ -14,6 +14,7 @@ services:
             condition: service_healthy
           mysql:
             condition: service_healthy
+        restart: unless-stopped
     keycloak:
         container_name: keycloak
         build:
@@ -32,6 +33,7 @@ services:
         depends_on:
           mysql:
             condition: service_healthy
+        restart: unless-stopped
     mysql:
         container_name: mysql
         build:
@@ -45,3 +47,4 @@ services:
           test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
           timeout: 10s
           retries: 20
+        restart: unless-stopped
