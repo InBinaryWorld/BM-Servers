@@ -30,6 +30,7 @@ public class InvoiceConverter implements ConverterCompanyInterface<Invoice, Invo
         dto.setBuyerName(invoice.getBuyerName());
         dto.setCreationDate(invoice.getCreationDate());
         dto.setDueDate(invoice.getDueDate());
+        dto.setIssueDate(invoice.getIssueDate());
         dto.setFileReference(invoice.getFileReference());
         dto.setInvoiceName(invoice.getInvoiceName());
         dto.setIsPaid(invoice.getIsPaid());
@@ -49,6 +50,7 @@ public class InvoiceConverter implements ConverterCompanyInterface<Invoice, Invo
         invoice.setBuyerName(dto.getBuyerName());
         invoice.setCreationDate(dto.getCreationDate());
         invoice.setDueDate(dto.getDueDate());
+        invoice.setIssueDate(dto.getIssueDate());
         invoice.setFileReference(dto.getFileReference());
         invoice.setInvoiceName(dto.getInvoiceName());
         invoice.setIsPaid(dto.getIsPaid());

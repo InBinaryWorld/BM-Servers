@@ -45,6 +45,9 @@ public class InvoicePostDTO implements PostDTOInterface {
     @NotNull
     private LocalDate dueDate;
 
+    @NotNull
+    private LocalDate issueDate;
+
     @Valid
     @NotNull
     private AmountPostDTO totalAmount;

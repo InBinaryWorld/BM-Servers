@@ -93,7 +93,7 @@ public class InvoiceDocGeneratorIText implements InvoiceDocGenerator {
     }
 
     private PdfPCell getBaseDataCell(BaseInvoiceDataModel model) {
-        String creationDate = Formatters.formatDate(model.getCreationDate());
+        String issueDate = Formatters.formatDate(model.getIssueDate());
         String dueDate = Formatters.formatDate(model.getDueDate());
         String paymentMethod = model.getPaymentMethod() instanceof PaymentMethodTransfer ? "Przelew" : "Gotowka";
 
@@ -110,7 +110,7 @@ public class InvoiceDocGeneratorIText implements InvoiceDocGenerator {
         desc.addElement(createParagraph("Metoda płatności:"));
 
         PdfPCell val = noBorderDecortor(new PdfPCell());
-        val.addElement(createParagraph(creationDate));
+        val.addElement(createParagraph(issueDate));
         val.addElement(createParagraph(dueDate));
         val.addElement(createParagraph(paymentMethod));
 

@@ -49,6 +49,9 @@ public class Invoice extends BaseCompanyEntity {
     @NotNull
     private LocalDate dueDate;
 
+    @NotNull
+    private LocalDate issueDate;
+
     @Valid
     @NotNull
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)

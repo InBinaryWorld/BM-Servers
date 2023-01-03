@@ -44,6 +44,7 @@ public class CreateInvoiceConverter {
         model.setCreationDate(dto.getCreationDate());
         model.setPaymentMethod(paymentMethod);
         model.setDueDate(dto.getDueDate());
+        model.setIssueDate(dto.getIssueDate());
         model.setReceiver(receiver);
         model.setSeller(seller);
         model.setBuyer(buyer);
@@ -135,6 +136,7 @@ public class CreateInvoiceConverter {
         dto.setCreationDate(model.getCreationDate());
         dto.setInvoiceName(model.getInvoiceNumber());
         dto.setDueDate(model.getDueDate());
+        dto.setIssueDate(model.getIssueDate());
         dto.setTotalAmount(amountPostDTO);
         dto.setFileReference(fileName);
         dto.setIsPaid(false);

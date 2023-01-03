@@ -18,4 +18,5 @@ public class BaseInvoiceDataModel {
     private String InvoiceNumber;
     private String InvoiceLogo;
     private LocalDate dueDate;
+    private LocalDate issueDate;
 }

@@ -38,6 +38,9 @@ public class CreateInvoiceDTO {
     private LocalDate dueDate;
 
     @NotNull
+    private LocalDate issueDate;
+
+    @NotNull
     @JsonIgnore
     private OffsetDateTime creationDate = OffsetDateTime.now(ZoneOffset.UTC);
 
