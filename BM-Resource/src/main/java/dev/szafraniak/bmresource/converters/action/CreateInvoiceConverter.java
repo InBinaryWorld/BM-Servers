@@ -42,9 +42,11 @@ public class CreateInvoiceConverter {
         model.setInvoiceLogo(company.getInvoiceLogo());
         model.setInvoiceNumber(dto.getInvoiceNumber());
         model.setCreationDate(dto.getCreationDate());
+        model.setSplitPayment(dto.getSplitPayment());
         model.setPaymentMethod(paymentMethod);
         model.setDueDate(dto.getDueDate());
         model.setIssueDate(dto.getIssueDate());
+        model.setSellDate(dto.getSellDate());
         model.setReceiver(receiver);
         model.setSeller(seller);
         model.setBuyer(buyer);
@@ -135,8 +137,10 @@ public class CreateInvoiceConverter {
         dto.setBuyerName(model.getBuyer().getName());
         dto.setCreationDate(model.getCreationDate());
         dto.setInvoiceName(model.getInvoiceNumber());
+        dto.setSplitPayment(model.getSplitPayment());
         dto.setDueDate(model.getDueDate());
         dto.setIssueDate(model.getIssueDate());
+        dto.setSellDate(model.getSellDate());
         dto.setTotalAmount(amountPostDTO);
         dto.setFileReference(fileName);
         dto.setIsPaid(false);

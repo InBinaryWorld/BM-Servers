@@ -4,7 +4,6 @@ import dev.szafraniak.bmresource.dto.PutDTOInterface;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 
 @Data
 public class InvoicePutDTO implements PutDTOInterface {
@@ -27,6 +26,10 @@ public class InvoicePutDTO implements PutDTOInterface {
 //    private LocalDate dueDate;
 
 //    private LocalDate issueDate;
+
+//    private LocalDate sellDate;
+
+//    private Boolean splitPayment;
 
 //    private Contact contact;
 

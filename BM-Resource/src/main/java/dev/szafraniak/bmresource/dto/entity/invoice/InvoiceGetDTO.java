@@ -27,9 +27,13 @@ public class InvoiceGetDTO implements GetDTOInterface {
 
     private OffsetDateTime dateOfPayment;
 
+    private Boolean splitPayment;
+
     private LocalDate dueDate;
 
     private LocalDate issueDate;
+
+    private LocalDate sellDate;
 
     private BaseGetDTO contact;
 

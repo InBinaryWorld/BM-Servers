@@ -3,7 +3,6 @@ package dev.szafraniak.bmresource.dto.entity.invoice;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.szafraniak.bmresource.dto.PostDTOInterface;
 import dev.szafraniak.bmresource.dto.entity.amount.AmountPostDTO;
-import dev.szafraniak.bmresource.model.entity.contact.Contact;
 import dev.szafraniak.bmresource.utils.Regexps;
 import lombok.Data;
 
@@ -47,6 +46,12 @@ public class InvoicePostDTO implements PostDTOInterface {
 
     @NotNull
     private LocalDate issueDate;
+
+    @NotNull
+    private LocalDate sellDate;
+
+    @NotNull
+    private Boolean splitPayment;
 
     @Valid
     @NotNull

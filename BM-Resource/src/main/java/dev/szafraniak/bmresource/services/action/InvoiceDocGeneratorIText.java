@@ -50,6 +50,7 @@ public class InvoiceDocGeneratorIText implements InvoiceDocGenerator {
         setBaseData(document, model);
         setItems(document, finances);
         setSummary(document, finances);
+        setSplitPayment(document, model);
         setSignFields(document);
         document.close();
     }
@@ -95,6 +96,7 @@ public class InvoiceDocGeneratorIText implements InvoiceDocGenerator {
     private PdfPCell getBaseDataCell(BaseInvoiceDataModel model) {
         String issueDate = Formatters.formatDate(model.getIssueDate());
         String dueDate = Formatters.formatDate(model.getDueDate());
+        String sellDate = Formatters.formatDate(model.getSellDate());
         String paymentMethod = model.getPaymentMethod() instanceof PaymentMethodTransfer ? "Przelew" : "Gotowka";
 
         PdfPTable table = new PdfPTable(2);
@@ -106,11 +108,13 @@ public class InvoiceDocGeneratorIText implements InvoiceDocGenerator {
 
         PdfPCell desc = noBorderDecortor(new PdfPCell());
         desc.addElement(createParagraph("Data wystawienia:"));
+        desc.addElement(createParagraph("Data sprzedaży:"));
         desc.addElement(createParagraph("Termin zapłaty:"));
         desc.addElement(createParagraph("Metoda płatności:"));
 
         PdfPCell val = noBorderDecortor(new PdfPCell());
         val.addElement(createParagraph(issueDate));
+        val.addElement(createParagraph(sellDate));
         val.addElement(createParagraph(dueDate));
         val.addElement(createParagraph(paymentMethod));
 
@@ -213,6 +217,12 @@ public class InvoiceDocGeneratorIText implements InvoiceDocGenerator {
         table.addCell(createParCell("Razem", Element.ALIGN_LEFT));
         table.addCell(createParCell(totalGross, Element.ALIGN_RIGHT, defaultBoldFont));
         doc.add(table);
+    }
+
+    private void setSplitPayment(Document doc, BaseInvoiceDataModel baseData) throws DocumentException {
+        if (baseData.getSplitPayment()) {
+            doc.add(createParagraph("Mechanizm podzielonej płatności"));
+        }
     }
 
     private void setTotalOfGroups(PdfPTable table, FinancesInvoiceSectionModel finances) {

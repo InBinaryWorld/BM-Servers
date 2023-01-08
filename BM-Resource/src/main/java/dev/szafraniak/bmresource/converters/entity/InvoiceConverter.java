@@ -4,7 +4,6 @@ import dev.szafraniak.bmresource.dto.entity.amount.AmountGetDTO;
 import dev.szafraniak.bmresource.dto.entity.invoice.InvoiceGetDTO;
 import dev.szafraniak.bmresource.dto.entity.invoice.InvoicePostDTO;
 import dev.szafraniak.bmresource.dto.entity.invoice.InvoicePutDTO;
-import dev.szafraniak.bmresource.dto.entity.shared.BaseGetDTO;
 import dev.szafraniak.bmresource.model.entity.Amount;
 import dev.szafraniak.bmresource.model.entity.Company;
 import dev.szafraniak.bmresource.model.entity.Invoice;
@@ -29,8 +28,10 @@ public class InvoiceConverter implements ConverterCompanyInterface<Invoice, Invo
         dto.setId(invoice.getId());
         dto.setBuyerName(invoice.getBuyerName());
         dto.setCreationDate(invoice.getCreationDate());
+        dto.setSplitPayment(invoice.getSplitPayment());
         dto.setDueDate(invoice.getDueDate());
         dto.setIssueDate(invoice.getIssueDate());
+        dto.setSellDate(invoice.getSellDate());
         dto.setFileReference(invoice.getFileReference());
         dto.setInvoiceName(invoice.getInvoiceName());
         dto.setIsPaid(invoice.getIsPaid());
@@ -51,6 +52,8 @@ public class InvoiceConverter implements ConverterCompanyInterface<Invoice, Invo
         invoice.setCreationDate(dto.getCreationDate());
         invoice.setDueDate(dto.getDueDate());
         invoice.setIssueDate(dto.getIssueDate());
+        invoice.setSellDate(dto.getSellDate());
+        invoice.setSplitPayment(dto.getSplitPayment());
         invoice.setFileReference(dto.getFileReference());
         invoice.setInvoiceName(dto.getInvoiceName());
         invoice.setIsPaid(dto.getIsPaid());

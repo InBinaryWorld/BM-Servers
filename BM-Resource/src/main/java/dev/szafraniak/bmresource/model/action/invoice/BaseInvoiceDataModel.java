@@ -19,4 +19,6 @@ public class BaseInvoiceDataModel {
     private String InvoiceLogo;
     private LocalDate dueDate;
     private LocalDate issueDate;
+    private LocalDate sellDate;
+    private Boolean splitPayment;
 }

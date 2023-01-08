@@ -17,7 +17,7 @@ public class Formatters {
     private final static DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(BaseEnvironment.DATE_PATTERN);
 
     public static String formatTaxRate(BigDecimal number) {
-        return number.toString() + "%";
+        return formatInteger(number) + "%";
     }
 
     public static String formatDate(OffsetDateTime offsetDateTime) {
